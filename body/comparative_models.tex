@@ -1,0 +1,141 @@
+\chapter{Comparative Models}
+
+\section{Introduction to Baseline Models}
+
+To understand the capabilities and limitations of the Liquid Neural Network (LNN), it is important to benchmark its performance against established neural architectures. This chapter introduces two such baselines: the Temporal Convolutional Network (TCN) and the Long Short-Term Memory (LSTM) network. Both models were trained on the same trajectory prediction task, using the same dataset and training protocol as the LNN.
+
+The choice of these two architectures was motivated by their contrasting inductive biases. The LSTM represents the class of recurrent models with gated memory and internal state persistence, while the TCN is a convolutional alternative that relies on dilated kernels and temporal receptive fields. Each offers a different approach to sequence modelling, and both are widely used in time-series tasks across domains such as finance, speech, and control systems.
+
+By evaluating the behaviour of these models under clean and adversarial conditions, we aim to identify not just their predictive accuracy, but also their robustness, sensitivity to perturbation, and qualitative characteristics of their outputs. These insights provide a broader context for assessing the strengths and weaknesses of the LNN in the following respects:
+\begin{itemize}
+    \item \textbf{Temporal memory:} How effectively does each model retain and process temporal dependencies?
+    \item \textbf{Structural robustness:} How does architectural rigidity or flexibility affect the model's susceptibility to noise?
+    \item \textbf{Gradient stability:} What does the geometry of each model’s loss surface imply for adversarial vulnerability?
+\end{itemize}
+
+The remainder of this chapter provides a detailed breakdown of the TCN and LSTM implementations used in this project, followed by an in-depth analysis of two adversarial attack methods—Fast Gradient Sign Method (FGSM) and Projected Gradient Descent (PGD)—applied to all three models under identical conditions.
+
+
+
+\section{Temporal Convolutional Network (TCN)}
+
+\subsection{Overview and Motivation}
+The Temporal Convolutional Network (TCN) is a fully convolutional architecture designed for sequential data. Unlike RNN-based models, which process inputs recursively and maintain an internal hidden state, TCNs rely on 1D convolutions applied over the temporal axis. This allows for parallel computation and more stable gradients, particularly for long sequences.
+
+A defining feature of the TCN is its use of \textbf{dilated convolutions}, which expand the receptive field exponentially with depth while preserving causality. This makes TCNs highly effective at modelling long-range dependencies without the vanishing gradient issues that often affect RNNs.
+
+\subsection{Theoretical Background}
+For a 1D input sequence $x \in \mathbb{R}^{T \times d}$, a dilated convolution with kernel $k$ and dilation factor $d$ is defined as:
+\[
+(y *_{d} k)(t) = \sum_{i=0}^{k-1} k(i) \cdot x(t - d \cdot i)
+\]
+This structure allows the model to observe wider contexts with fewer parameters and layers.
+
+In practice, the TCN is constructed using \textbf{residual blocks} with stacked dilated convolutions, dropout, and skip connections to stabilise training. Zero-padding is used to ensure output length matches input length.
+
+\subsection{Model Architecture}
+The implemented TCN consists of 3 residual blocks, each with:
+\begin{itemize}
+    \item Two 1D convolutional layers with kernel size 3
+    \item Dilation rates of 1, 2, and 4 respectively
+    \item ReLU activations and dropout regularisation
+    \item Optional 1x1 convolutions for matching input-output dimensions
+\end{itemize}
+An output convolution maps the final hidden representation to the desired 2D coordinate space.
+
+\begin{lstlisting}[language=Python, caption={Simplified TCN architecture}]
+class ResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, kernel_size, dilation, dropout):
+        ...
+        self.conv1 = nn.Conv1d(..., dilation=dilation)
+        self.conv2 = nn.Conv1d(..., dilation=dilation)
+
+class TCN(nn.Module):
+    def __init__(self, input_dim=2, hidden_channels=128, ...):
+        self.tcn = nn.Sequential(*residual_blocks)
+        self.output_layer = nn.Conv1d(hidden_channels, output_dim, 1)
+\end{lstlisting}
+
+\subsection{Training Configuration}
+The TCN was trained on the same spiral dataset as the LNN, with identical batch size, learning rate, loss function (Smooth L1), and normalisation pipeline. The model was optimised using Adam and a learning rate scheduler that halved the rate every 500 steps.
+
+\subsection{Performance and Behaviour}
+The TCN demonstrated strong performance on the trajectory prediction task, converging more quickly than the LNN and producing smooth outputs even with a small receptive field. The use of dilated convolutions allowed the model to predict coordinated curvature without explicitly tracking hidden state over time.
+
+\hl{PUT TCN INFEENCE EXAMPLE/ARCHITECTURE DIAGRAM HERE}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.65\linewidth]{img/tcn_inference_example.png}
+%     \caption{TCN inference trajectory on unseen spiral data.}
+%     \label{fig:tcn_inference}
+% \end{figure}
+
+\subsection{Design Considerations}
+\begin{itemize}
+    \item \textbf{Causality:} All convolutions were causal, ensuring no future information was used during prediction.
+    \item \textbf{Parameter efficiency:} Despite having no recurrence, the TCN was able to model complex spirals with relatively few layers and a compact parameter set.
+    \item \textbf{Regularisation:} Dropout was used within each block to avoid overfitting, as convolutional models tend to memorise local structures in small datasets.
+\end{itemize}
+
+While lacking the dynamic time constants of the LNN, the TCN proved to be a strong baseline in terms of speed, stability, and accuracy under clean conditions. Subsequent sections examine its vulnerability under adversarial perturbations.
+
+
+\section{Long Short-Term Memory Network (LSTM)}
+
+\subsection{Background and Rationale}
+The Long Short-Term Memory (LSTM) network is one of the most widely used recurrent neural architectures for sequential learning tasks. It was introduced to address the limitations of classical RNNs, particularly the vanishing and exploding gradient problems during backpropagation through time. The LSTM introduces gated memory units that regulate the flow of information over time.
+
+LSTMs were included in this study as a canonical reference point. Their ability to retain past information via internal cell states makes them well-suited for temporal tasks such as trajectory prediction.
+
+\subsection{LSTM Cell Mechanics}
+An LSTM cell maintains two internal states: a hidden state $h_t$ and a cell state $c_t$. The cell's behaviour is controlled by three gates:
+\[
+\begin{aligned}
+f_t &= \sigma(W_f x_t + U_f h_{t-1} + b_f) \quad &\text{(forget gate)} \\
+i_t &= \sigma(W_i x_t + U_i h_{t-1} + b_i) \quad &\text{(input gate)} \\
+o_t &= \sigma(W_o x_t + U_o h_{t-1} + b_o) \quad &\text{(output gate)} \\
+\tilde{c}_t &= \tanh(W_c x_t + U_c h_{t-1} + b_c) \quad &\text{(cell candidate)} \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
+h_t &= o_t \odot \tanh(c_t)
+\end{aligned}
+\]
+These equations define how the LSTM updates its memory and hidden representations at each time step.
+
+\subsection{Model Implementation}
+In this project, the LSTM was implemented using PyTorch’s built-in \texttt{nn.LSTM} module. A two-layer LSTM was used, with 128 hidden units per layer. The final hidden state was passed through a linear projection layer to produce the 2D coordinate output.
+
+\begin{lstlisting}[language=Python, caption={Simplified LSTM model structure}]
+class LSTMModel(nn.Module):
+    def __init__(self, input_dim=2, hidden_dim=128, num_layers=2, output_dim=2):
+        self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
+        self.output_layer = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x):
+        out, _ = self.lstm(x)
+        return self.output_layer(out)
+\end{lstlisting}
+
+\subsection{Training Configuration}
+The LSTM was trained using the same dataset and preprocessing pipeline as the LNN and TCN. The Smooth L1 loss was used, and training was performed over 1000 epochs with a learning rate of 0.005. A step decay scheduler was applied halfway through training.
+
+\subsection{Training Observations}
+The LSTM showed stable training behaviour and low final validation loss. However, unlike the TCN and LNN, it exhibited slightly slower convergence. Its outputs were smooth and consistent, although it occasionally underfit regions with sharper curvature.
+
+\hl{PUT LSTM INFEENCE EXAMPLE/ARCHITECTURE DIAGRAM HERE}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.65\linewidth]{img/lstm_inference_example.png}
+%     \caption{LSTM inference on unseen spiral sequence.}
+%     \label{fig:lstm_inference}
+% \end{figure}
+
+\subsection{Design Considerations}
+\begin{itemize}
+    \item \textbf{Batch-first processing:} The model was structured to accept input tensors of shape $(B, T, d)$ to be consistent with the other architectures.
+    \item \textbf{State management:} Hidden and cell states were initialised to zero at the start of each sequence.
+    \item \textbf{Model depth:} Two layers were used to capture moderately deep temporal patterns without overfitting to noise.
+\end{itemize}
+
+While the LSTM offers a reliable baseline for temporal prediction, its recurrent structure can make it more sensitive to gradient-based perturbations. This sensitivity is further explored in the following sections on adversarial evaluation.

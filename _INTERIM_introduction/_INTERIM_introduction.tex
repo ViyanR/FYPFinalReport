@@ -1,0 +1,36 @@
+\chapter{Introduction}
+
+In this chapter, we introduce the motivations, objectives and challenges of developing a verification Method for liquid neural networks.
+
+\section{Motivations}
+
+Liquid neural networks are a novel AI architecture. In comparison to traditional neural networks, they allow computationally efficient processing of temporal data, whilst remaining adaptable to changing environments after training. This is achieved by modelling neuron activations with differential equations. The design is inspired by how brain cells communicate with each other.
+
+Due to these properties, LNNs have applications in robotics, autonomous systems \cite{chahineRobustFlightNavigation2023}, and time-series analysis where adaptability and resource efficiency are critical. In addition, LNNs have the potential to alleviate the environmental challenges of large-scale machine learning systems, due to their efficiency.
+
+LNNs are also designed to be resilient to noise and variability within input data, due to their dynamic design. They demonstrate greater robustness and out of distribution properties compared to standard RELU-based models.
+
+In order to prove/quantify these properties, a verification method must be developed for LNNs. Verification is essential for a neural network architecture to be accepted/used to ensure safety, reliability, and effectiveness. This helps prevent vulnerabilities, such as incorrect predictions, instability, or adversarial susceptibility. These can compromise real-world performance, which is especially important in safety-critical applications. This process ensures the architecture meets theoretical guarantees, complies with ethical and safety standards, and achieves the intended objectives.
+
+Traditional verification methods struggle to accommodate the dynamic and temporal complexity present in these networks.
+
+\section{Objectives}
+
+There are three objectives of this project.
+
+\begin{enumerate}
+    \item 
+    Gain a detailed understanding of neural network verification techniques, focusing on symbolic interval propagation and the methodologies behind various CROWN implementations for certifying robustness and safety.
+    \item 
+    Gain a thorough understanding of liquid neural networks and the mathematical principles that underpin their dynamic, continuous-time behavior.
+    \item 
+    Develop and test a verification method for liquid neural networks.
+\end{enumerate}
+
+\section{Challenges}
+
+Since LNNs are a recent innovation, limited research/documentation exists on liquid neural networks, in comparison to traditional neural network models. This could make it challenging to design tailored verification frameworks.
+
+Another challenge is the difficulty of obtaining liquid neural network models for testing and evaluation. Unlike traditional networks, where pre-trained models are widely available, LNNs are still in the early stages of adoption, meaning there is limited accessibility to practical implementations for experimentation.
+
+Finally, most existing verification methods rely on assumptions about neural networks, such as fixed architectures or static parameters. Liquid neural networks violate these assumptions, using dynamic and continuous-time behavior. This can lead to traditional methods being ineffective or requiring substantial adaptation.

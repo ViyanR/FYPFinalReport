@@ -1,0 +1,271 @@
+\chapter{Liquid Neural Network Design and Implementation}
+
+\section{Design Overview}
+This chapter presents the detailed implementation of the Liquid Neural Network (LNN) developed in PyTorch for sequential 2D time-series prediction. The architecture is based on the Liquid Time-Constant (LTC) neuron model, which simulates continuous-time dynamics through ordinary differential equations (ODEs) and exhibits properties of neural adaptability and temporal memory.
+
+The primary goal of the implementation was to create a biologically inspired, interpretable recurrent model with competitive performance on trajectory prediction tasks. Unlike conventional RNNs or LSTMs, the LNN is governed by time-continuous equations rather than discrete updates, allowing finer control over neuronal dynamics.
+
+\vspace{1em}
+\noindent \textbf{Design Decisions:}
+\begin{itemize}
+    \item \textbf{Framework:} PyTorch was selected due to its flexible dynamic graph construction and ease of integrating custom layers with automatic differentiation.
+    \item \textbf{Neuron Dynamics:} The neuron model was designed to emulate leaky integrate-and-fire (LIF) behaviour with added plasticity through modulated reversal potentials and conductances.
+    \item \textbf{Time Unfolding:} Each forward pass of the LNN integrates over multiple internal time steps (ODE unfolds) to approximate the continuous-time solution, reflecting membrane voltage evolution.
+    \item \textbf{Baseline Comparison:} To benchmark performance, identical training and evaluation protocols were implemented for alternative architectures (LSTM, TCN) using the same data.
+\end{itemize}
+
+The following sections document the architecture, neuron formulation, wiring strategy, training setup, and performance characteristics of the LNN. Robustness and verification analysis are covered in subsequent chapters.
+
+\section{Wiring and Connectivity}
+A key component of the LNN architecture is its sparse and biologically motivated connectivity structure. To simulate the non-uniform and random nature of synaptic wiring observed in biological networks, a custom class named \texttt{RandomWiring} was implemented.
+
+This class generates two adjacency matrices:
+\begin{itemize}
+    \item A \textbf{recurrent adjacency matrix} of shape $(n \times n)$ defining internal connections between neurons within the hidden layer.
+    \item A \textbf{sensory adjacency matrix} of shape $(d_{\text{in}} \times n)$ which defines the input-to-hidden connectivity.
+\end{itemize}
+Each matrix contains continuous values sampled from a uniform distribution on $[0, 1]$, which are later used to create binary masks or to modulate weight strengths.
+
+Additionally, the \texttt{RandomWiring} class generates reversal potentials:
+\begin{itemize}
+    \item \texttt{erev} for neuron-neuron connections.
+    \item \texttt{sensory\_erev} for input-synapse connections.
+\end{itemize}
+These potentials are initialised from a uniform range $[-0.2, 0.2]$ and are treated as fixed, non-learnable parameters in this implementation.
+
+\vspace{1em}
+\noindent \textbf{Design Considerations:}
+\begin{itemize}
+    \item \textbf{Biological plausibility:} Fixed sparse masks emulate the limited number of active connections in real cortical microcircuits.
+    \item \textbf{Randomised initialisation:} Each instantiation of \texttt{RandomWiring} results in a different network topology, allowing stochastic variation in experiments.
+    \item \textbf{Separation of sensory and recurrent dynamics:} By decoupling the sensory and recurrent wiring, the model can explicitly distinguish between input-driven and internal dynamic behaviour.
+\end{itemize}
+
+\noindent Below is a simplified example of how the \texttt{RandomWiring} class is defined:
+\begin{lstlisting}[language=Python, caption={Simplified RandomWiring class}]
+class RandomWiring:
+    def __init__(self, input_dim, output_dim, neuron_count):
+        self.adjacency_matrix = np.random.uniform(0, 1, (neuron_count, neuron_count))
+        self.sensory_adjacency_matrix = np.random.uniform(0, 1, (input_dim, neuron_count))
+        
+    def erev_initializer(self):
+        return np.random.uniform(-0.2, 0.2, (neuron_count, neuron_count))
+
+    def sensory_erev_initializer(self):
+        return np.random.uniform(-0.2, 0.2, (input_dim, neuron_count))
+\end{lstlisting}
+
+\section{LTC Neuron Dynamics}
+The core computational unit of the Liquid Neural Network is the \texttt{LIFNeuronLayer}, a custom PyTorch module that simulates the behaviour of Liquid Time-Constant (LTC) neurons. These neurons operate using a continuous-time dynamical model governed by a first-order differential equation, capturing the evolution of membrane potentials in response to internal and external stimuli.
+
+The model integrates over time using a discretised ODE solver implemented within the forward pass. Specifically, it unfolds the membrane update equation over a fixed number of steps (\texttt{ode\_unfolds}) using an Euler-like method.
+
+\noindent The update rule is governed by:
+\[
+v_t = \frac{c_m \cdot v_{t-1} + g_{\text{leak}} \cdot V_{\text{leak}} + I_{\text{syn}}}{c_m + g_{\text{leak}} + G_{\text{syn}} + \varepsilon}
+\]
+where:
+\begin{itemize}
+    \item $c_m$: membrane capacitance (learnable)
+    \item $g_{\text{leak}}$: leak conductance (learnable)
+    \item $V_{\text{leak}}$: leak reversal potential
+    \item $I_{\text{syn}}$: synaptic current from sensory and recurrent inputs
+    \item $G_{\text{syn}}$: total synaptic conductance
+    \item $\varepsilon$: small stabilisation constant
+\end{itemize}
+
+\noindent Both sensory and recurrent synaptic activations are modelled via a sigmoid function with learnable $\mu$ (mean) and $\sigma$ (scale), followed by a softplus-modulated weight:
+\[
+\text{activation} = \text{Softplus}(W) \cdot \sigma\left( \frac{v - \mu}{\sigma} \right)
+\]
+
+\vspace{1em}
+\noindent \textbf{Design Choices:}
+\begin{itemize}
+    \item \textbf{Learnable Parameters:} All biophysical constants—capacitance, leak conductance, reversal potentials, synaptic weights—are learnable, providing flexibility in dynamic behaviour.
+    \item \textbf{Softplus Regularisation:} Weights and conductances are passed through \texttt{Softplus} to enforce positivity while allowing gradients to flow smoothly during training.
+    \item \textbf{ODE Unfolding:} The number of internal solver steps is fixed (\texttt{ode\_unfolds} = 12) to balance numerical precision with computational cost.
+    \item \textbf{Sparsity Masks:} Both recurrent and sensory activations are element-wise masked using the adjacency matrices from \texttt{RandomWiring}, enforcing fixed sparsity throughout training.
+\end{itemize}
+
+\noindent The neuron dynamics are encapsulated in the following structure:
+\begin{lstlisting}[language=Python, caption={Simplified LTC neuron forward method}]
+def ode_solver(self, inputs, state, elapsed_time):
+    v_pre = state
+    for _ in range(self.ode_unfolds):
+        synaptic_input = compute_synaptic_activation(v_pre)
+        numerator = self.cm * v_pre + self.gleak * self.vleak + synaptic_input
+        denominator = self.cm + self.gleak + synaptic_conductance
+        v_pre = numerator / (denominator + self.epsilon)
+    return v_pre
+\end{lstlisting}
+This mechanism allows neurons to respond not only to present input but also to their internal temporal dynamics, mimicking continuous-time memory traces observed in biological neurons.
+
+\section{Network Architecture}
+The full Liquid Neural Network is constructed by embedding the LTC neuron layer within a recurrent wrapper, implemented as a custom \texttt{LTCRNN} module. This wrapper sequentially passes each time step of the input through the same \texttt{LIFNeuronLayer}, maintaining a hidden state that evolves over time. The resulting structure can be viewed as a biologically grounded alternative to traditional RNN cells.
+
+At a high level, the architecture accepts an input tensor of shape $(B, T, d_{\text{in}})$, where $B$ is the batch size, $T$ is the sequence length, and $d_{\text{in}}$ is the input dimension (two in this case, corresponding to 2D spatial coordinates). For each time step $t$, the neuron layer receives the $t$-th slice of the sequence and updates the hidden state, generating a predicted output of shape $(B, T, d_{\text{out}})$.
+
+\vspace{1em}
+\noindent \textbf{Design Considerations and Tradeoffs:}
+\begin{itemize}
+    \item \textbf{Hidden state dimensionality:} The number of LTC neurons (set via \texttt{hidden\_dim}) defines the model capacity. A lower number limits expressiveness but reduces overfitting risk and improves computational efficiency.
+    \item \textbf{Output mapping:} Rather than applying a separate output layer, the voltage traces themselves are treated as predictions. This design allows direct interpretation of the membrane state as a continuous output signal.
+    \item \textbf{Batch-first structure:} Following PyTorch conventions, all sequences are processed in batch-major form, allowing efficient tensor operations and GPU parallelism.
+\end{itemize}
+
+\noindent The architecture can be summarised as follows:
+\begin{lstlisting}[language=Python, caption={Structure of the LTCRNN module}]
+class LTCRNN(nn.Module):
+    def __init__(self, wiring, input_dim, hidden_dim, output_dim):
+        self.cell = LIFNeuronLayer(wiring)
+        ...
+        
+    def forward(self, inputs):
+        batch_size, seq_len, _ = inputs.size()
+        states = torch.zeros(batch_size, self.hidden_dim)
+        outputs = []
+        for t in range(seq_len):
+            out, states = self.cell(inputs[:, t, :], states)
+            outputs.append(out)
+        return torch.stack(outputs, dim=1)
+\end{lstlisting}
+
+This design maintains a clear separation between the continuous-time neuronal dynamics and the sequence-level integration logic. As a result, the architecture remains both modular and biologically interpretable, while still being compatible with modern deep learning toolchains.
+
+\section{Training Configuration (and dataset)}
+The LNN was trained on a synthetic 2D spiral trajectory dataset, specifically chosen for its smooth temporal structure and nonlinearity. Each data point consists of an $(x, y)$ coordinate, and the goal of the model is to predict the next point in the sequence given a fixed-length input window. The sequence nature of the task makes it well-suited for testing temporal memory and continuous dynamics.
+
+Training was conducted using supervised learning. Inputs and targets were created by shifting a sliding window of length $T = 3$ over the full spiral. Each input sequence of three time steps was paired with the corresponding next three steps as the target output.
+
+\vspace{1em}
+\noindent \textbf{Data Preprocessing:}
+\begin{itemize}
+    \item All inputs were standardised using the training set mean and standard deviation.
+    \item Targets were normalised in the same way to preserve scale consistency.
+    \item The spiral dataset was generated programmatically with adjustable number of points and turns.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent \textbf{Training Parameters:}
+\begin{itemize}
+    \item \textbf{Loss function:} Mean Squared Error (\texttt{nn.MSELoss()}) was used to penalise deviations from the ground truth trajectory.
+    \item \textbf{Optimiser:} Adam was chosen due to its fast convergence and robustness to parameter scaling. The learning rate was set to 0.005.
+    \item \textbf{Epochs:} The model was trained for 2000 epochs to ensure convergence, with periodic visual evaluation every 100 epochs.
+    \item \textbf{Batching:} Input sequences were split into overlapping windows and grouped into batches of size 32. This batching strategy allows efficient GPU utilisation while preserving temporal continuity.
+    \item \textbf{Train/validation split:} A random 80/20 split was used, with shuffling applied to prevent memorisation of input order.
+\end{itemize}
+
+\vspace{1em}
+\noindent The training process was implemented as follows:
+\begin{lstlisting}[language=Python, caption={Simplified training loop for the LNN}]
+for epoch in range(num_epochs):
+    lnn_model.train()
+    total_loss = 0
+    for x_batch, y_batch in zip(input_batches, target_batches):
+        optimizer.zero_grad()
+        outputs = lnn_model(x_batch)
+        loss = criterion(outputs, y_batch)
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+\end{lstlisting}
+
+\vspace{0.5em}
+\noindent The training loop includes evaluation checkpoints where predicted trajectories are plotted and compared to ground truth. These visualisations provided crucial insight into convergence behaviour beyond what scalar loss values could show.
+
+\vspace{1em}
+\noindent \textbf{Design Rationale:}
+\begin{itemize}
+    \item A small sequence length ($T = 3$) was chosen to reduce training complexity while still allowing temporal dependencies to be captured.
+    \item Training on a synthetically generated spiral ensured control over noise and resolution, which allowed clearer attribution of error sources to model limitations rather than data irregularities.
+    \item The validation split was kept random to mimic real-world test generalisation, though later sections explore unseen spiral generation for more robust testing.
+\end{itemize}
+
+\section{Training Behaviour}
+Throughout training, model performance was monitored both quantitatively—via validation loss—and qualitatively through trajectory plots. Evaluation occurred at regular intervals (every 100 epochs), allowing for close inspection of how well the LNN was capturing the underlying dynamics of the spiral sequence.
+
+\noindent The primary trends observed during training were as follows:
+\begin{itemize}
+    \item Loss decreased steadily in early epochs, with diminishing returns as training progressed.
+    \item In some cases, small fluctuations in validation loss were observed, likely due to the non-convexity of the parameter landscape and the biological variability induced by random wiring.
+    \item Visual predictions of the trajectory showed clear improvement over time. Early predictions were coarse approximations, while later epochs yielded smoother and more accurate reconstructions.
+\end{itemize}
+
+\noindent The following plot illustrates training and validation behaviour over time:
+
+\hl{INSERT LOSS CURVE IMAGE HERE}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.65\linewidth]{img/loss_curve.png}
+%     \caption{Validation trajectory prediction vs ground truth (epoch 1000).}
+%     \label{fig:lnn_loss}
+% \end{figure}
+
+\vspace{1em}
+\noindent \textbf{Qualitative Evaluation:}  
+One of the more useful aspects of the evaluation process was the visual inspection of the predicted path over time. The LNN was able to maintain smooth curvature and approximate the rotational dynamics of the spiral without overshooting or excessive lag. This was true even on validation data not seen during training.
+
+\hl{IMAGE OF VALIDATION SPIRAL HERE}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.65\linewidth]{img/trajectory_example.png}
+%     \caption{Predicted vs true spiral trajectory at validation time (denormalised).}
+%     \label{fig:lnn_spiral}
+% \end{figure}
+
+\vspace{1em}
+\noindent \textbf{Design Interpretation:}
+\begin{itemize}
+    \item \textbf{ODE unfolding depth:} The number of internal steps in the membrane integration process contributed significantly to trajectory stability. Deeper unfolding improved smoothness, but with diminishing returns.
+    \item \textbf{Effect of sparsity:} Fixed wiring helped constrain overfitting and may have contributed to better generalisation than a fully connected architecture.
+    \item \textbf{Performance variation:} Some runs with different initialisations showed variability in loss curves and convergence speed, indicating sensitivity to initial wiring or parameter seeds.
+\end{itemize}
+
+While training times were longer than for simpler architectures (e.g., LSTMs), the interpretability and stability of the LNN were noticeably better in capturing the underlying continuous structure of the problem.
+
+% Might delete this section
+
+\section{Model Saving and Reusability}
+To support reproducibility and downstream experimentation—particularly for robustness evaluation and formal verification—the trained model was saved along with all relevant metadata. This included not only the model weights, but also normalisation parameters and structural information needed to recreate the inference environment without re-training.
+
+\vspace{1em}
+\noindent \textbf{Checkpoint Contents:}
+\begin{itemize}
+    \item \texttt{model\_state\_dict:} The full parameter state of the trained LNN, captured via PyTorch’s built-in serialization.
+    \item \texttt{input\_shape:} Stored to ensure correct tensor dimensions during evaluation or reinitialisation.
+    \item \texttt{mean, std:} The normalisation statistics used during training. These are essential to apply consistent transformations at inference time.
+    \item \texttt{epsilon, method:} Stored in cases where perturbation-based or bound-based analysis (e.g., IBP or CROWN) is applied in later stages.
+    \item \texttt{input\_tensor:} For select experiments, the original input sequence was stored alongside the model for reference or robustness testing.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent \textbf{Example save structure:}
+\begin{lstlisting}[language=Python, caption={Saving trained LNN model and metadata}]
+torch.save({
+    'model_state_dict': lnn_model.state_dict(),
+    'input_shape': list(input_tensor.shape),
+    'normalisation': {'mean': mean.tolist(), 'std': std.tolist()},
+    'eps': 0.1,
+    'method': 'IBP',
+    'all_inputs': all_inputs,
+}, 'lnn_bounds_raw.pt')
+\end{lstlisting}
+
+\vspace{1em}
+\noindent \textbf{Design Rationale:}
+\begin{itemize}
+    \item \textbf{Separation of model and metadata:} Rather than serialising the full model object (which can be sensitive to code changes), only the state dictionary was saved, ensuring compatibility and modularity.
+    \item \textbf{Inclusion of statistical context:} In time-series tasks, normalisation is critical. Saving the exact values used during training avoids discrepancies in future runs.
+    \item \textbf{Reusability in robustness evaluation:} Since later chapters involve adversarial attacks and bound propagation, preserving the original inputs and parameter configuration was necessary for direct replayability.
+\end{itemize}
+
+This structure ensures that the LNN can be deployed, evaluated, or analysed independently of the training pipeline, aligning with reproducibility standards expected in machine learning research.
+
+
+
+
+
+

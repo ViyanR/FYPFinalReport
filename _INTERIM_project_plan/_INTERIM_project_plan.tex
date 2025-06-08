@@ -1,0 +1,42 @@
+\chapter{Project Plan}
+
+\section{Completed Work}
+
+\subsection*{Liquid Neural Network Research}
+
+After having researched liquid neural networks, a comprehensive understanding of their architecture and their underlying mathematical principles has been developed. This involved exploring into the continuous-time dynamics modeled by neural ordinary differential equations (ODEs), which form the foundation of liquid neural networks. This also included the integration of dynamic time constants and nonlinear activation functions, which allow liquid neural networks to adapt their behavior over time. The inspiration and background behind the inception of these architectures has also been studied. The differences between liquid neural networks and  traditional neural networks has also been analysed, focusing on key aspects such as their ability to handle time-dependent data, their dynamic adaptability, and the mathematical implications of their continuous evolution compared to the static layers of traditional models. This has highlighted the advantages and limitations of liquid neural networks.
+
+\subsection*{ODE Learning}
+
+Ordinary differential equations, their solutions, and the computational methods available for solving them have been studied as well. This involved reviewing the foundational theory behind ODEs, including both linear and nonlinear equations, as well as exploring analytical and numerical techniques for finding solutions. Common numerical solvers were examined, such as the Euler method, Runge-Kutta methods, and adaptive solvers like Dormand-Prince, focusing on their accuracy, efficiency, and suitability for different types of problems. In addition, specialized solvers designed for stiff equations and systems with discontinuities were studied, to understand their importance in handling the complex dynamics often present in liquid neural networks. This has provided a mathematical foundation for effectively applying ODE principles to the modeling and verification of liquid neural networks.
+
+\subsection*{Neural Network Verification Research}
+
+A range of neural network verification methods have been explored. This has provided an understanding of their theoretical foundations, practical implementations, and applicability to LNNs. This involved studying the formal proofs that underpin verification techniques, such as symbolic interval propagation, reachability analysis with zonotopes and star sets, Lipschitz-based methods, and optimization-based approaches such as mixed-integer linear programming (MILP). The strengths and weaknesses of each method were examined, focussing on computational efficiency, scalability, and precision in capturing complex network behaviors. Particular attention was given to assessing their compatibility with the dynamic and continuous-time nature of LNNs, which often violate the assumptions made by traditional verification frameworks. Through this analysis, potential gaps in current methods have been identified. Possible extensions to existing methods have been explored, to handle the unique challenges posed by LNN architectures.
+
+\section{Future Work}
+
+\subsection*{Set-up for Verification Experiments \& Initial Verification Method(s) Theory}
+\subsubsection*{\textit{End of February}}
+
+This milestone involves having an environment set-up, with suitable LNN model(s) found, and a programmatic method for verification evaluation. In addition, a few potential verification methods should be proposed, as theoretic proofs/explanations.
+
+\subsection*{Complete Verification Framework(s) Implementation}
+\subsubsection*{\textit{End of April}}
+
+This milestone involves the theoretical verification methods being implemented as a working framework.
+
+\subsection*{Evaluate Verification Frameworks}
+\subsubsection*{\textit{End of May}}
+
+
+This milestone involves applying the framework(s) to the LNN models, within the set-up environment. They will be assessed according to the metrics in the following chapter (Evaluation Plan).
+
+\subsection*{Report Writing}
+\subsubsection*{\textit{June 13th}}
+
+This milestone involves completing the report, which will outline the entire research process. This will contain literature reviews, records of the technical work, documentation of any final code written, evaluation of results, and an insight into possible future work.
+
+\subsection*{Extensions}
+
+Potential extensions to an LNN verification framework would include optimizing the framework for large-scale LNNs, integrating it with existing machine learning pipelines for real-time verification, and evaluating its applicability for other neural network architectures.
