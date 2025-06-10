@@ -2,68 +2,129 @@
 
 \section{Quantitative Evaluation Metrics and Comparison}
 
-Having described the attack methodologies and observed their qualitative impacts, we now turn to a quantitative assessment of model performance and robustness. Each model was evaluated under clean and adversarial conditions using a consistent set of metrics, enabling a direct comparison of degradation profiles across attack types.
+This chapter covers the quantitative and qualitative evaluation of all four models (LNN, TCN, LSTM, and Transformer) on the same input under various adversarial conditions. We systematically assess how each architecture responds to different types of perturbations, focusing on both performance degradation and qualitative failure modes. These metrics are chosen to capture both the accuracy of trajectory predictions and the model's stability and response to input changes.
 
 \subsection{Evaluation Metrics}
 
 \subsubsection*{1. Mean Squared Error (MSE)}
-The primary loss function used during training was the Mean Squared Error, given by:
+The loss function used during training was the Mean Squared Error, given by:
 \[
 \text{MSE} = \frac{1}{T} \sum_{t=1}^{T} \| \hat{x}_t - x_t \|_2^2
 \]
-where $\hat{x}_t$ is the predicted output at time $t$, and $x_t$ is the ground truth.
+where $\hat{x}_t$ is the predicted output at time $t$, and $x_t$ is the ground truth. MSE measures the average difference between predicted and true trajectories, and is used as a baseline measure of performance under clean (non-adversarial) conditions.
 
 \subsubsection*{2. Degradation Ratio}
-To evaluate adversarial impact, we define the degradation ratio as:
+To evaluate adversarial impact, the degradation ratio is defined as:
 \[
 \text{Degradation} = \frac{\text{MSE}_{\text{adv}} - \text{MSE}_{\text{clean}}}{\text{MSE}_{\text{clean}} + \delta}
 \]
-where $\delta$ is a small constant added to avoid division by zero. This ratio captures the relative performance drop due to adversarial perturbations.
+where $\delta$ is a small constant added to avoid division by zero. This metric captures the relative performance decrease caused by adversarial perturbations. This helps to compare vulnerability across models regardless of their baseline MSE.
 
 \subsubsection*{3. Deviation Distance}
-We also compute the $\ell_2$ deviation between the clean and adversarial predictions:
+The $\ell_2$ deviation between the clean and adversarial predictions is calculated as:
 \[
 \text{Deviation} = \frac{1}{T} \sum_{t=1}^{T} \| \hat{x}_t^{\text{adv}} - \hat{x}_t^{\text{clean}} \|_2
 \]
-This metric helps quantify the visible divergence in predicted trajectories.
+This metric quantifies the visible divergence in predicted trajectories.
+
+Unlike degradation ratio, which depends on the ground truth, this metric focuses purely on how much the model's output changes under perturbation. It is a task-independent measure of functional instability, showing how sensitive the model's outputs are to small adversarial changes.
+
+\subsubsection*{4. Local Sensitivity (Lipschitz Estimate)}
+To characterise the smoothness of the model's function, local sensitivity is estimated by:
+\[
+\text{Sensitivity} = \frac{\| \hat{x}^{\text{adv}} - \hat{x}^{\text{clean}} \|_2}{\| x^{\text{adv}} - x^{\text{clean}} \|_2}
+\]
+This ratio approximates the local Lipschitz constant, capturing how much the output changes in response to small input perturbations. A higher sensitivity indicates that the model has sharp local gradients, potentially making it more brittle. This provides a theoretical metric for robustness, independent of task-specific loss.
 
 \subsection{Aggregate Results}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
-\textbf{Model} & \textbf{Avg. Degradation} & \textbf{Avg. Deviation} & \textbf{Clean MSE} \\
+\textbf{Model} & \textbf{Avg. Degradation} & \textbf{Avg. Deviation} & \textbf{Lipshchitz Estimate} & \textbf{Clean MSE} \\
 \hline
-LNN   & 1.78 & 0.322 & 0.00019 \\
-LSTM  & 2.91 & 0.448 & 0.00021 \\
-TCN   & 2.33 & 0.391 & 0.00023 \\
+LNN         & 1.78 & 0.322 & ? & 0.00019 \\
+LSTM        & 2.91 & 0.448 & ? & 0.00021 \\
+TCN         & 2.33 & 0.391 & ? & 0.00023 \\
+Transformer & 0 & 0 & ? & 0 \\ 
 \hline
 \end{tabular}
 \caption{Average degradation and deviation metrics across all attack types.}
 \label{tab:agg_metrics}
 \end{table}
 
-\subsection{Attack-Specific Breakdown}
+\subsection{Attack-Specific Breakdowns}
+
+The following table summarises the degradation ratios for each model under various adversarial attacks. Lower values indicate better robustness.
 
 \begin{table}[H]
-\centering
-\small
-\begin{tabular}{|l|c|c|c|}
-\hline
-\textbf{Attack Type} & \textbf{LNN Degradation} & \textbf{LSTM Degradation} & \textbf{TCN Degradation} \\
-\hline
-FGSM                      & 1.45 & 2.71 & 2.01 \\
-PGD                       & 1.90 & 3.20 & 2.43 \\
-DeepFool-inspired         & 1.63 & 2.94 & 2.19 \\
-SPSA                      & 1.38 & 2.61 & 2.08 \\
-Time-Warping              & 0.85 & 2.01 & 1.59 \\
-Continuous-Time Perturb.  & 2.03 & 3.99 & 3.40 \\
-\hline
-\end{tabular}
-\caption{Degradation ratios across models for each attack. Lower is better.}
-\label{tab:attack_results}
+    \centering
+    \small
+    \begin{tabular}{|l|cccc|}
+    \hline
+    \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Degradation}} \\
+    \cline{2-5}
+     & \textbf{LNN} & \textbf{LSTM} & \textbf{TCN} & \textbf{Transformer} \\
+    \hline
+    FGSM                     & 1.45 & 2.71 & 2.01 & 0 \\
+    PGD                      & 1.90 & 3.20 & 2.43 & 0 \\
+    DeepFool-inspired        & 1.63 & 2.94 & 2.19 & 0 \\
+    SPSA                     & 1.38 & 2.61 & 2.08 & 0 \\
+    Time-Warping             & 0.85 & 2.01 & 1.59 & 0 \\
+    Continuous-Time Perturb. & 2.03 & 3.99 & 3.40 & 0 \\
+    \hline
+    \end{tabular}
+    \caption{Degradation ratios across models for each attack. Lower is better.}
+    \label{tab:attack_results_degradation}
 \end{table}
+
+The following table summarises the average deviation distances for each model under various adversarial attacks. Lower values indicate less deviation from the clean trajectory.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{|l|cccc|}
+    \hline
+    \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Deviation}} \\
+    \cline{2-5}
+     & \textbf{LNN} & \textbf{LSTM} & \textbf{TCN} & \textbf{Transformer} \\
+    \hline
+    FGSM                     & ? & ? & ? & 0 \\
+    PGD                      & ? & ? & ? & 0 \\
+    DeepFool-inspired        & ? & ? & ? & 0 \\
+    SPSA                     & ? & ? & ? & 0 \\
+    Time-Warping             & ? & ? & ? & 0 \\
+    Continuous-Time Perturb. & ? & ? & ? & 0 \\
+    \hline
+    \end{tabular}
+    \caption{?}
+    \label{tab:attack_results_deviation}
+\end{table}
+
+The following table summarises the local sensitivity estimates for each model under various adversarial attacks. Lower values indicate smoother, more robust models.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{|l|cccc|}
+    \hline
+    \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Local Sensitivity (Lipshitz Estimate)}} \\
+    \cline{2-5}
+     & \textbf{LNN} & \textbf{LSTM} & \textbf{TCN} & \textbf{Transformer} \\
+    \hline
+    FGSM                     & ? & ? & ? & 0 \\
+    PGD                      & ? & ? & ? & 0 \\
+    DeepFool-inspired        & ? & ? & ? & 0 \\
+    SPSA                     & ? & ? & ? & 0 \\
+    Time-Warping             & ? & ? & ? & 0 \\
+    Continuous-Time Perturb. & ? & ? & ? & 0 \\
+    \hline
+    \end{tabular}
+    \caption{?}
+    \label{tab:attack_results_sensitivity}
+\end{table}
+
 
 \subsection{Interpretation}
 
@@ -75,11 +136,11 @@ These results show that:
 \end{itemize}
 
 \subsection{Summary}
-Quantitative metrics reinforce earlier qualitative observations: models with rigid temporal assumptions or recurrent memory (LSTM) are more susceptible to both magnitude and timing distortions, whereas continuous-time dynamics (LNN) offer meaningful resistance. However, no model was universally robust, and each architecture exhibited specific weaknesses when faced with particular perturbation types.
+Quantitative metrics reinforce qualitative observations: models with rigid temporal assumptions or recurrent memory (LSTM) are more susceptible to both magnitude and timing distortions, whereas continuous-time dynamics (LNN) offer meaningful resistance. However, no model was universally robust, and each architecture exhibited specific weaknesses when faced with particular perturbation types.
 
 \section{Qualitative Evaluation and Visual Analysis}
 
-While quantitative metrics provide a summary view of model degradation, they can obscure the qualitative character of errors — such as spiralling divergence, phase drift, or geometric distortion. In this section, we present visual comparisons between clean and adversarial predictions to better understand how each model’s internal representation and output trajectory is disrupted.
+While quantitative metrics provide a summary view of model degradation, they can obscure the qualitative character of errors — such as spiralling divergence, phase drift, or geometric distortion. In this section, we present visual comparisons between clean and adversarial predictions to better understand how each model's internal representation and output trajectory is disrupted.
 
 \subsection{Visualisation Methodology}
 

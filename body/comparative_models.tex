@@ -2,27 +2,23 @@
 
 \section{Introduction to Baseline Models}
 
-To understand the capabilities and limitations of the Liquid Neural Network (LNN), it is important to benchmark its performance against established neural architectures. This chapter introduces two such baselines: the Temporal Convolutional Network (TCN) and the Long Short-Term Memory (LSTM) network. Both models were trained on the same trajectory prediction task, using the same dataset and training protocol as the LNN.
+To understand the capabilities and limitations of the Liquid Neural Network (LNN), we benchmark its performance against established neural architectures. This chapter introduces two baselines: the Temporal Convolutional Network (TCN) and the Long Short-Term Memory (LSTM) network. Both models were trained on the same trajectory prediction task, using the same dataset and training protocol as the LNN.
 
-The choice of these two architectures was motivated by their contrasting inductive biases. The LSTM represents the class of recurrent models with gated memory and internal state persistence, while the TCN is a convolutional alternative that relies on dilated kernels and temporal receptive fields. Each offers a different approach to sequence modelling, and both are widely used in time-series tasks across domains such as finance, speech, and control systems.
+The choice of these architectures was motivated by their contrasting inductive biases. The LSTM represents the class of recurrent models with gated memory and internal state persistence, while the TCN is a convolutional network that uses dilated kernels and temporal receptive fields. Each has a different approach to sequence modelling, and both are widely used in time-series tasks across various domains.
 
-By evaluating the behaviour of these models under clean and adversarial conditions, we aim to identify not just their predictive accuracy, but also their robustness, sensitivity to perturbation, and qualitative characteristics of their outputs. These insights provide a broader context for assessing the strengths and weaknesses of the LNN in the following respects:
+By evaluating the behaviour of these models under clean and adversarial conditions, we aim to identify both their predictive accuracy, and their robustness, sensitivity to perturbation, and qualitative output characteristics. These insights provide a broader context for assessing the LNN in the following aspects:
 \begin{itemize}
-    \item \textbf{Temporal memory:} How effectively does each model retain and process temporal dependencies?
-    \item \textbf{Structural robustness:} How does architectural rigidity or flexibility affect the model's susceptibility to noise?
-    \item \textbf{Gradient stability:} What does the geometry of each model’s loss surface imply for adversarial vulnerability?
+    \item \textbf{Temporal memory:} How effectively each model retains and processes temporal dependencies
+    \item \textbf{Structural robustness:} How architectural rigidity affects the model's susceptibility to noise
+    \item \textbf{Gradient stability:} The correlation between  the geometry of a model's loss and its' adversarial vulnerability?
 \end{itemize}
-
-The remainder of this chapter provides a detailed breakdown of the TCN and LSTM implementations used in this project, followed by an in-depth analysis of two adversarial attack methods—Fast Gradient Sign Method (FGSM) and Projected Gradient Descent (PGD)—applied to all three models under identical conditions.
-
-
 
 \section{Temporal Convolutional Network (TCN)}
 
 \subsection{Overview and Motivation}
 The Temporal Convolutional Network (TCN) is a fully convolutional architecture designed for sequential data. Unlike RNN-based models, which process inputs recursively and maintain an internal hidden state, TCNs rely on 1D convolutions applied over the temporal axis. This allows for parallel computation and more stable gradients, particularly for long sequences.
 
-A defining feature of the TCN is its use of \textbf{dilated convolutions}, which expand the receptive field exponentially with depth while preserving causality. This makes TCNs highly effective at modelling long-range dependencies without the vanishing gradient issues that often affect RNNs.
+TCN's use \textbf{dilated convolutions}, which expand the receptive field exponentially with depth while preserving causality. This makes them highly effective at modelling long-range dependencies without the vanishing gradient issues that often affect RNNs.
 
 \subsection{Theoretical Background}
 For a 1D input sequence $x \in \mathbb{R}^{T \times d}$, a dilated convolution with kernel $k$ and dilation factor $d$ is defined as:
@@ -78,15 +74,15 @@ The TCN demonstrated strong performance on the trajectory prediction task, conve
     \item \textbf{Regularisation:} Dropout was used within each block to avoid overfitting, as convolutional models tend to memorise local structures in small datasets.
 \end{itemize}
 
-While lacking the dynamic time constants of the LNN, the TCN proved to be a strong baseline in terms of speed, stability, and accuracy under clean conditions. Subsequent sections examine its vulnerability under adversarial perturbations.
+Despite lacking the dynamic time constants of the LNN, the TCN proved to be a strong baseline in terms of speed, stability, and accuracy under clean conditions.
 
 
 \section{Long Short-Term Memory Network (LSTM)}
 
 \subsection{Background and Rationale}
-The Long Short-Term Memory (LSTM) network is one of the most widely used recurrent neural architectures for sequential learning tasks. It was introduced to address the limitations of classical RNNs, particularly the vanishing and exploding gradient problems during backpropagation through time. The LSTM introduces gated memory units that regulate the flow of information over time.
+The Long Short-Term Memory (LSTM) network is a popular recurrent neural architectures for sequential learning tasks. It was introduced to address the limitations of classical RNNs, particularly the vanishing and exploding gradient problems during backpropagation through time. The LSTM introduces gated memory units that regulate the flow of information over time.
 
-LSTMs were included in this study as a canonical reference point. Their ability to retain past information via internal cell states makes them well-suited for temporal tasks such as trajectory prediction.
+Their ability to retain past information via internal cell states makes them well-suited for temporal tasks such as trajectory prediction.
 
 \subsection{LSTM Cell Mechanics}
 An LSTM cell maintains two internal states: a hidden state $h_t$ and a cell state $c_t$. The cell's behaviour is controlled by three gates:
@@ -131,11 +127,43 @@ The LSTM showed stable training behaviour and low final validation loss. However
 %     \label{fig:lstm_inference}
 % \end{figure}
 
-\subsection{Design Considerations}
-\begin{itemize}
-    \item \textbf{Batch-first processing:} The model was structured to accept input tensors of shape $(B, T, d)$ to be consistent with the other architectures.
-    \item \textbf{State management:} Hidden and cell states were initialised to zero at the start of each sequence.
-    \item \textbf{Model depth:} Two layers were used to capture moderately deep temporal patterns without overfitting to noise.
-\end{itemize}
+While the LSTM offers a reliable baseline for temporal prediction, its recurrent structure can make it more sensitive to gradient-based perturbations.
 
-While the LSTM offers a reliable baseline for temporal prediction, its recurrent structure can make it more sensitive to gradient-based perturbations. This sensitivity is further explored in the following sections on adversarial evaluation.
+% Need to rewrite this section
+
+\section{Transformer-Based Sequence Model}
+
+The Transformer architecture implemented in this project is a lightweight variant of the original Transformer encoder proposed by Vaswani et al.~(2017), adapted for short-length continuous 2D time-series data. Unlike recurrent architectures such as LSTMs, the Transformer relies entirely on self-attention mechanisms and positional encodings to capture temporal dependencies. This decouples sequence modelling from recurrence, enabling parallelism during training and offering improved gradient flow across layers.
+
+\subsection*{Positional Encoding Module}
+
+Since Transformers lack an inherent notion of order (unlike RNNs or CNNs), explicit positional information must be injected into the model. This is achieved via a fixed sinusoidal positional encoding scheme, where the embedding for each position $pos$ and dimension $i$ is defined as:
+
+\[
+\text{PE}_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i / d}}\right), \quad 
+\text{PE}_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i / d}}\right)
+\]
+
+This formulation provides the model with a continuous and differentiable signal representing absolute position in the sequence. Crucially, it allows for extrapolation to sequence lengths not seen during training. The encoding is added element-wise to the input embeddings and is shared across the batch.
+
+\subsection*{Transformer Encoder Design}
+
+The main \texttt{TransformerModel} begins by projecting the 2D input at each timestep into a higher-dimensional embedding space ($d=64$) using a learnable linear transformation. This enables the representation of richer latent features per timestep. The sequence of embeddings is then processed by a stack of Transformer encoder layers, each composed of multi-head self-attention and a feed-forward subnetwork. The self-attention mechanism allows the model to dynamically weight contributions from different timesteps, making it particularly effective at modelling non-local temporal correlations—such as curvature and spiralling patterns found in the dataset.
+
+Following the encoder block, the output is linearly projected back to the 2D space to match the prediction format. This ensures compatibility with the existing LSTM training loop, requiring no changes to loss computation or preprocessing.
+
+\subsection*{Suitability for the Task}
+
+Despite the short sequence length ($\text{seq\_len} = 3$), the Transformer architecture is well-suited to this task for several reasons:
+
+\begin{itemize}
+    \item \textbf{Parallel Processing:} All timesteps are processed concurrently, improving training speed and efficiency.
+    
+    \item \textbf{Long-Term Dependency Modelling:} Self-attention generalises well to longer sequences and higher-resolution datasets, making this architecture extensible to future scenarios.
+    
+    \item \textbf{Positional Awareness Without Recurrence:} The use of explicit sinusoidal embeddings enables the model to distinguish temporally adjacent inputs in the absence of hidden-state propagation.
+    
+    \item \textbf{Smooth Output Dynamics:} Empirically, the Transformer achieves validation loss in the range of $0.0002$–$0.0006$, yielding stable and continuous predictions consistent with the underlying spiral dynamics.
+    
+    \item \textbf{Robustness to Input Variability:} Self-attention allows the model to focus on the most informative timesteps, reducing sensitivity to noise or input distortions.
+\end{itemize}

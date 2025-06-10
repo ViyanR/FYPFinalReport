@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.20)  8 JUN 2025 20:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.20)  10 JUN 2025 18:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -997,24 +997,24 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1070,9 +1070,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 
-Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 51.
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 52.
 
-Package hyperref Info: Link coloring ON on input line 51.
+Package hyperref Info: Link coloring ON on input line 52.
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -1080,15 +1080,15 @@ Package hyperref Info: Link coloring ON on input line 51.
 \c@lstlisting=\count338
  (./title/title.tex
 Package epstopdf Info: Source file: <title/logo.eps>
-(epstopdf)                    date: 2025-01-20 14:56:06
+(epstopdf)                    date: 2025-06-08 20:44:21
 (epstopdf)                    size: 1035249 bytes
 (epstopdf)             Output file: <title/logo-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-01-20 16:10:56
+(epstopdf)                    date: 2025-06-08 20:44:21
 (epstopdf)                    size: 15652 bytes
 (epstopdf)             Command: <repstopdf --outfile=title/logo-eps-converted-to.pdf title/logo.eps>
 (epstopdf)             \includegraphics on input line 9.
 Package epstopdf Info: Output file is already uptodate.
-<title/logo-eps-converted-to.pdf, id=469, 362.35374pt x 95.35625pt>
+<title/logo-eps-converted-to.pdf, id=465, 362.35374pt x 95.35625pt>
 File: title/logo-eps-converted-to.pdf Graphic file (type pdf)
 <use title/logo-eps-converted-to.pdf>
 Package pdftex.def Info: title/logo-eps-converted-to.pdf  used on input line 9.
@@ -1133,6 +1133,8 @@ File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 ) [9
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 37.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 45.
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 46.
@@ -1140,21 +1142,26 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
 Chapter 4.
 [15
 
-] [16] [17]) (./body/adversarial_attacks.tex [18]
+] [16] [17]
+Overfull \hbox (0.39352pt too wide) in paragraph at lines 151--152
+\T1/cmr/m/n/10 The main \T1/cmtt/m/n/10 Trans-former-Model \T1/cmr/m/n/10 be-gins by pro-ject-ing the 2D in-put at each timestep into a higher-dimensional
+ []
+
+) (./body/adversarial_attacks.tex [18]
 Chapter 5.
 [19
 
 ] [20] [21]
-Overfull \hbox (4.22684pt too wide) in paragraph at lines 173--173
+Overfull \hbox (4.22684pt too wide) in paragraph at lines 164--164
 []\T1/cmr/bx/n/14.4 Simultaneous Per-tur-ba-tion Stochas-tic Ap-prox-i-ma-tion (SPSA) 
  []
 
-[22] [23] [24] [25]
-Overfull \hbox (24.127pt too wide) in paragraph at lines 343--355
+[22] [23] [24]
+Overfull \hbox (24.127pt too wide) in paragraph at lines 334--346
  [][] 
  []
 
-) (./body/auto_lirpa.tex [26
+[25]) (./body/auto_lirpa.tex [26
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
@@ -1167,45 +1174,58 @@ Chapter 6.
 Chapter 7.
 [28
 
+]
+Underfull \vbox (badness 2088) has occurred while \output is active []
 
+ [29
 pdfTeX warning (ext4): destination with the same identifier (name{table.7.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.67 
-     ]
-
-LaTeX Warning: Reference `fig:lstm_pgd' on page 29 undefined on input line 107.
-
-
-LaTeX Warning: Reference `fig:tcn_spsa' on page 29 undefined on input line 120.
-
-[29
+l.127 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{table.7.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.121 
+l.127 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.7.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.127 
       ]
 
-LaTeX Warning: Reference `fig:lstm_pgd' on page 30 undefined on input line 133.
+LaTeX Warning: Reference `fig:lstm_pgd' on page 30 undefined on input line 168.
 
-[30]) (./evaluation/defenses_and_mitigation.tex [31]
+
+LaTeX Warning: Reference `fig:tcn_spsa' on page 30 undefined on input line 181.
+
+[30
+pdfTeX warning (ext4): destination with the same identifier (name{table.7.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.183 \subsection
+                 {LNN Responses}]
+
+LaTeX Warning: Reference `fig:lstm_pgd' on page 31 undefined on input line 194.
+
+[31]) (./evaluation/defenses_and_mitigation.tex [32]
 Chapter 8.
-[32
+[33
 
-] [33] [34] [35] [36
+] [34] [35] [36] [37
 pdfTeX warning (ext4): destination with the same identifier (name{table.8.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.240 
-      ]) (./conclusion/conclusion.tex [37]
+      ]) (./conclusion/conclusion.tex [38]
 Chapter 9.
-) (./main.bbl [38
+) (./main.bbl [39
 
-]) (./declaration/declaration.tex [39
+]) (./declaration/declaration.tex [40
 
 ]
 Chapter 10.
-) [40
+) [41
 
 ] (./main.aux)
  ***********
@@ -1217,21 +1237,21 @@ L3 programming layer <2024-02-20>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E001D8DD2F898822179B834A9EF8F8B5;21828.
+(rerunfilecheck)             Checksum: 1061B89695A6ADB0D273EA117F33332A;21679.
  ) 
 Here is how much of TeX's memory you used:
- 25224 strings out of 474116
- 453949 string characters out of 5743682
+ 25216 strings out of 474116
+ 453854 string characters out of 5743682
  2064187 words of memory out of 5000000
- 46807 multiletter control sequences out of 15000+600000
+ 46801 multiletter control sequences out of 15000+600000
  579007 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,10n,101p,569b,2123s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,10n,101p,828b,2125s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfit0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0500.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on main.pdf (40 pages, 642664 bytes).
+Output written on main.pdf (41 pages, 648287 bytes).
 PDF statistics:
- 1110 PDF objects out of 1200 (max. 8388607)
- 997 compressed objects within 10 object streams
- 287 named destinations out of 1000 (max. 500000)
- 938 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1107 PDF objects out of 1200 (max. 8388607)
+ 993 compressed objects within 10 object streams
+ 285 named destinations out of 1000 (max. 500000)
+ 930 words of extra memory for PDF output out of 10000 (max. 10000000)
 
