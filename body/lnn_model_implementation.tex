@@ -107,7 +107,7 @@ The full Liquid Neural Network is constructed by embedding the LTC neuron layer 
 At a high level, the architecture accepts an input tensor of shape $(B, T, d_{\text{in}})$, where $B$ is the batch size, $T$ is the sequence length, and $d_{\text{in}}$ is the input dimension (two in this case, corresponding to 2D spatial coordinates). For each time step $t$, the neuron layer receives the $t$-th slice of the sequence and updates the hidden state, generating a predicted output of shape $(B, T, d_{\text{out}})$.
 
 \vspace{1em}
-\noindent \textbf{Design Considerations and Tradeoffs:}
+\linebreakparagraph{Design Considerations and Tradeoffs:}
 \begin{itemize}
     \item \textbf{Hidden state dimensionality:} The number of LTC neurons (set via \texttt{hidden\_dim}) defines the model capacity. A lower number limits expressiveness but reduces overfitting risk and improves computational efficiency.
     \item \textbf{Output mapping:} Rather than applying a separate output layer, the voltage traces themselves are treated as predictions. This design allows direct interpretation of the membrane state as a continuous output signal.
@@ -192,29 +192,51 @@ Throughout training, model performance was monitored both quantitatively (via va
     \item Visual predictions of the trajectory showed clear improvement over time. Early predictions were coarse approximations, while later epochs yielded smoother and more accurate reconstructions.
 \end{itemize}
 
+\linebreakparagraph{Trajectory Loss Curves}
+
 \noindent The following plot illustrates training and validation behaviour over time:
 
-\hl{INSERT LOSS CURVE IMAGE HERE}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/lnn_loss_curve.png}
+    \caption{Training and validation loss over epochs.}
+    \label{fig:lnn_loss}
+\end{figure}
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.65\linewidth]{img/loss_curve.png}
-%     \caption{Validation trajectory prediction vs ground truth (epoch 1000).}
-%     \label{fig:lnn_loss}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/lnn_loss_curve_zoomed.png}
+    \caption{Training and validation loss over epochs.}
+    \label{fig:lnn_loss_zoomed}
+\end{figure}
 
-\vspace{1em}
-\noindent \textbf{Qualitative Evaluation:}  
-Visually, the predicted path over time showed that the LNN was able to maintain smooth curvature and approximate the rotational dynamics of the spiral without overshooting or excessive lag. This was true even on validation data not seen during train ing.
+To evaluate the model's learning progress and generalisation, we record the full-sequence mean squared error (MSE) first on the entire spiral (which contains the training datapoint and the held-out validation datapoints), and then on a separate unseen evaluation spiral at each epoch. Rather than separately plotting training and validation loss — which are contiguous segments of the same spiral trajectory, they are treated as a single sequence. This is because since temporal continuity is essential in modelling dynamical systems. This decision avoids misleading interpretations that might arise from artificial segmentation of a naturally evolving system.
 
-\hl{IMAGE OF VALIDATION SPIRAL HERE}
+The resulting loss curves, shown in Figure~\ref{fig:lnn_loss} and Figure~\ref{fig:lnn_loss_zoomed}, allow a direct comparison of model performance on the trajectory it is optimised on versus a held-out trajectory generated under the same dynamics but seeded differently. Early in training, both curves decrease rapidly, suggesting that the model learns the underlying structure efficiently. As training proceeds, the two curves converge, with the evaluation spiral maintaining a slightly higher loss—indicating some generalisation gap but also demonstrating stable extrapolation beyond the training path. Notably, neither curve exhibits significant divergence or overfitting behaviour, which supports the robustness and consistency of the trained model.
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.65\linewidth]{img/trajectory_example.png}
-%     \caption{Predicted vs true spiral trajectory at validation time (denormalised).}
-%     \label{fig:lnn_spiral}
-% \end{figure}
+\linebreakparagraph{Qualitative Evaluation}
+Visually, the predicted path over time showed that the LNN was able to maintain smooth curvature and approximate the rotational dynamics of the spiral without overshooting or excessive lag. This was true even on validation data not seen during training. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/lnn_training_validation_spiral_epoch_1.png}
+    \caption{LLN predicted vs true spiral trajectory at epoch 1, on denormalised training (and validation) spiral}
+    \label{fig:lnn_training_validation_spiral_epoch_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/lnn_training_validation_spiral_epoch_400.png}
+    \caption{LLN predicted vs true spiral trajectory at epoch 400, on denormalised training (and validation) spiral}
+    \label{fig:lnn_training_validation_spiral_epoch_400}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/lnn_training_validation_spiral_epoch_2000.png}
+    \caption{LLN predicted vs true spiral trajectory at epoch 2000, on denormalised training (and validation) spiral}
+    \label{fig:lnn_training_validation_spiral_epoch_2000}
+\end{figure}
 
 \vspace{1em}
 \noindent \textbf{Observed Patterns Across Training Runs:}

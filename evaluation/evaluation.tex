@@ -125,8 +125,7 @@ The following table summarises the local sensitivity estimates for each model un
     \label{tab:attack_results_sensitivity}
 \end{table}
 
-
-\subsection{Interpretation}
+\linebreakparagraph{Interpretation}
 
 These results show that:
 \begin{itemize}
@@ -135,7 +134,8 @@ These results show that:
     \item The \textbf{TCN displayed moderate robustness}, especially under non-directional attacks like SPSA and FGSM, but degraded more significantly under continuous perturbations and PGD.
 \end{itemize}
 
-\subsection{Summary}
+\linebreakparagraph{Interpretation}
+
 Quantitative metrics reinforce qualitative observations: models with rigid temporal assumptions or recurrent memory (LSTM) are more susceptible to both magnitude and timing distortions, whereas continuous-time dynamics (LNN) offer meaningful resistance. However, no model was universally robust, and each architecture exhibited specific weaknesses when faced with particular perturbation types.
 
 \section{Qualitative Evaluation and Visual Analysis}
