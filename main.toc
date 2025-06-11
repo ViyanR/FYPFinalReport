@@ -1,124 +1,128 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Literature Review}{8}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Liquid Neural Network Design and Implementation}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Design Overview}{9}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Wiring and Connectivity}{9}{section.3.2}%
-\contentsline {section}{\numberline {3.3}LTC Neuron Dynamics}{10}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Network Architecture}{11}{section.3.4}%
-\contentsline {paragraph}{Design Considerations and Tradeoffs:}{11}{section*.4}%
-\contentsline {section}{\numberline {3.5}Training Configuration (and dataset)}{12}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Training Behaviour}{13}{section.3.6}%
-\contentsline {paragraph}{Trajectory Loss Curves}{13}{section*.5}%
-\contentsline {paragraph}{Qualitative Evaluation}{14}{section*.6}%
-\contentsline {chapter}{\numberline {4}Comparative Models}{18}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction to Baseline Models}{18}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Temporal Convolutional Network (TCN)}{18}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Overview and Motivation}{18}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Theoretical Background}{18}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Model Architecture}{19}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Training Configuration}{20}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Performance and Behaviour}{20}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Design Considerations}{20}{subsection.4.2.6}%
-\contentsline {section}{\numberline {4.3}Long Short-Term Memory Network (LSTM)}{20}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Background and Rationale}{20}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}LSTM Cell Mechanics}{20}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Model Implementation}{20}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Training Configuration}{21}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Training Observations}{21}{subsection.4.3.5}%
-\contentsline {section}{\numberline {4.4}Transformer Model}{21}{section.4.4}%
-\contentsline {paragraph}{Transformer Encoder Design}{22}{section*.9}%
-\contentsline {paragraph}{Model Architecture}{22}{section*.10}%
-\contentsline {paragraph}{Suitability for the Task}{22}{section*.12}%
-\contentsline {subsection}{\numberline {4.4.1}Training Configuration}{23}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Performance and Behaviour}{23}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Design Considerations}{23}{subsection.4.4.3}%
-\contentsline {chapter}{\numberline {5}Adversarial Attack Methodology}{25}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introduction to Adversarial Attacks}{25}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Fast Gradient Sign Method (FGSM)}{25}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Mathematical Formulation}{25}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Implementation Details}{25}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Evaluation and Observations}{26}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Projected Gradient Descent (PGD)}{26}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Mathematical Formulation}{26}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Implementation Details}{26}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Performance and Model Responses}{27}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Design Choices}{27}{subsection.5.3.4}%
-\contentsline {subsection}{\numberline {5.3.5}DeepFool-Inspired Directional Attack}{27}{subsection.5.3.5}%
-\contentsline {subsection}{\numberline {5.3.6}Theoretical Basis}{27}{subsection.5.3.6}%
-\contentsline {subsection}{\numberline {5.3.7}Implementation Summary}{27}{subsection.5.3.7}%
-\contentsline {subsection}{\numberline {5.3.8}Model Comparisons and Observations}{28}{subsection.5.3.8}%
-\contentsline {subsection}{\numberline {5.3.9}Design Considerations}{28}{subsection.5.3.9}%
-\contentsline {section}{\numberline {5.4}Simultaneous Perturbation Stochastic Approximation (SPSA)}{28}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Mathematical Formulation}{28}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Implementation and Design Choices}{28}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Empirical Performance Across Models}{29}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Reflections on Robustness}{29}{subsection.5.4.4}%
-\contentsline {section}{\numberline {5.5}Time-Warping Attack}{29}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Conceptual Basis}{29}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Mathematical Formulation}{29}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}Implementation Strategy}{30}{subsection.5.5.3}%
-\contentsline {subsection}{\numberline {5.5.4}Results and Model Sensitivity}{30}{subsection.5.5.4}%
-\contentsline {subsection}{\numberline {5.5.5}Design Choices}{30}{subsection.5.5.5}%
-\contentsline {section}{\numberline {5.6}Continuous-Time Perturbation Attack}{30}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Motivation}{30}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Formulation and Mechanism}{31}{subsection.5.6.2}%
-\contentsline {subsection}{\numberline {5.6.3}Implementation Details}{31}{subsection.5.6.3}%
-\contentsline {subsection}{\numberline {5.6.4}Model-Specific Responses}{31}{subsection.5.6.4}%
-\contentsline {subsection}{\numberline {5.6.5}Design Rationale}{31}{subsection.5.6.5}%
-\contentsline {section}{\numberline {5.7}Summary of Attack Design and Implementation Decisions}{32}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Attack Categories and Coverage}{32}{subsection.5.7.1}%
-\contentsline {subsection}{\numberline {5.7.2}Implementation Consistency}{32}{subsection.5.7.2}%
-\contentsline {subsection}{\numberline {5.7.3}Design Considerations}{32}{subsection.5.7.3}%
-\contentsline {subsection}{\numberline {5.7.4}Interpretation of Results}{32}{subsection.5.7.4}%
-\contentsline {chapter}{\numberline {6}CROWN, IBP, autolirpa}{33}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Evaluation}{34}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Quantitative Evaluation Metrics and Comparison}{34}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Evaluation Metrics}{34}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Aggregate Results}{35}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Attack-Specific Breakdowns}{35}{subsection.7.1.3}%
-\contentsline {paragraph}{Interpretation}{36}{section*.17}%
-\contentsline {paragraph}{Interpretation}{36}{section*.18}%
-\contentsline {section}{\numberline {7.2}Qualitative Evaluation and Visual Analysis}{36}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Visualisation Methodology}{36}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}LSTM Responses}{36}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}TCN Responses}{37}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}LNN Responses}{37}{subsection.7.2.4}%
-\contentsline {subsection}{\numberline {7.2.5}Comparative Failure Modes}{37}{subsection.7.2.5}%
-\contentsline {subsection}{\numberline {7.2.6}Phase Drift and Spiral Collapse}{37}{subsection.7.2.6}%
-\contentsline {subsection}{\numberline {7.2.7}Interpretive Summary}{37}{subsection.7.2.7}%
-\contentsline {section}{\numberline {7.3}Comparative Discussion of Model Robustness}{37}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}Summary of Behaviour Under Attack}{37}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Architectural Trade-offs}{38}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}Robustness by Attack Type}{38}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}Implications for Deployment}{38}{subsection.7.3.4}%
-\contentsline {subsection}{\numberline {7.3.5}Conclusion}{38}{subsection.7.3.5}%
-\contentsline {chapter}{\numberline {8}Defences and Mitigation Strategies}{39}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Introduction}{39}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Adversarial Training and Noise Injection}{39}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Gradient-Based Adversarial Training}{39}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}Noise Injection During Training}{40}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}Benefits and Trade-offs}{40}{subsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.2.4}Considerations}{40}{subsection.8.2.4}%
-\contentsline {section}{\numberline {8.3}Architectural Enhancements for Robustness}{40}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}Memory Mechanisms and Temporal Smoothing}{40}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}Receptive Field and Feature Redundancy}{40}{subsection.8.3.2}%
-\contentsline {subsection}{\numberline {8.3.3}Stability in Continuous-Time Models}{41}{subsection.8.3.3}%
-\contentsline {subsection}{\numberline {8.3.4}Summary}{41}{subsection.8.3.4}%
-\contentsline {section}{\numberline {8.4}Input Preprocessing and Temporal Defences}{41}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}Low-Pass Filtering}{41}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}Interpolation and Resampling Defences}{41}{subsection.8.4.2}%
-\contentsline {subsection}{\numberline {8.4.3}Temporal Quantisation}{42}{subsection.8.4.3}%
-\contentsline {subsection}{\numberline {8.4.4}Trade-offs and Limitations}{42}{subsection.8.4.4}%
-\contentsline {subsection}{\numberline {8.4.5}Summary}{42}{subsection.8.4.5}%
-\contentsline {section}{\numberline {8.5}Model-Specific Mitigation Insights}{42}{section.8.5}%
-\contentsline {subsection}{\numberline {8.5.1}LSTM: Sequential Memory Vulnerabilities}{42}{subsection.8.5.1}%
-\contentsline {subsection}{\numberline {8.5.2}TCN: Localised Perturbation Sensitivity}{42}{subsection.8.5.2}%
-\contentsline {subsection}{\numberline {8.5.3}LNN: ODE Sensitivity and Stability Management}{43}{subsection.8.5.3}%
-\contentsline {subsection}{\numberline {8.5.4}Summary Table}{43}{subsection.8.5.4}%
-\contentsline {section}{\numberline {8.6}Limitations and Future Work}{43}{section.8.6}%
-\contentsline {subsection}{\numberline {8.6.1}Limitations}{43}{subsection.8.6.1}%
-\contentsline {subsection}{\numberline {8.6.2}Future Work}{43}{subsection.8.6.2}%
-\contentsline {subsection}{\numberline {8.6.3}Conclusion}{44}{subsection.8.6.3}%
-\contentsline {chapter}{\numberline {9}Conclusion}{45}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Declaration}{47}{chapter.10}%
+\contentsline {chapter}{\numberline {2}Background and Literature Review}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Liquid Neural Networks}{8}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Continuous-Time Dynamical Systems/Differential Equations}{8}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}LNN Training}{9}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}LNN Inference}{9}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Advantages of LNNs}{10}{subsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.4.a}Temporal Modelling}{10}{subsubsection.2.1.4.1}%
+\contentsline {subsubsection}{\numberline {2.1.4.b}Adaptability}{10}{subsubsection.2.1.4.2}%
+\contentsline {subsubsection}{\numberline {2.1.4.c}Efficiency}{10}{subsubsection.2.1.4.3}%
+\contentsline {subsubsection}{\numberline {2.1.4.d}Stability}{11}{subsubsection.2.1.4.4}%
+\contentsline {section}{\numberline {2.2}Neural Network Verification}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}The Verification Problem}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Motivation}{11}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Recurrent Neural Networks}{12}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Robustness Verification for Recurrent Neural Networks}{12}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Symbolic and Interval Propagation Methods}{13}{subsection.2.2.5}%
+\contentsline {subsubsection}{\numberline {2.2.5.a}SIP (Symbolic Interval Propagation)}{13}{subsubsection.2.2.5.1}%
+\contentsline {paragraph}{Steps in SIP:}{13}{section*.4}%
+\contentsline {paragraph}{Advantages for Liquid Neural Networks}{14}{section*.5}%
+\contentsline {paragraph}{Practical Considerations}{14}{section*.6}%
+\contentsline {subsubsection}{\numberline {2.2.5.b}CROWN (Certified Robustness to Weight Perturbations)}{14}{subsubsection.2.2.5.2}%
+\contentsline {paragraph}{Mathematical Framework}{14}{section*.7}%
+\contentsline {paragraph}{Bounding Nonlinearities}{14}{section*.8}%
+\contentsline {paragraph}{Output Certification}{14}{section*.9}%
+\contentsline {paragraph}{Application to Neural ODEs}{15}{section*.10}%
+\contentsline {paragraph}{Practical Implementation}{15}{section*.11}%
+\contentsline {subsubsection}{\numberline {2.2.5.c}Lipschitz-Based Methods}{15}{subsubsection.2.2.5.3}%
+\contentsline {paragraph}{Mathematical Foundation}{15}{section*.12}%
+\contentsline {paragraph}{Estimation of the Lipschitz Constant}{15}{section*.13}%
+\contentsline {paragraph}{Verification Applications}{16}{section*.14}%
+\contentsline {paragraph}{Practical Implementation}{16}{section*.15}%
+\contentsline {chapter}{\numberline {3}Liquid Neural Network Design and Implementation}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Design Overview}{17}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Wiring and Connectivity}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}LTC Neuron Dynamics}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Network Architecture}{19}{section.3.4}%
+\contentsline {paragraph}{Design Considerations and Tradeoffs:}{19}{section*.16}%
+\contentsline {section}{\numberline {3.5}Training Configuration (and dataset)}{21}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Training Behaviour}{23}{section.3.6}%
+\contentsline {paragraph}{Trajectory Loss Curves}{24}{section*.17}%
+\contentsline {paragraph}{Qualitative Evaluation}{24}{section*.18}%
+\contentsline {subsection}{\numberline {3.6.1}Inference}{26}{subsection.3.6.1}%
+\contentsline {chapter}{\numberline {4}Comparative Models}{28}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction to Baseline Models}{28}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Temporal Convolutional Network (TCN)}{28}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Overview and Motivation}{28}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Theoretical Background}{28}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Model Architecture}{29}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Training Configuration}{30}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Performance and Behaviour}{30}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Design Considerations}{30}{subsection.4.2.6}%
+\contentsline {section}{\numberline {4.3}Long Short-Term Memory Network (LSTM)}{30}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Background and Rationale}{30}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}LSTM Cell Mechanics}{30}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Model Implementation}{30}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Training Configuration}{31}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Training Observations}{31}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Transformer Model}{31}{section.4.4}%
+\contentsline {paragraph}{Transformer Encoder Design}{32}{section*.20}%
+\contentsline {paragraph}{Model Architecture}{32}{section*.21}%
+\contentsline {paragraph}{Suitability for the Task}{32}{section*.23}%
+\contentsline {subsection}{\numberline {4.4.1}Training Configuration}{33}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Performance and Behaviour}{33}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Design Considerations}{33}{subsection.4.4.3}%
+\contentsline {chapter}{\numberline {5}Adversarial Attack Methodology}{35}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction to Adversarial Attacks}{35}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Fast Gradient Sign Method (FGSM)}{35}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Mathematical Formulation}{35}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Implementation Details}{35}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Evaluation and Observations}{36}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Projected Gradient Descent (PGD)}{36}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Mathematical Formulation}{36}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Implementation Details}{36}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Performance and Model Responses}{37}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Design Choices}{37}{subsection.5.3.4}%
+\contentsline {subsection}{\numberline {5.3.5}DeepFool-Inspired Directional Attack}{37}{subsection.5.3.5}%
+\contentsline {subsection}{\numberline {5.3.6}Theoretical Basis}{37}{subsection.5.3.6}%
+\contentsline {subsection}{\numberline {5.3.7}Implementation Summary}{37}{subsection.5.3.7}%
+\contentsline {subsection}{\numberline {5.3.8}Model Comparisons and Observations}{38}{subsection.5.3.8}%
+\contentsline {subsection}{\numberline {5.3.9}Design Considerations}{38}{subsection.5.3.9}%
+\contentsline {section}{\numberline {5.4}Simultaneous Perturbation Stochastic Approximation (SPSA)}{38}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Mathematical Formulation}{38}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Implementation and Design Choices}{38}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Empirical Performance Across Models}{39}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Reflections on Robustness}{39}{subsection.5.4.4}%
+\contentsline {section}{\numberline {5.5}Time-Warping Attack}{39}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Conceptual Basis}{39}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Mathematical Formulation}{39}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Implementation Strategy}{40}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}Results and Model Sensitivity}{40}{subsection.5.5.4}%
+\contentsline {subsection}{\numberline {5.5.5}Design Choices}{40}{subsection.5.5.5}%
+\contentsline {section}{\numberline {5.6}Continuous-Time Perturbation Attack}{40}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Motivation}{40}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Formulation and Mechanism}{41}{subsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.6.3}Implementation Details}{41}{subsection.5.6.3}%
+\contentsline {subsection}{\numberline {5.6.4}Model-Specific Responses}{41}{subsection.5.6.4}%
+\contentsline {subsection}{\numberline {5.6.5}Design Rationale}{41}{subsection.5.6.5}%
+\contentsline {section}{\numberline {5.7}Summary of Attack Design and Implementation Decisions}{42}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Attack Categories and Coverage}{42}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Implementation Consistency}{42}{subsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.7.3}Design Considerations}{42}{subsection.5.7.3}%
+\contentsline {subsection}{\numberline {5.7.4}Interpretation of Results}{42}{subsection.5.7.4}%
+\contentsline {chapter}{\numberline {6}Bound Certification (Auto Lirpa)}{43}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Evaluation}{44}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Quantitative Evaluation Metrics and Comparison}{44}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Evaluation Metrics}{44}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Aggregate Results}{45}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Attack-Specific Breakdowns}{45}{subsection.7.1.3}%
+\contentsline {paragraph}{Interpretation}{46}{section*.28}%
+\contentsline {paragraph}{Interpretation}{46}{section*.29}%
+\contentsline {section}{\numberline {7.2}Qualitative Evaluation and Visual Analysis}{46}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Visualisation Methodology}{46}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}LSTM Responses}{46}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}TCN Responses}{47}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}LNN Responses}{47}{subsection.7.2.4}%
+\contentsline {subsection}{\numberline {7.2.5}Comparative Failure Modes}{47}{subsection.7.2.5}%
+\contentsline {subsection}{\numberline {7.2.6}Phase Drift and Spiral Collapse}{47}{subsection.7.2.6}%
+\contentsline {subsection}{\numberline {7.2.7}Interpretive Summary}{47}{subsection.7.2.7}%
+\contentsline {section}{\numberline {7.3}Comparative Discussion of Model Robustness}{47}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Summary of Behaviour Under Attack}{47}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Architectural Trade-offs}{48}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}Robustness by Attack Type}{48}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.3.4}Implications for Deployment}{48}{subsection.7.3.4}%
+\contentsline {subsection}{\numberline {7.3.5}Conclusion}{48}{subsection.7.3.5}%
+\contentsline {chapter}{\numberline {8}Conclusion}{49}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Declaration}{51}{chapter.9}%

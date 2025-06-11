@@ -5,4 +5,22 @@ Chahine M, Hasani R, Kao P, Ray A, Shubert R, Lechner M, et~al.
 \newblock Robust Flight Navigation out of Distribution with Liquid Neural Networks.
 \newblock Science Robotics. 2023 Apr;8(77):eadc8892.
 
+\bibitem{hasaniLiquidTimeconstantNetworks2021}
+Hasani R, Lechner M, Amini A, Rus D, Grosu R.
+\newblock Liquid {{Time-constant Networks}}.
+\newblock Proceedings of the AAAI Conference on Artificial Intelligence. 2021 May;35(9):7657-66.
+
+\bibitem{tedxtalksLiquidNeuralNetworks2023}
+{TEDx Talks}. Liquid {{Neural Networks}} {\textbar} {{Ramin Hasani}} {\textbar} {{TEDxMIT}}; 2023.
+
+\bibitem{henriksenEfficientNeuralNetwork}
+Henriksen P, Lomuscio A. Efficient {{Neural Network Verification}} via {{Adaptive Refinement}} and {{Adversarial Search}};.
+
+\bibitem{WhatRecurrentNeural2021}
+What Is a {{Recurrent Neural Network}} ({{RNN}})? {\textbar} {{IBM}}; 2021.
+\newblock https://www.ibm.com/think/topics/recurrent-neural-networks.
+
+\bibitem{zhangEfficientNeuralNetwork2018}
+Zhang H, Weng TW, Chen PY, Hsieh CJ, Daniel L. Efficient {{Neural Network Robustness Certification}} with {{General Activation Functions}}. arXiv; 2018.
+
 \end{thebibliography}

@@ -18,6 +18,10 @@
 \usepackage{soul}
 \usepackage{listings}
 \usepackage{float}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{shapes, arrows.meta, positioning, calc}
+\usetikzlibrary{fit}
 
 % Python listings
 \lstset{
@@ -57,7 +61,7 @@
 \tableofcontents
 
 \input{introduction/introduction.tex}
-\input{literature_review/literature_review.tex}
+\input{background/background.tex}
 % Body of Work - Split into 3/4 Chapters:
 % Some students working on more experimental projects choose to instead split this up with one chapter per experiment, including aspects of both development and evaluation within each chapter.
 \input{body/lnn_model_implementation.tex}
@@ -66,7 +70,7 @@
 \input{body/auto_lirpa.tex}
 % Split body into about 3/4 sections
 \input{evaluation/evaluation.tex}
-\input{evaluation/defenses_and_mitigation.tex}
+% \input{evaluation/defenses_and_mitigation.tex}
 \input{conclusion/conclusion.tex}
 
 \bibliographystyle{vancouver}
