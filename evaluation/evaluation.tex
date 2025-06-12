@@ -1,10 +1,9 @@
 \chapter{Evaluation}
-
-\section{Quantitative Evaluation Metrics and Comparison}
+\label{chap:evaluation}
 
 This chapter covers the quantitative and qualitative evaluation of all four models (LNN, TCN, LSTM, and Transformer) on the same input under various adversarial conditions. We systematically assess how each architecture responds to different types of perturbations, focusing on both performance degradation and qualitative failure modes. These metrics are chosen to capture both the accuracy of trajectory predictions and the model's stability and response to input changes.
 
-\subsection{Evaluation Metrics}
+\section{Quantitative Evaluation Metrics and Comparison}
 
 \subsubsection*{1. Mean Squared Error (MSE)}
 The loss function used during training was the Mean Squared Error, given by:
@@ -36,7 +35,7 @@ To characterise the smoothness of the model's function, local sensitivity is est
 \]
 This ratio approximates the local Lipschitz constant, capturing how much the output changes in response to small input perturbations. A higher sensitivity indicates that the model has sharp local gradients, potentially making it more brittle. This provides a theoretical metric for robustness, independent of task-specific loss.
 
-\subsection{Aggregate Results}
+\section{Aggregate Results}
 
 \begin{table}[H]
 \centering
@@ -44,17 +43,19 @@ This ratio approximates the local Lipschitz constant, capturing how much the out
 \hline
 \textbf{Model} & \textbf{Avg. Degradation} & \textbf{Avg. Deviation} & \textbf{Lipshchitz Estimate} & \textbf{Clean MSE} \\
 \hline
-LNN         & 1.78 & 0.322 & ? & 0.00019 \\
-LSTM        & 2.91 & 0.448 & ? & 0.00021 \\
-TCN         & 2.33 & 0.391 & ? & 0.00023 \\
-Transformer & 0 & 0 & ? & 0 \\ 
+LNN         & ? & ? & ? & 0.002795 \\
+TCN        & ? & ? & ? & 0.002782 \\
+LSTM         & ? & ? & ? & 0.004416 \\
+Transformer & ? & ? & ? & 0.007677 \\ 
 \hline
 \end{tabular}
 \caption{Average degradation and deviation metrics across all attack types.}
 \label{tab:agg_metrics}
 \end{table}
 
-\subsection{Attack-Specific Breakdowns}
+The MSE of each model are close to each-other, so they are comparable in terms of robustness.
+
+\section{Attack-Specific Breakdowns}
 
 The following table summarises the degradation ratios for each model under various adversarial attacks. Lower values indicate better robustness.
 
@@ -63,16 +64,16 @@ The following table summarises the degradation ratios for each model under vario
     \small
     \begin{tabular}{|l|cccc|}
     \hline
-    \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Degradation}} \\
+    \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Degradation (\%)}} \\
     \cline{2-5}
-     & \textbf{LNN} & \textbf{LSTM} & \textbf{TCN} & \textbf{Transformer} \\
+     & \textbf{LNN} & \textbf{TCN} & \textbf{LSTM} & \textbf{Transformer} \\
     \hline
-    FGSM                     & 1.45 & 2.71 & 2.01 & 0 \\
-    PGD                      & 1.90 & 3.20 & 2.43 & 0 \\
-    DeepFool-inspired        & 1.63 & 2.94 & 2.19 & 0 \\
-    SPSA                     & 1.38 & 2.61 & 2.08 & 0 \\
-    Time-Warping             & 0.85 & 2.01 & 1.59 & 0 \\
-    Continuous-Time Perturb. & 2.03 & 3.99 & 3.40 & 0 \\
+    FGSM                     & 209.6842 & 242.5555 & 169.5259 & 122.8652 \\
+    PGD                      & 209.6700 & 241.7085 & 169.5408 & 127.9633 \\
+    DeepFool-inspired        & 12.5395 & 13.9643 & 11.2735 & 8.8294 \\
+    SPSA                     & 36.8717 & 47.0328 & 29.7149 & 21.6053 \\
+    Time-Warping             & 1576.5198 & 1664.5960 & 1033.6341 & 579.3263 \\
+    Continuous-Time Perturb. & 458.7058 & 435.9864 & 329.8787 & 242.7071 \\
     \hline
     \end{tabular}
     \caption{Degradation ratios across models for each attack. Lower is better.}
@@ -88,14 +89,14 @@ The following table summarises the average deviation distances for each model un
     \hline
     \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Deviation}} \\
     \cline{2-5}
-     & \textbf{LNN} & \textbf{LSTM} & \textbf{TCN} & \textbf{Transformer} \\
+     & \textbf{LNN} & \textbf{TCN} & \textbf{LSTM} & \textbf{Transformer} \\
     \hline
-    FGSM                     & ? & ? & ? & 0 \\
-    PGD                      & ? & ? & ? & 0 \\
-    DeepFool-inspired        & ? & ? & ? & 0 \\
-    SPSA                     & ? & ? & ? & 0 \\
-    Time-Warping             & ? & ? & ? & 0 \\
-    Continuous-Time Perturb. & ? & ? & ? & 0 \\
+    FGSM                     & 1.293169 & 1.419442 & 1.367006 & 1.474218 \\
+    PGD                      & 1.293832 & 1.416078 & 1.367387 & 1.527660 \\
+    DeepFool-inspired        & 0.096296 & 0.101111 & 0.111709 & 0.148173 \\
+    SPSA                     & 0.777944 & 0.876160 & 0.842481 & 0.919706 \\
+    Time-Warping             & 6.953865 & 7.026645 & 6.882243 & 7.036172 \\
+    Continuous-Time Perturb. & 2.634408 & 2.599266 & 2.601533 & 2.717356 \\
     \hline
     \end{tabular}
     \caption{?}
@@ -111,30 +112,78 @@ The following table summarises the local sensitivity estimates for each model un
     \hline
     \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Local Sensitivity (Lipshitz Estimate)}} \\
     \cline{2-5}
-     & \textbf{LNN} & \textbf{LSTM} & \textbf{TCN} & \textbf{Transformer} \\
+     & \textbf{LNN} & \textbf{TCN} & \textbf{LSTM} & \textbf{Transformer} \\
     \hline
-    FGSM                     & ? & ? & ? & 0 \\
-    PGD                      & ? & ? & ? & 0 \\
-    DeepFool-inspired        & ? & ? & ? & 0 \\
-    SPSA                     & ? & ? & ? & 0 \\
-    Time-Warping             & ? & ? & ? & 0 \\
-    Continuous-Time Perturb. & ? & ? & ? & 0 \\
+    FGSM                     & 0.915554 & 1.004954 & 0.967830 & 1.043735 \\
+    PGD                      & 0.919326 & 1.005099 & 0.968100 & 1.090577 \\
+    DeepFool-inspired        & 0.962984 & 1.011127 & 1.117503 & 1.497606 \\
+    SPSA                     & 0.857096 & 1.003862 & 0.964692 & 1.026772 \\
+    Time-Warping             & 0.999767 & 1.010231 & 0.989470 & 1.011601 \\
+    Continuous-Time Perturb. & 1.011938 & 1.006981 & 1.005773 & 1.053375 \\
     \hline
     \end{tabular}
     \caption{?}
     \label{tab:attack_results_sensitivity}
 \end{table}
 
-\linebreakparagraph{Interpretation}
+\subsection*{FGSM Attack Results}
 
-These results show that:
+The FGSM attack was applied to all three models under a fixed perturbation budget $\epsilon = 0.05$. Key findings include:
 \begin{itemize}
-    \item The \textbf{LNN consistently achieved the lowest degradation}, particularly under time-based attacks, indicating its robustness to temporal deformations.
-    \item The \textbf{LSTM was the most vulnerable} across almost all attack types, reflecting its sensitivity to accumulated error in recurrent cell states.
-    \item The \textbf{TCN displayed moderate robustness}, especially under non-directional attacks like SPSA and FGSM, but degraded more significantly under continuous perturbations and PGD.
+    \item \textbf{LSTM:} Showed significant degradation, especially in regions with abrupt curvature. The gating mechanisms did not mitigate linear perturbations.
+    \item \textbf{TCN:} Relatively robust in early regions of the spiral but vulnerable at turn boundaries. This is likely due to reliance on local receptive fields.
+    \item \textbf{LNN:} Demonstrated moderate degradation. The neuron dynamics offered some resistance to sharp perturbation, but sensitivity remained in areas where the membrane potential saturated.
 \end{itemize}
 
-\linebreakparagraph{Interpretation}
+\hl{PUT FGSM TRAJECTORIES HERE}
+
+\subsection*{PGD Attack Results}
+
+PGD caused greater degradation than FGSM across all models, with stronger effect on deeper temporal structures. Results indicated:
+\begin{itemize}
+    \item \textbf{LSTM:} Highly vulnerable. PGD-induced drift accumulated over time, causing the model to diverge from the ground truth trajectory.
+    \item \textbf{TCN:} Whilst convolutional structure dampened some effects, the model's locality made it sensitive to consistent directional gradients across the sequence.
+    \item \textbf{LNN:} Showed meaningful robustness - the continuous-time integration added temporal stability which dampened the effect of rapid perturbations. However, convergence was sensitive to $\alpha$ and step count.
+\end{itemize}
+
+\hl{PUT PGD TRAJECTORIES HERE}
+
+\subsection*{Deepfool-Like Attack Results}
+
+\hl{PUT DEEPFOOL-LIKE TRAJECTORIES HERE}
+
+\subsection*{SPSA Results}
+
+\begin{itemize}
+    \item \textbf{LSTM:} SPSA degraded performance comparably to FGSM, although convergence was noisier due to the stochastic gradient estimate.
+    \item \textbf{TCN:} The convolutional structure resisted small random perturbations, but susceptibility increased when $\alpha$ was tuned to larger values.
+    \item \textbf{LNN:} Resistant in early iterations. The combination of continuous dynamics and sparsity in the input-response surface resulted in less reliable gradient estimates, which reduced the effectiveness of the attack.
+\end{itemize}
+
+\hl{PUT SPSA TRAJECTORIES HERE}
+
+\subsection*{Time Warping Attack Results}
+
+\begin{itemize}
+    \item \textbf{LSTM:} Sensitive to early warping. Because cell states are updated recursively, incorrect timing causes cumulative errors in the hidden dynamics.
+    \item \textbf{TCN:} Moderately robust. The fixed receptive field allowed the model to partially recover from distorted timing, particularly when the convolutional kernel sizes covered the affected regions.
+    \item \textbf{LNN:} Demonstrated strong resistance. Due to the use of continuous-time ODE integration, the model's internal dynamics adjusted to the temporal irregularity more gracefully than discrete-step models.
+\end{itemize}
+
+\hl{PUT TIME-WARPING TRAJECTORIES HERE? or maybe in evaluation section}
+
+\subsection*{Continuous-Time Adversarial Perturbation Attack Results}
+
+\begin{itemize}
+    \item \textbf{LSTM:} While hidden states filtered some noise, early perturbations caused unstable cell state updates and diverging outputs.
+    \item \textbf{TCN:} Most vulnerable. Injected noise propagated through convolutions without temporal gating, degrading local features significantly.
+    \item \textbf{LNN:} Performance depended on perturbation amplitude. For small $\epsilon$, the continuous dynamics helped dissipate noise. For larger values, membrane potential dynamics were destabilised, revealing vulnerabilities in non-linear integration regimes.
+\end{itemize}
+
+\hl{PUT CONTINUOUS-TIME PERTURBATION TRAJECTORIES HERE}
+
+
+\subsection*{Interpretation}
 
 Quantitative metrics reinforce qualitative observations: models with rigid temporal assumptions or recurrent memory (LSTM) are more susceptible to both magnitude and timing distortions, whereas continuous-time dynamics (LNN) offer meaningful resistance. However, no model was universally robust, and each architecture exhibited specific weaknesses when faced with particular perturbation types.
 
@@ -142,7 +191,7 @@ Quantitative metrics reinforce qualitative observations: models with rigid tempo
 
 While quantitative metrics provide a summary view of model degradation, they can obscure the qualitative character of errors — such as spiralling divergence, phase drift, or geometric distortion. In this section, we present visual comparisons between clean and adversarial predictions to better understand how each model's internal representation and output trajectory is disrupted.
 
-\subsection{Visualisation Methodology}
+\subsection*{Visualisation Methodology}
 
 For each attack and model combination:
 \begin{itemize}
@@ -154,7 +203,7 @@ For each attack and model combination:
 
 Each figure highlights a specific failure mode characteristic to the architecture under consideration.
 
-\subsection{LSTM Responses}
+\subsection*{LSTM Responses}
 
 \hl{lstm\_pgd\_vs\_clean image here}
 
@@ -167,7 +216,7 @@ Each figure highlights a specific failure mode characteristic to the architectur
 
 In Figure~\ref{fig:lstm_pgd}, the LSTM exhibits a delayed but growing deviation from the target trajectory. The adversarial path initially aligns with the ground truth but diverges significantly after the midpoint. This reflects the cumulative sensitivity of cell states to early perturbations.
 
-\subsection{TCN Responses}
+\subsection*{TCN Responses}
 
 \hl{tcn\_spsa\_vs\_clean image here}
 
@@ -180,7 +229,7 @@ In Figure~\ref{fig:lstm_pgd}, the LSTM exhibits a delayed but growing deviation 
 
 As shown in Figure~\ref{fig:tcn_spsa}, the TCN is affected primarily in the local vicinity of the perturbation. The convolutional receptive fields help contain the noise, but the model fails to recover global structure due to its lack of temporal feedback.
 
-\subsection{LNN Responses}
+\subsection*{LNN Responses}
 
 \hl{lnn\_timewarp\_vs\_clean image here}
 
@@ -193,7 +242,7 @@ As shown in Figure~\ref{fig:tcn_spsa}, the TCN is affected primarily in the loca
 
 Figure~\ref{fig:lstm_pgd} shows the LNN's response to temporal distortion. The predicted spiral remains coherent even under significant warping, reflecting the network's ability to integrate inputs continuously over time. The internal dynamics filter out high-frequency changes, preventing sharp deflections.
 
-\subsection{Comparative Failure Modes}
+\subsection*{Comparative Failure Modes}
 
 \begin{itemize}
     \item \textbf{LSTM:} Most errors are due to memory misalignment; adversarial perturbations early in the sequence affect long-term predictions.
@@ -201,7 +250,7 @@ Figure~\ref{fig:lstm_pgd} shows the LNN's response to temporal distortion. The p
     \item \textbf{LNN:} Shows resilience to smooth temporal shifts but is vulnerable to persistent directional gradients or rapidly fluctuating noise.
 \end{itemize}
 
-\subsection{Phase Drift and Spiral Collapse}
+\subsection*{Phase Drift and Spiral Collapse}
 
 A recurring theme observed across all models under PGD and DeepFool-like attacks is \emph{phase drift} — a steady deviation in angular position on the spiral. Unlike random noise, these attacks produce a consistent directional bias, causing the prediction to spiral inward or outward.
 
@@ -214,7 +263,7 @@ A recurring theme observed across all models under PGD and DeepFool-like attacks
 %     \label{fig:phase_drift}
 % \end{figure}
 
-\subsection{Interpretive Summary}
+\subsection*{Interpretive Summary}
 
 Visual inspection confirms that degradation is not uniform:
 \begin{itemize}
@@ -239,7 +288,16 @@ Having evaluated the LNN, TCN, and LSTM across a wide spectrum of adversarial co
     \item \textbf{LNN:} Exhibits the most consistent robustness, particularly under time-warping and continuous-time attacks. Its ODE-based internal state provides smoother transitions and better filtering of high-frequency noise. Nevertheless, the LNN is not invulnerable—attacks that align with sensitive dynamical regimes (e.g., PGD or high-amplitude SPSA) can still destabilise the model.
 \end{itemize}
 
-\subsection{Architectural Trade-offs}
+\subsection*{Interpretation of Results}
+No single model outperformed others under all adversarial settings. The LSTM's gating mechanisms offered some regularisation benefits but failed under directional and temporal distortions. The TCN was resilient to localised noise but vulnerable to global shifts and multi-step attacks. The LNN demonstrated nuanced robustness, especially against temporal distortions, but remained sensitive to high-frequency injected noise within its ODE solver.
+
+Overall, the diversity of attack types reveals how robustness is not a singular property but a complex interplay of architectural assumptions, dynamic behaviour, and model training dynamics.
+
+\vspace{1em}
+\noindent The next chapter explores these architectural and behavioural insights in greater depth by comparing model robustness across all attacks using quantitative and qualitative metrics.
+
+
+\subsection*{Architectural Trade-offs}
 
 Each model's robustness can be linked to its architectural assumptions:
 \begin{enumerate}
@@ -248,7 +306,7 @@ Each model's robustness can be linked to its architectural assumptions:
     \item \textbf{LNN:} By encoding time explicitly through continuous dynamics, the LNN achieves robustness to subtle perturbations in both time and space. However, stability depends heavily on solver configuration and the nonlinearity of the governing ODE.
 \end{enumerate}
 
-\subsection{Robustness by Attack Type}
+\subsection*{Robustness by Attack Type}
 
 \begin{itemize}
     \item \textbf{Gradient-based attacks:} PGD and DeepFool-inspired attacks exploit local curvature in the loss landscape. LSTM suffers most due to deep recurrence. LNN partially resists due to its low-sensitivity ODE integration.
@@ -256,7 +314,7 @@ Each model's robustness can be linked to its architectural assumptions:
     \item \textbf{Temporal attacks:} Time-warping and continuous-time perturbations target the model's implicit assumptions about sampling frequency and state evolution. LNN outperforms others, showcasing a key advantage of continuous-time architectures in adversarial settings.
 \end{itemize}
 
-\subsection{Implications for Deployment}
+\subsection*{Implications for Deployment}
 
 These findings carry important implications:
 \begin{itemize}
@@ -264,12 +322,3 @@ These findings carry important implications:
     \item Robustness is context-dependent — no model is universally secure, and the choice of architecture should be informed by the anticipated type of input perturbation.
     \item LNNs offer promising directions for tasks where input timing is noisy or attacker-controlled, such as sensor-based monitoring or robotics.
 \end{itemize}
-
-\subsection{Conclusion}
-
-In summary, this evaluation demonstrates that:
-\begin{enumerate}
-    \item Robustness is a multidimensional property — not all attacks exploit the same vulnerabilities.
-    \item LNNs, while more complex, deliver meaningful robustness advantages under temporal and structured adversarial regimes.
-    \item Careful architectural and training design — including regularisation and solver stability — is essential in real-world deployments where adversarial inputs cannot be ruled out.
-\end{enumerate}

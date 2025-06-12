@@ -17,12 +17,12 @@ By evaluating the behaviour of these models under clean and adversarial conditio
 
 \section{Temporal Convolutional Network (TCN)}
 
-\subsection{Overview and Motivation}
-The Temporal Convolutional Network (TCN) is a fully convolutional architecture designed for sequential data. Unlike RNN-based models, which process inputs recursively and maintain an internal hidden state, TCNs rely on 1D convolutions applied over the temporal axis. This allows for parallel computation and more stable gradients, particularly for long sequences.
+\subsection*{Overview and Motivation}
+The TCN is a fully convolutional architecture designed for sequential data. Unlike RNN-based models, which process inputs recursively and maintain an internal hidden state, TCNs rely on 1D convolutions applied over the temporal axis. This allows for parallel computation and more stable gradients, particularly for long sequences.
 
 TCN's use \textbf{dilated convolutions}, which expand the receptive field exponentially with depth while preserving causality. This makes them highly effective at modelling long-range dependencies without the vanishing gradient issues that often affect RNNs.
 
-\subsection{Theoretical Background}
+\subsection*{Theoretical Background}
 For a 1D input sequence $x \in \mathbb{R}^{T \times d}$, a dilated convolution with kernel $k$ and dilation factor $d$ is defined as:
 \[
 (y *_{d} k)(t) = \sum_{i=0}^{k-1} k(i) \cdot x(t - d \cdot i)
@@ -31,15 +31,12 @@ This structure allows the model to observe wider contexts with fewer parameters 
 
 In practice, the TCN is constructed using \textbf{residual blocks} with stacked dilated convolutions, dropout, and skip connections to stabilise training. Zero-padding is used to ensure output length matches input length.
 
-\subsection{Model Architecture}
-The implemented TCN consists of 3 residual blocks, each with:
-\begin{itemize}
-    \item Two 1D convolutional layers with kernel size 3
-    \item Dilation rates of 1, 2, and 4 respectively
-    \item ReLU activations and dropout regularisation
-    \item Optional 1x1 convolutions for matching input-output dimensions
-\end{itemize}
+\subsection*{Model Architecture}
+The implemented TCN consists of 3 residual blocks, each with: two dilated 1D convolutional layers with kernel size 3, ReLU activations and dropout regularisation, and optional 1x1 convolutions for matching input-output dimensions. Each residual block has a dilation rate of 1, 2, and 4 respectively (exponentially increasing dilation).
+
 An output convolution maps the final hidden representation to the desired 2D coordinate space.
+
+Below is a simplified example of the TCN model implementation:
 
 \begin{lstlisting}[language=Python, caption={Simplified TCN architecture}]
 class ResidualBlock(nn.Module):
@@ -53,9 +50,6 @@ class TCN(nn.Module):
         self.tcn = nn.Sequential(*residual_blocks)
         self.output_layer = nn.Conv1d(hidden_channels, output_dim, 1)
 \end{lstlisting}
-
-\hl{PUT TCN INFEENCE EXAMPLE/ARCHITECTURE DIAGRAM HERE}
-
 
 \begin{figure}[H]
     \centering
@@ -84,38 +78,118 @@ class TCN(nn.Module):
         \node[below=0.2cm of out] (final) {\textbf{Predicted Coordinates}};
         \draw[->, thick] (out) -- (final);
 
-        % Label
-        \node at (0, -7.2) {\textit{Stacked Dilated Residual Convolutions in the TCN}};
     \end{tikzpicture}
-    \caption{Temporal Convolutional Network (TCN) architecture with 3 residual blocks and exponentially increasing dilation. Each block contains two dilated convolutions with dropout, ReLU, and optional skip connection.}
+    \caption{Temporal Convolutional Network (TCN) architecture}
     \label{fig:tcn_architecture}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        box/.style={draw, rounded corners=2pt, minimum width=2.2cm, minimum height=0.9cm, align=center, fill=orange!15},
+        conv/.style={draw, minimum width=2.2cm, minimum height=0.9cm, align=center, fill=blue!10},
+        dropout/.style={draw, minimum width=2.2cm, minimum height=0.9cm, align=center, fill=red!10},
+        every node/.style={font=\small},
+        arrow/.style={->, thick},
+        thickline/.style={-, thick}
+    ]
 
-\subsection{Training Configuration}
+    % % Input sequence
+    % \node[box] (seq1) at (-5, 0.9) {Temporal\\Sequence};
+    % \foreach \i in {1,...,5} {
+    %     \node[draw, fill=orange!10, minimum size=0.6cm] (in\i) at ($(-5,0.9) + (\i*0.5, 0)$) {};
+    %     \pgfmathtruncatemacro{\j}{\i-1}
+    %     \ifnum\i>1
+    %         \draw[arrow] (in\j) -- (in\i);
+    %     \fi
+    % }
+    % Input sequence
+    \node[box] (seq1) at (-5, 0.9) {Temporal\\Sequence};
+
+    % Draw input nodes and arrows manually
+    \node[draw, fill=orange!10, minimum size=0.6cm] (in1) at (-4.5, 0.9) {};
+    \node[draw, fill=orange!10, minimum size=0.6cm] (in2) at (-4.0, 0.9) {};
+    \node[draw, fill=orange!10, minimum size=0.6cm] (in3) at (-3.5, 0.9) {};
+    \node[draw, fill=orange!10, minimum size=0.6cm] (in4) at (-3.0, 0.9) {};
+    \node[draw, fill=orange!10, minimum size=0.6cm] (in5) at (-2.5, 0.9) {};
+
+    \draw[arrow] (in1) -- (in2);
+    \draw[arrow] (in2) -- (in3);
+    \draw[arrow] (in3) -- (in4);
+    \draw[arrow] (in4) -- (in5);
+
+    % Arrow into block
+    \node[conv] (dil1) at (-1.3, 0.9) {Dilated\\Convolution};
+    \draw[arrow] (in5) -- (dil1);
+
+    % Residual Block container
+    \node[draw=orange!80!black, very thick, rounded corners=6pt, fit=(dil1), inner sep=2.5cm, label=below:{\textbf{Residual Block}}] (block) {};
+
+    % Inside block
+    \node[conv] (conv1) at (0.8, 2.1) {Convolution};
+    \node[conv] (relu) at (0.8, 1.0) {ReLU};
+    \node[draw, circle, minimum size=0.6cm, fill=white] (add) at (1.5, 0.4) {$+$};
+    \node[dropout] (drop) at (0.8, -0.6) {Dropout};
+    \node[box] (resid) at (2.8, 1.4) {\textit{Resid}\\Connection};
+
+    \draw[arrow] (dil1) -- (conv1);
+    \draw[arrow] (conv1) -- (relu);
+    \draw[arrow] (relu) -- (add);
+    \draw[arrow] (drop) -- (add);
+    \draw[arrow] (dil1) |- (drop);
+    \draw[arrow] (dil1) |- (resid);
+    \draw[arrow] (resid) -- (add);
+
+    % Output
+    \node[box] (output) at (4.5, 0.4) {Output};
+    \draw[arrow] (add) -- (output);
+
+    \end{tikzpicture}
+    \caption{Structure of a TCN Residual Block. Each convolution uses dilation to increase receptive field, while residual skip connections and dropout stabilise training.}
+    \label{fig:tcn_residual_block}
+\end{figure}
+
+\subsection*{Training Configuration}
 The TCN was trained on the same spiral dataset as the LNN, with identical batch size, learning rate, loss function (Smooth L1), and normalisation pipeline. The model was optimised using Adam and a learning rate scheduler that halved the rate every 500 steps.
 
-\subsection{Performance and Behaviour}
+\subsection*{Performance and Behaviour}
 The TCN demonstrated strong performance on the trajectory prediction task, converging more quickly than the LNN and producing smooth outputs even with a small receptive field. The use of dilated convolutions allowed the model to predict coordinated curvature without explicitly tracking hidden state over time.
 
-\subsection{Design Considerations}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/tcn_training_validation_spiral_epoch_1.png}
+        \caption{Epoch 1}
+        \label{fig:tcn_training_validation_spiral_epoch_1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/tcn_training_validation_spiral_epoch_400.png}
+        \caption{Epoch 400 (early stopping point)}
+        \label{fig:tcn_training_validation_spiral_epoch_400}
+    \end{subfigure}
+    \vskip\baselineskip
+    \caption{TCN predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}
+    \label{fig:tcn_spiral_progression_grid}
+\end{figure}
+
+\subsection*{Design Considerations}
 \begin{itemize}
     \item \textbf{Causality:} All convolutions were causal, ensuring no future information was used during prediction.
-    \item \textbf{Parameter efficiency:} Despite having no recurrence, the TCN was able to model complex spirals with relatively few layers and a compact parameter set.
-    \item \textbf{Regularisation:} Dropout was used within each block to avoid overfitting, as convolutional models tend to memorise local structures in small datasets.
+    \item \textbf{Parameter efficiency:} Despite having no recurrence, the TCN was able to model complex spirals with relatively few layers and a small parameter set.
+    \item \textbf{Regularisation:} Dropout was used within each block to avoid overfitting (since convolutional models tend to memorise local structures in small datasets).
 \end{itemize}
 
 Despite lacking the dynamic time constants of the LNN, the TCN proved to be a strong baseline in terms of speed, stability, and accuracy under clean conditions.
 
-
 \section{Long Short-Term Memory Network (LSTM)}
 
-\subsection{Background and Rationale}
-The Long Short-Term Memory (LSTM) network is a popular recurrent neural architectures for sequential learning tasks. It was introduced to address the limitations of classical RNNs, particularly the vanishing and exploding gradient problems during backpropagation through time. The LSTM introduces gated memory units that regulate the flow of information over time.
+\subsection*{Overview and Motivation}
+The LSTM network is a popular recurrent neural architectures for sequential learning tasks. It was introduced to address the limitations of classical RNNs, particularly the vanishing and exploding gradient problems during backpropagation through time. The LSTM uses gated memory units that regulate the flow of information over time.
 
-Their ability to retain past information via internal cell states makes them well-suited for temporal tasks such as trajectory prediction.
+LSTMs have the ability to retain past information via internal cell states. This makes them well-suited for temporal tasks, such as trajectory prediction.
 
-\subsection{LSTM Cell Mechanics}
+\subsection*{LSTM Cell Mechanics}
 An LSTM cell maintains two internal states: a hidden state $h_t$ and a cell state $c_t$. The cell's behaviour is controlled by three gates:
 \[
 \begin{aligned}
@@ -127,10 +201,10 @@ c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
 h_t &= o_t \odot \tanh(c_t)
 \end{aligned}
 \]
-These equations define how the LSTM updates its memory and hidden representations at each time step.
+These equations define how the LSTM updates its memory and hidden representations at each time step. $W_*$ and $U_*$ are learnable weight matrices applied to the current input $x_t$ and previous hidden state $h_{t-1}$ respectively; $b_*$ are bias vectors. Each subscript $*$ corresponds to a particular gate ($f$: forget, $i$: input, $o$: output, $c$: cell candidate). $\odot$ denotes elementwise multiplication.
 
-\subsection{Model Implementation}
-In this project, the LSTM was implemented using PyTorch’s built-in \texttt{nn.LSTM} module. A two-layer LSTM was used, with 128 hidden units per layer. The final hidden state was passed through a linear projection layer to produce the 2D coordinate output.
+\subsection*{Model Implementation}
+The LSTM was implemented using PyTorch's built-in \texttt{nn.LSTM} module. A two-layer LSTM was used, with 128 hidden units per layer. The final hidden state was passed through a linear projection layer to output a 2D coordinate.
 
 \begin{lstlisting}[language=Python, caption={Simplified LSTM model structure}]
 class LSTMModel(nn.Module):
@@ -142,14 +216,6 @@ class LSTMModel(nn.Module):
         out, _ = self.lstm(x)
         return self.output_layer(out)
 \end{lstlisting}
-
-\subsection{Training Configuration}
-The LSTM was trained using the same dataset and preprocessing pipeline as the LNN and TCN. The Smooth L1 loss was used, and training was performed over 1000 epochs with a learning rate of 0.005. A step decay scheduler was applied halfway through training.
-
-\subsection{Training Observations}
-The LSTM showed stable training behaviour and low final validation loss. However, unlike the TCN and LNN, it exhibited slightly slower convergence. Its outputs were smooth and consistent, although it occasionally underfit regions with sharper curvature.
-
-\hl{PUT LSTM INFEENCE EXAMPLE/ARCHITECTURE DIAGRAM HERE}
 
 \begin{figure}[H]
     \centering
@@ -216,23 +282,40 @@ The LSTM showed stable training behaviour and low final validation loss. However
     \label{fig:lstm_architecture_final}
 \end{figure}
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.65\linewidth]{img/lstm_inference_example.png}
-%     \caption{LSTM inference on unseen spiral sequence.}
-%     \label{fig:lstm_inference}
-% \end{figure}
+\subsection*{Training Configuration}
+The LSTM was trained using the same dataset and preprocessing pipeline as the LNN and TCN. The Smooth L1 loss was used, and training was performed over 1000 epochs with a learning rate of 0.005. A step decay scheduler was applied halfway through training.
+
+\subsection*{Training Observations}
+The LSTM showed stable training behaviour and low final validation loss. However, unlike the TCN and LNN, it exhibited slightly slower convergence. Its outputs were smooth and consistent, although it occasionally underfit regions with sharper curvature.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/lstm_training_validation_spiral_epoch_1.png}
+        \caption{Epoch 1}
+        \label{fig:lstm_training_validation_spiral_epoch_1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/lstm_training_validation_spiral_epoch_1000.png}
+        \caption{Epoch 1000 (early stopping point)}
+        \label{fig:lstm_training_validation_spiral_epoch_1000}
+    \end{subfigure}
+    \vskip\baselineskip
+    \caption{LSTM predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}
+    \label{fig:lstm_spiral_progression_grid}
+\end{figure}
 
 While the LSTM offers a reliable baseline for temporal prediction, its recurrent structure can make it more sensitive to gradient-based perturbations.
 
 \section{Transformer Model}
 
 \subsection*{Overview and Motivation}
-The Transformer is an attention-based architecture originally developed for sequence transduction tasks in NLP. The Transformer architecture implemented in this project is a lightweight variant of the original Transformer encoder proposed by Vaswani et al.~(2017), adapted for short-length continuous 2D time-series data. Unlike recurrent or convolutional models, the Transformer uses \textbf{self-attention} to learn dependencies across the input sequence in parallel. This decouples sequence processing from sequential computation and enables greater flexibility in learning temporal relationships.
+The Transformer is an attention-based architecture originally developed for sequence transduction tasks in NLP. The Transformer architecture implemented in this project is a lightweight variant of the original Transformer encoder proposed by Vaswani et al.~(2017), adapted for short-length continuous 2D time-series data. Unlike recurrent or convolutional models, the Transformer uses \textbf{self-attention} to learn dependencies across the input sequence in parallel. This decouples sequence processing from sequential computation and provides greater flexibility in learning temporal relationships.
 
-\linebreakparagraph{Transformer Encoder Design}
+\subsection*{Transformer Encoder Design}
 
-The core of the model is the \textbf{Transformer encoder}, a stack of layers built around self-attention and feedforward submodules. Each encoder layer learns to transform the input sequence into a more abstract representation by allowing each token (i.e., timestep) to attend to others, subject to a causal constraint.
+The main aspect of the model is the \textbf{Transformer encoder}, a stack of layers built around self-attention and feedforward submodules. Each encoder layer learns to transform the input sequence into a more abstract representation by allowing each token (timestep) to attend to others, subject to a causal constraint.
 
 Each encoder layer consists of the following components:
 
@@ -241,7 +324,7 @@ Each encoder layer consists of the following components:
     \[
     \text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^\top}{\sqrt{d}} + M \right) V
     \]
-    where $Q$, $K$, and $V$ are learned linear projections of the input, and $M$ is a \textbf{causal mask}—a triangular matrix filled with $-\infty$ above the diagonal to prevent attention to future positions.
+    where $Q$, $K$, and $V$ are learned linear projections of the input, and $M$ is a \textbf{causal mask}: a triangular matrix filled with $-\infty$ above the diagonal to prevent attention to future positions.
 
     \item \textbf{Feedforward Network:} Following attention, a two-layer feedforward block applies a non-linear transformation independently at each position:
     \[
@@ -259,67 +342,12 @@ Each encoder layer consists of the following components:
 
 Two of these encoder layers are stacked, allowing the model to build hierarchical abstractions over the input sequence.
 
-Thus, the transformer encoder processes input sequences in parallel, whilst still capturing autoregressive temporal dependencies via the attention mask. The resulting sequence of contextualised embeddings is then passed to a prediction head that maps each timestep to its corresponding 2D coordinate.
+The transformer encoder processes input sequences in parallel, whilst still capturing autoregressive temporal dependencies via the attention mask. The resulting sequence of contextualised embeddings is then passed to a prediction head that maps each timestep to its corresponding 2D coordinate output.
 
 Positional information is injected via \textbf{learnable positional embeddings}, which are added to the input projections before encoding. A \textbf{causal mask} is applied to ensure predictions at time $t$ do not access future values (enforcing temporal directionality).
 
-\linebreakparagraph{Model Architecture}
-The Transformer model used in this work consists of: an input projection layer mapping 2D inputs to a 128-dimensional latent space, two Transformer encoder layers, a causal attention mask (to enforce autoregressive prediction), and a residual MLP head that maps the encoder output back into 2D coordinates.
-
-\subsection*{Suitability for the Task}
-
-Despite the short sequence length ($\text{seq\_len} = 3$), the Transformer architecture is well-suited to this task for several reasons:
-
-\linebreakparagraph{Suitability for the Task}
-
-\begin{itemize}
-    \item \textbf{Parallel Processing:} All timesteps are processed concurrently, improving training speed and efficiency.
-    
-    \item \textbf{Long-Term Dependency Modelling:} Self-attention generalises well to longer sequences and higher-resolution datasets, allowing the model to capture long-range dependencies.
-    
-    \item \textbf{Positional Awareness Without Recurrence:} The use of learnable positional embeddings enables the model to adaptively distinguish temporally adjacent inputs in the absence of hidden-state propagation.
-
-    \item \textbf{Smooth Output Dynamics:} Empirically, the Transformer achieves validation loss in the range of $0.0002$–$0.0006$, yielding stable and continuous predictions consistent with the underlying spiral dynamics.
-    
-    \item \textbf{Robustness to Input Variability:} Self-attention allows the model to focus on the most informative timesteps, reducing sensitivity to noise or input distortions.
-\end{itemize}
-
-
-\begin{lstlisting}[language=Python, caption={Simplified Transformer architecture}]
-class TransformerModel(nn.Module):
-    def __init__(self, input_dim=2, model_dim=128, ...):
-        self.input_proj = nn.Linear(input_dim, model_dim)
-        self.encoder = nn.TransformerEncoder(...)
-        self.output_head = nn.Sequential(
-            nn.Linear(model_dim, model_dim // 2),
-            nn.ReLU(),
-            nn.Linear(model_dim // 2, output_dim)
-        )
-\end{lstlisting}
-
-\subsection{Training Configuration}
-The Transformer was trained on the same spiral dataset as other baselines, using identical input preprocessing and normalisation. Optimisation was performed using AdamW with cosine annealing, and Smooth L1 loss was used as the objective. The model received short input sequences (length 3), and positional embeddings were learned from scratch.
-
-\subsection{Performance and Behaviour}
-Although the Transformer initially showed promising performance, with early convergence to low validation loss, extended training often led to \textbf{overfitting}, increasing loss and reduced trajectory fidelity. Its attention-based mechanism enabled flexibility but also made it sensitive to noise and hyperparameters, particularly given the small training context.
-
-\hl{PUT TRANSFORMER INFERENCE EXAMPLE/ARCHITECTURE DIAGRAM HERE}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.65\linewidth]{img/transformer_inference_example.png}
-%     \caption{Transformer inference trajectory on unseen spiral data.}
-%     \label{fig:transformer_inference}
-% \end{figure}
-
-\subsection{Design Considerations}
-\begin{itemize}
-    \item \textbf{Parallelism:} Unlike the LSTM and TCN, the Transformer operates without recurrence or convolution, allowing full-sequence parallelism during training.
-    \item \textbf{Positional encoding:} A learnable position embedding allows the model to infer order, compensating for the lack of temporal structure in pure attention.
-    \item \textbf{Generalisation:} The model's performance was sensitive to overfitting, highlighting a trade-off between expressivity and inductive bias in low-data regimes.
-\end{itemize}
-
-The Transformer model provides a powerful and flexible alternative to recurrent and convolutional architectures. However, its high capacity and limited structural bias made it more susceptible to generalisation issues under the noisy spiral task compared to more structured models like the TCN or LSTM.
+\subsection*{Model Architecture}
+The Transformer model used contains: an input projection layer mapping 2D inputs to a 128-dimensional latent space, two Transformer encoder layers, a causal attention mask (to enforce autoregressive prediction), and a residual MLP head that maps the encoder output back into 2D coordinates.
 
 \begin{figure}[H]
     \centering
@@ -367,3 +395,45 @@ The Transformer model provides a powerful and flexible alternative to recurrent 
     \caption{Architecture of the Transformer encoder used}
     \label{fig:transformer_encoder_diagram}
 \end{figure}
+
+\subsection*{Suitability for the Task}
+
+Despite the short sequence length ($\text{seq\_len} = 3$), the transformer architecture is well-suited to this task for several reasons. Transformers allow for parallel processing of all timesteps, which improves training speed/efficiency. The model is also effective at capturing long-range dependencies in the dataset (despite short sequence length), since self-attention generalises well to higher-resolution datasets (longer sequences). In addition, the learnable positional embeddings allow the model to gain positional awareness without recurrence. This means the model can adaptively distinguish temporally adjacent inputs, enabling it to  focus on the most informative timesteps. This helps to reduce sensitivity to noise and input distortions.
+
+\begin{lstlisting}[language=Python, caption={Simplified Transformer architecture}]
+class TransformerModel(nn.Module):
+    def __init__(self, input_dim=2, model_dim=128, ...):
+        self.input_proj = nn.Linear(input_dim, model_dim)
+        self.encoder = nn.TransformerEncoder(...)
+        self.output_head = nn.Sequential(
+            nn.Linear(model_dim, model_dim // 2),
+            nn.ReLU(),
+            nn.Linear(model_dim // 2, output_dim)
+        )
+\end{lstlisting}
+
+\subsection*{Training Configuration}
+The Transformer was trained on the same spiral dataset as other baselines, using identical input preprocessing and normalisation. Optimisation was performed using AdamW with cosine annealing, and Smooth L1 loss was used as the objective. The model received short input sequences (length 3), and positional embeddings were learned from scratch.
+
+\subsection*{Performance and Behaviour}
+Although the Transformer initially showed promising performance, with early convergence to low validation loss, extended training often led to \textbf{overfitting}, increasing loss and reduced trajectory fidelity. Its attention-based mechanism enabled flexibility but also made it sensitive to noise and hyperparameters, particularly given the small training context.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/transformer_training_validation_spiral_epoch_1.png}
+        \caption{Epoch 1}
+        \label{fig:transformer_training_validation_spiral_epoch_1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/transformer_training_validation_spiral_epoch_600.png}
+        \caption{Epoch 600 (early stopping point)}
+        \label{fig:transformer_training_validation_spiral_epoch_600}
+    \end{subfigure}
+    \vskip\baselineskip
+    \caption{Transformer predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}
+    \label{fig:transformer_spiral_progression_grid}
+\end{figure}
+
+The Transformer model provides a powerful and flexible alternative to recurrent and convolutional architectures. However, its high capacity and limited structural bias made it more susceptible to generalisation issues (overfitting) under the noisy spiral task compared to more structured models like the TCN or LSTM. This highlights a trade-off between expressivity and inductive bias when data is limited.

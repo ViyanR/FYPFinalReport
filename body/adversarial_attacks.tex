@@ -2,7 +2,7 @@
 
 \section{Introduction to Adversarial Attacks}
 
-Adversarial attacks are deliberately constructed perturbations to input data that cause a machine learning model to make incorrect predictions with high confidence. These perturbations are often imperceptible or bounded in norm, but can expose vulnerabilities in the model's internal representations and loss surface geometry.
+Adversarial attacks are deliberately constructed perturbations to input data that cause an ML model to make incorrect predictions with high confidence. These perturbations are often imperceptible or bounded in norm, but can expose vulnerabilities in the model's internal representations and loss surface geometry.
 
 For sequential models such as the LNN, TCN, and LSTM, adversarial robustness is important, especially in safety-critical applications involving temporal dynamics. Several attacks are implemented in this project, targeting both gradient-accessible and gradient-free contexts, and include both white-box and black-box variants.
 
@@ -13,20 +13,20 @@ Each attack was evaluated under the same conditions, using:
     \item Denormalised outputs for interpretability and comparison.
 \end{itemize}
 
-\noindent The metrics used for evaluating adversarial degradation included \textbf{Degradation Ratio}, \textbf{Deviation}, anf \textbf{Local Sensitivity} (Lipschitz constant). These are explained further, with analysis of results across all models, in the evaluation section.
+The metrics used for evaluating adversarial degradation included \textbf{Degradation Ratio}, \textbf{Deviation}, anf \textbf{Local Sensitivity} (Lipschitz constant). For all models/attacks, further explanation of these metrics, numerical results, and qualitative analysis can be found in the evaluation section \ref{chap:evaluation}.
 
 \section{Fast Gradient Sign Method (FGSM)}
 
 The Fast Gradient Sign Method (FGSM) is a single-step adversarial attack first introduced by Goodfellow et al.\ in 2014. It exploits the local linearity of neural networks by using the gradient of the loss function with respect to the input to perturb the input data in the direction that maximally increases loss.
 
-\subsection{Mathematical Formulation}
+\subsection*{Mathematical Representation}
 Given a model $f_\theta$, a loss function $\mathcal{L}(f_\theta(x), y)$, and a clean input-target pair $(x, y)$, the FGSM adversarial example is constructed as:
 \[
 x^{\text{adv}} = x + \epsilon \cdot \text{sign} \left( \nabla_x \mathcal{L}(f_\theta(x), y) \right)
 \]
 where $\epsilon$ controls the perturbation magnitude and $\text{sign}(\cdot)$ is applied elementwise. The method requires only a single forward and backward pass.
 
-\subsection{Implementation Details}
+\subsection*{Implementation Details}
 FGSM was implemented using PyTorch's autograd engine. The input tensor was marked with \texttt{requires\_grad=True} and gradients were computed by backpropagating through the MSE loss between model output and the clean target sequence. The sign of the gradient was scaled by $\epsilon$ and added to the input.
 
 \begin{lstlisting}[language=Python, caption={FGSM adversarial attack implementation}]
@@ -36,38 +36,21 @@ perturbation = epsilon * x.grad.sign()
 x_adv = x + perturbation
 \end{lstlisting}
 
-\subsection{Evaluation and Observations}
-The FGSM attack was applied to all three models under a fixed perturbation budget $\epsilon = 0.05$. Key findings include:
-\begin{itemize}
-    \item \textbf{LSTM:} Showed significant degradation, especially in regions with abrupt curvature. The gating mechanisms did not mitigate linear perturbations.
-    \item \textbf{TCN:} Relatively robust in early regions of the spiral but vulnerable at turn boundaries. This is likely due to reliance on local receptive fields.
-    \item \textbf{LNN:} Demonstrated moderate degradation. The neuron dynamics offered some resistance to sharp perturbation, but sensitivity remained in areas where the membrane potential saturated.
-\end{itemize}
-
-\hl{PUT FGSM TRAJECTORIES HERE? or maybe in evaluation section}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/fgsm_comparison.png}
-%     \caption{Predicted trajectories under FGSM attack for LNN, TCN, and LSTM ($\epsilon = 0.05$).}
-%     \label{fig:fgsm_results}
-% \end{figure}
-
-\noindent \textbf{Design Reflection:}  
+\subsection*{Attack Design Reflection:}  
 FGSM is efficient but limited, as it assumes linearity and is easy to defend against with basic regularisation, so was used as a baseline attack method.
 
 \section{Projected Gradient Descent (PGD)}
 
-The Projected Gradient Descent (PGD) attack is an iterative extension of FGSM and is regarded as one of the strongest first-order adversaries in adversarial machine learning. Proposed by Madry et al., PGD performs multiple small steps of perturbation in the direction of the loss gradient, while projecting the adversarial input back onto an $\ell_p$ ball of fixed radius after each step.
+The PGD attack is an iterative extension of FGSM and is regarded as one of the strongest first-order adversaries in adversarial machine learning. Proposed by Madry et al., PGD performs multiple small steps of perturbation in the direction of the loss gradient, while projecting the adversarial input back onto an $\ell_p$ ball of fixed radius after each step.
 
-\subsection{Mathematical Formulation}
+\subsection*{Mathematical Representation}
 Given an input $x$ and perturbation budget $\epsilon$, PGD initializes the adversarial input as $x_0^{\text{adv}} = x + \delta$ (with $\delta$ small or random), and iteratively updates it as follows:
 \[
 x_{t+1}^{\text{adv}} = \Pi_{B_\epsilon(x)} \left( x_t^{\text{adv}} + \alpha \cdot \text{sign}\left( \nabla_x \mathcal{L}(f_\theta(x_t^{\text{adv}}), y) \right) \right)
 \]
 Here, $\Pi_{B_\epsilon(x)}$ denotes projection onto the $\ell_\infty$ ball centered at $x$ with radius $\epsilon$, and $\alpha$ is the step size.
 
-\subsection{Implementation Details}
+\subsection*{Implementation Details}
 The attack was implemented using a fixed number of iterations (10), and in each step:
 \begin{itemize}
     \item The model performed a forward pass on the current adversarial input.
@@ -86,24 +69,8 @@ for _ in range(num_iter):
         x_adv = torch.clamp(x_orig + perturbation, min, max).detach().requires_grad_()
 \end{lstlisting}
 
-\subsection{Performance and Model Responses}
-PGD caused greater degradation than FGSM across all models, with stronger effect on deeper temporal structures. Results indicated:
-\begin{itemize}
-    \item \textbf{LSTM:} Highly vulnerable. PGD-induced drift accumulated over time, causing the model to diverge from the ground truth trajectory.
-    \item \textbf{TCN:} Whilst convolutional structure dampened some effects, the model's locality made it sensitive to consistent directional gradients across the sequence.
-    \item \textbf{LNN:} Showed meaningful robustness - the continuous-time integration added temporal stability which dampened the effect of rapid perturbations. However, convergence was sensitive to $\alpha$ and step count.
-\end{itemize}
 
-\hl{PUT PGD TRAJECTORIES HERE? or maybe in evaluation section}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/pgd_results.png}
-%     \caption{Trajectories under PGD attack across all models. Perturbation: $\epsilon = 0.05$, step size $\alpha = 0.01$, 10 iterations.}
-%     \label{fig:pgd_attack}
-% \end{figure}
-
-\subsection{Design Choices}
+\subsection*{Design Choices}
 \begin{itemize}
     \item \textbf{Step size $\alpha$:} Set as $0.01$ after empirical tuning to balance convergence and perturbation spread.
     \item \textbf{Projection radius $\epsilon$:} Fixed at $0.05$ to match FGSM budget for fair comparison.
@@ -112,11 +79,11 @@ PGD caused greater degradation than FGSM across all models, with stronger effect
 
 Unlike FGSM, PGD exposes high-curvature regions of the loss surface. The extent to which a model resists PGD steps provided insight into the local geometry of its input-output mapping.
 
-\subsection{DeepFool-Inspired Directional Attack}
+\section{DeepFool-Inspired Directional Attack}
 
 Whilst FGSM and PGD are effective, they rely on sign-based or norm-bounded perturbations and can be inefficient in identifying the minimal perturbation required for misprediction. DeepFool, introduced by Moosavi-Dezfooli et al., aims to iteratively approximate the closest decision boundary in input space. Though originally formulated for classification, a modified version was implemented here to exploit the gradient direction of loss for regression.
 
-\subsection{Theoretical Basis}
+\subsection*{Mathematical Representation}
 In its original form, DeepFool linearises the classifier around the current point and computes the minimal step in the direction of the gradient that crosses the decision boundary. In our regression-focussed adaptation, the perturbation is applied directly in the normalised direction of the loss gradient, without projection.
 
 The update rule is given by:
@@ -125,7 +92,7 @@ x^{\text{adv}} = x + \eta \cdot \frac{\nabla_x \mathcal{L}(f(x), y)}{ \| \nabla_
 \]
 where $\eta$ is a scalar perturbation magnitude and $\delta$ is a small stabilisation term to prevent division by zero.
 
-\subsection{Implementation Summary}
+\subsection*{Implementation Summary}
 The attack was implemented using a single or few iterations, computing the raw gradient of the loss with respect to the input and stepping along the normalised direction. Unlike PGD, no projection or clipping was applied. This was chosen to explore worst-case directional drift.
 
 \begin{lstlisting}[language=Python, caption={Directional (DeepFool-like) Gradient Attack}]
@@ -136,23 +103,7 @@ perturbation = eta * gradient / (torch.norm(gradient) + epsilon)
 x_adv = x + perturbation
 \end{lstlisting}
 
-\subsection{Model Comparisons and Observations}
-\begin{itemize}
-    \item \textbf{LSTM:} Exhibited strong drift under this attack, especially near the sequence midpoint where cell state updates accumulate. Perturbations along raw gradients quickly destabilised the output.
-    \item \textbf{TCN:} Localised convolutional features led to sharper local deformation, but degradation plateaued after initial displacement.
-    \item \textbf{LNN:} Resistant to small $\eta$, but susceptible when gradient directions aligned with sensitive voltage states. Nonlinearity in ODE integration helped to minimise the impact in early layers.
-\end{itemize}
-
-\hl{PUT PGD TRAJECTORIES HERE? or maybe in evaluation section}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/deepfool_directional.png}
-%     \caption{Effects of directional perturbation on predicted spiral paths (DeepFool-style gradient drift).}
-%     \label{fig:deepfool_like}
-% \end{figure}
-
-\subsection{Design Considerations}
+\subsection*{Design Considerations}
 \begin{itemize}
     \item \textbf{Normalisation:} Gradient was normalised using $\ell_2$ norm rather than using the sign, to emulate the boundary-seeking nature of DeepFool.
     \item \textbf{No projection:} Allowed the perturbation to fully reflect the underlying geometry of the loss surface, rather than artificially constraining it.
@@ -167,7 +118,7 @@ The Simultaneous Perturbation Stochastic Approximation (SPSA) attack is a gradie
 
 This makes SPSA a suitable candidate for attacking models with non-differentiable components or highly unstable gradient behaviour—conditions often encountered in ODE-based or discretised models like the LNN.
 
-\subsection{Mathematical Formulation}
+\subsection*{Mathematical Representation}
 Let $x \in \mathbb{R}^d$ be the input and $\mathcal{L}$ the loss function. At each iteration, SPSA perturbs $x$ in a randomly sampled direction $\Delta \sim \{\pm 1\}^d$, and estimates the gradient as:
 \[
 \hat{g}_i = \frac{\mathcal{L}(x + \sigma \Delta) - \mathcal{L}(x - \sigma \Delta)}{2 \sigma} \cdot \Delta_i
@@ -178,7 +129,7 @@ x^{\text{adv}}_{t+1} = x^{\text{adv}}_t + \alpha \cdot \text{sign}(\hat{g})
 \]
 Here, $\sigma$ controls the scale of the finite difference, and $\alpha$ is the step size. The sign function ensures robustness against outliers in the gradient estimate.
 
-\subsection{Implementation and Design Choices}
+\subsection*{Implementation and Design Choices}
 In this project, the SPSA attack was implemented using the following design:
 \begin{itemize}
     \item Binary random perturbation vectors $\Delta$ were sampled independently at each iteration.
@@ -195,23 +146,7 @@ for _ in range(num_iter):
     x = x + alpha * grad_estimate.sign()
 \end{lstlisting}
 
-\subsection{Empirical Performance Across Models}
-\begin{itemize}
-    \item \textbf{LSTM:} SPSA degraded performance comparably to FGSM, although convergence was noisier due to the stochastic gradient estimate.
-    \item \textbf{TCN:} The convolutional structure resisted small random perturbations, but susceptibility increased when $\alpha$ was tuned to larger values.
-    \item \textbf{LNN:} Resistant in early iterations. The combination of continuous dynamics and sparsity in the input-response surface resulted in less reliable gradient estimates, which reduced the effectiveness of the attack.
-\end{itemize}
-
-\hl{PUT SPSA TRAJECTORIES HERE? or maybe in evaluation section}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/spsa_attack_results.png}
-%     \caption{Comparison of predicted trajectories under SPSA attack.}
-%     \label{fig:spsa_results}
-% \end{figure}
-
-\subsection{Reflections on Robustness}
+\subsection*{Reflections on Robustness}
 \begin{itemize}
     \item \textbf{Gradient-free limitation:} SPSA is powerful when gradients are inaccessible, but its convergence is sensitive to $\sigma$ and batch size.
     \item \textbf{Hyperparameter sensitivity:} Choosing appropriate $\alpha$ and $\sigma$ values was important, small values caused the gradient estimate to vanished and large values caused the model to overshot the adversarial direction.
@@ -224,17 +159,17 @@ The stochastic nature of this attack mirrors real-world adversarial conditions, 
 
 Unlike traditional adversarial attacks that modify the magnitude of input features, the time-warping attack alters the temporal structure of the input sequence. This approach is motivated by the fact that many sequence models implicitly assume uniform temporal spacing, and small distortions in timing can have disproportionately large effects on prediction accuracy.
 
-\subsection{Conceptual Basis}
+\subsection*{Conceptual Basis}
 For trajectory prediction, a time-warping attack perturbs the relative spacing between consecutive time steps, modifying the “speed” or sampling rate of the underlying system without changing the actual trajectory points themselves. This is effective on models with strong temporal priors, such as recurrent or ODE-based networks.
 
-\subsection{Mathematical Formulation}
+\subsection*{Mathematical Formulation}
 Let $x = [x_0, x_1, \dots, x_{T-1}]$ be a sequence of length $T$. A warping function $w: \{0, 1, \dots, T-1\} \to \mathbb{R}$ maps each time index to a new location. After applying interpolation to enforce fixed-length output, the warped sequence becomes:
 \[
 x^{\text{warp}}_t = x(w(t)), \quad \text{where } w(t) = t + \epsilon \cdot \sin\left( \frac{2\pi t}{T} \right)
 \]
 Here, $\epsilon$ determines the amplitude of the distortion. Interpolation (e.g. linear or cubic) is used to ensure that the resulting sequence remains aligned with the original frame size.
 
-\subsection{Implementation Strategy}
+\subsection*{Implementation Strategy}
 The attack was implemented by generating control points across the time domain and applying sinusoidal displacements to simulate acceleration and deceleration patterns. The perturbed sequence was then interpolated back to the original length.
 
 \begin{lstlisting}[language=Python, caption={Example Time-Warping Attack Function}]
@@ -244,24 +179,7 @@ def warp_sequence(x, epsilon, num_control_points):
     return interpolate_sequence(x, warp)
 \end{lstlisting}
 
-\subsection{Results and Model Sensitivity}
-\begin{itemize}
-    \item \textbf{LSTM:} Sensitive to early warping. Because cell states are updated recursively, incorrect timing causes cumulative errors in the hidden dynamics.
-    \item \textbf{TCN:} Moderately robust. The fixed receptive field allowed the model to partially recover from distorted timing, particularly when the convolutional kernel sizes covered the affected regions.
-    \item \textbf{LNN:} Demonstrated strong resistance. Due to the use of continuous-time ODE integration, the model's internal dynamics adjusted to the temporal irregularity more gracefully than discrete-step models.
-\end{itemize}
-
-\hl{PUT TIME-WARPING TRAJECTORIES HERE? or maybe in evaluation section}
-
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/time_warping_results.png}
-%     \caption{Impact of time-warping perturbation ($\epsilon=0.2$) on model predictions.}
-%     \label{fig:time_warping}
-% \end{figure}
-
-\subsection{Design Choices}
+\subsection*{Design Choices}
 \begin{itemize}
     \item \textbf{Amplitude control:} The perturbation amplitude $\epsilon$ was bounded to ensure the warped sequence remained physically plausible and temporally ordered.
     \item \textbf{Interpolation method:} Linear interpolation was chosen for stability. Higher-order methods introduced numerical artefacts that degraded learning reproducibility.
@@ -274,10 +192,10 @@ The ability of the continuous-time model (LNN) to handle temporal distortions wi
 
 The continuous-time perturbation attack is a novel technique designed specifically for models with internal time dynamics, such as the Liquid Neural Network (LNN). Unlike discrete attacks which perturb input values directly, this method injects structured noise into the temporal dynamics governing the state evolution of the system. This is conceptually aligned with adversarial strategies in control theory and differential equation modelling.
 
-\subsection{Motivation}
+\subsection*{Motivation}
 In ODE-driven models, the output is not solely a function of discrete inputs, but rather of how internal states evolve over time in response to those inputs. Small perturbations to the continuous-time signal—especially during critical integration intervals—can lead to disproportionately large shifts in the terminal state. This attack was crafted to evaluate that phenomenon.
 
-\subsection{Formulation and Mechanism}
+\subsection*{Mathematical Representation}
 Given an input sequence $x(t)$ sampled at discrete steps, and a model defined by the differential equation:
 \[
 \frac{dv}{dt} = F(v, x(t))
@@ -290,7 +208,7 @@ x^{\text{adv}}(t_i) = x(t_i) + \delta_i, \quad \delta_i \sim \mathcal{U}(-\epsil
 \]
 where perturbations $\delta_i$ are constrained within a norm bound but applied at each ODE unfold step.
 
-\subsection{Implementation Details}
+\subsection*{Implementation Details}
 This attack was implemented by modifying the input sequence across all ODE solver substeps inside the \texttt{forward} method of the LNN. Unlike standard attacks, which treat input as static, this attack dynamically perturbs the input during internal time integration. The same idea was adapted for discrete models (LSTM, TCN) for comparison, by injecting noise at each time step only once.
 
 \begin{lstlisting}[language=Python, caption={Continuous-Time Perturbation Injection}]
@@ -299,23 +217,7 @@ for unfold in range(self.ode_unfolds):
     # Proceed with dynamics update using perturbed_input
 \end{lstlisting}
 
-\subsection{Model-Specific Responses}
-\begin{itemize}
-    \item \textbf{LSTM:} While hidden states filtered some noise, early perturbations caused unstable cell state updates and diverging outputs.
-    \item \textbf{TCN:} Most vulnerable. Injected noise propagated through convolutions without temporal gating, degrading local features significantly.
-    \item \textbf{LNN:} Performance depended on perturbation amplitude. For small $\epsilon$, the continuous dynamics helped dissipate noise. For larger values, membrane potential dynamics were destabilised, revealing vulnerabilities in non-linear integration regimes.
-\end{itemize}
-
-\hl{PUT CONTINUOUS-TIME PERTURBATION TRAJECTORIES HERE? or maybe in evaluation section}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/ct_attack_example.png}
-%     \caption{Model predictions under continuous-time perturbation ($\epsilon = 0.05$).}
-%     \label{fig:ct_attack}
-% \end{figure}
-
-\subsection{Design Rationale}
+\subsection*{Design Rationale}
 \begin{itemize}
     \item \textbf{ODE-Aware Attacking:} This is the only attack in this study that targets the solver trajectory itself, not just the input points.
     \item \textbf{Comparability:} The same noise patterns were applied to LSTM and TCN, but only once per timestep. For the LNN, they were applied across all ODE unfolds.
@@ -363,11 +265,3 @@ All attacks adhered to a common evaluation pipeline:
     \item \textbf{Model Adaptation:} While all attacks were originally developed for classification or discrete tasks, each was carefully adapted to suit regression-based, sequence-oriented prediction.
     \item \textbf{Generalisation across architectures:} Where possible, the same perturbation mechanism was tested on LNN, TCN, and LSTM to isolate architectural effects.
 \end{itemize}
-
-\subsection{Interpretation of Results}
-No single model outperformed others under all adversarial settings. The LSTM's gating mechanisms offered some regularisation benefits but failed under directional and temporal distortions. The TCN was resilient to localised noise but vulnerable to global shifts and multi-step attacks. The LNN demonstrated nuanced robustness, especially against temporal distortions, but remained sensitive to high-frequency injected noise within its ODE solver.
-
-Overall, the diversity of attack types reveals how robustness is not a singular property but a complex interplay of architectural assumptions, dynamic behaviour, and model training dynamics.
-
-\vspace{1em}
-\noindent The next chapter explores these architectural and behavioural insights in greater depth by comparing model robustness across all attacks using quantitative and qualitative metrics.
