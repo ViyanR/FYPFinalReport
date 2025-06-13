@@ -1,27 +1,14 @@
 \chapter{Conclusion}
 
-\hl{Around 1-2 pages}
+\section{Summary of Work}
 
-This project has explored the robustness of Logic Neural Networks (LNNs) against adversarial attacks, comparing them with traditional neural networks. The evaluation focused on three main types of attacks: temporal, structured, and spatial, each designed to exploit different vulnerabilities in the models.
-The results indicate that LNNs exhibit superior robustness in temporal and structured adversarial regimes, where the attacks leverage the temporal dependencies and structured relationships inherent in the data. In contrast, traditional neural networks were more susceptible to these types of attacks, highlighting their limitations in handling complex data structures.
+This project set out to conduct a comprehensive investigation into the adversarial robustness of Liquid Neural Networks (LNNs) compared to more established architectures, including LSTMs, Temporal Convolutional Networks (TCNs), and Transformers, under a variety of attack conditions. A key objective was to evaluate whether the biologically inspired dynamics and continuous-time formulation of LNNs confer practical advantages in the face of adversarial perturbations, especially on complex, low-data temporal tasks.
 
+A full suite of adversarial attacks was implemented, spanning both white-box (FGSM, PGD, DeepFool-inspired) and black-box (SPSA) settings, along with novel time-based strategies (time-warping and continuous-time perturbation). Each attack was evaluated on its effectiveness against the trajectory prediction capabilities of each model. Performance metrics such as degradation, deviation, and local Lipschitz estimates were recorded and analysed both quantitatively and visually. This multi-perspective analysis allowed for the identification of distinct architectural vulnerabilities, including phase drift in LSTMs, local distortion in TCNs, and solver-instability in LNNs.
 
-In summary, this evaluation demonstrates that:
-\begin{enumerate}
-    \item Robustness is a multidimensional property — not all attacks exploit the same vulnerabilities.
-    \item LNNs, while more complex, deliver meaningful robustness advantages under temporal and structured adversarial regimes.
-    \item Careful architectural and training design — including regularisation and solver stability — is essential in real-world deployments where adversarial inputs cannot be ruled out.
-\end{enumerate}
+In addition to empirical attacks, a robustness certification component was included using the \texttt{auto\_LiRPA} framework. This formal analysis provided lower bounds on model behaviour under norm-bounded perturbations, offering a complementary perspective to empirical evaluation. For LNNs in particular, the ability to propagate bounds through nonlinear ODE solvers revealed both strengths and gaps in their stability guarantees.
 
-\subsection*{Summary of Robustness by Attack Type}
-
-Gradient-based attacks like PGD and DeepFool cause sharp degradation in LSTMs and Transformers, both of which rely heavily on positional alignment. The LNN is more resistant, likely due to its smoother ODE integration. SPSA, despite being gradient-free, still impacts TCNs and Transformers, suggesting vulnerability to repeated local noise. Against temporal attacks, such as time-warping and continuous-time perturbations, only the LNN maintains trajectory stability—highlighting its advantage in modelling dynamic systems explicitly over time.
-
-
-
-\subsection*{Implications for Deployment}
-
-These findings carry important implications:
+These findings carry important implications for deployment of LNNs:
 \begin{itemize}
     \item When deploying models in adversarial or uncertain environments, the temporal assumptions of the architecture must be scrutinised.
     \item Robustness is context-dependent — no model is universally secure, and the choice of architecture should be informed by the anticipated type of input perturbation.
@@ -29,8 +16,16 @@ These findings carry important implications:
 \end{itemize}
 
 
-
-\section{Summary of Work}
-
+Throughout the report, care was taken to contextualise results with architectural insights, avoiding overreliance on scalar metrics and drawing attention to trajectory-level failure modes. The novelty of applying such a wide array of adversarial techniques—many of which had never been adapted to LNNs—underscores the originality of this work. Where prior literature focused on vision or classification tasks, this report contributes to the limited body of research evaluating adversarial robustness in continuous-time sequence prediction.
 
 \section{Future Work}
+
+Several promising directions for future research have emerged. First, the integration of robustness training techniques such as adversarial training, certified training, or interval-based regularisation could be explored for LNNs to further enhance their defensive capabilities. Given their continuous-time nature, LNNs may benefit from training procedures that regularise not only model weights but also the trajectories induced by adversarial schedules.
+
+Second, while this project focused on 2D synthetic spirals to maintain interpretability, real-world time series datasets—such as physiological signals or control system traces—would provide a stronger testbed for evaluating robustness in practical scenarios. Extending the current framework to handle larger, higher-dimensional datasets with irregular sampling would be a valuable contribution.
+
+Third, the certification methods used here rely on interval and bound propagation through neural ODE solvers. However, more recent methods such as zonotope or Taylor-based reachability analysis could improve the tightness of certified bounds. Likewise, further analysis of solver dynamics—especially in stiff or underdamped regimes—may yield deeper understanding of how adversarial signals interact with time-discretisation schemes.
+
+Finally, the Transformer model's relatively poor performance under perturbation raises important questions about its inductive biases in temporal tasks. Investigating hybrid models, such as Liquid Transformers or ODE-infused attention layers, could bridge the gap between high-capacity architectures and biologically plausible time modelling.
+
+Taken together, the findings of this project confirm that LNNs offer a promising and underexplored direction for adversarially robust temporal modelling. While not immune to attack, their continuous-time formulation introduces useful inductive properties that—when properly harnessed—may offer both practical and theoretical benefits for future AI systems.

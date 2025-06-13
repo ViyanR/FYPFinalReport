@@ -88,63 +88,60 @@ class TCN(nn.Module):
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
-        box/.style={draw, rounded corners=2pt, minimum width=2.2cm, minimum height=0.9cm, align=center, fill=orange!15},
-        conv/.style={draw, minimum width=2.2cm, minimum height=0.9cm, align=center, fill=blue!10},
-        dropout/.style={draw, minimum width=2.2cm, minimum height=0.9cm, align=center, fill=red!10},
+        box/.style={draw, rounded corners=2pt, minimum width=2.4cm, minimum height=1cm, align=center, fill=orange!15},
+        conv/.style={draw, minimum width=2.4cm, minimum height=1cm, align=center, fill=blue!10},
+        dropout/.style={draw, minimum width=2.4cm, minimum height=1cm, align=center, fill=red!10},
         every node/.style={font=\small},
-        arrow/.style={->, thick},
-        thickline/.style={-, thick}
+        arrow/.style={->, thick}
     ]
 
-    % % Input sequence
-    % \node[box] (seq1) at (-5, 0.9) {Temporal\\Sequence};
-    % \foreach \i in {1,...,5} {
-    %     \node[draw, fill=orange!10, minimum size=0.6cm] (in\i) at ($(-5,0.9) + (\i*0.5, 0)$) {};
-    %     \pgfmathtruncatemacro{\j}{\i-1}
-    %     \ifnum\i>1
-    %         \draw[arrow] (in\j) -- (in\i);
-    %     \fi
-    % }
-    % Input sequence
-    \node[box] (seq1) at (-5, 0.9) {Temporal\\Sequence};
+    % Input sequence label
+    \node[box] (seq) at (-5, 0) {Temporal\\Sequence};
 
-    % Draw input nodes and arrows manually
-    \node[draw, fill=orange!10, minimum size=0.6cm] (in1) at (-4.5, 0.9) {};
-    \node[draw, fill=orange!10, minimum size=0.6cm] (in2) at (-4.0, 0.9) {};
-    \node[draw, fill=orange!10, minimum size=0.6cm] (in3) at (-3.5, 0.9) {};
-    \node[draw, fill=orange!10, minimum size=0.6cm] (in4) at (-3.0, 0.9) {};
-    \node[draw, fill=orange!10, minimum size=0.6cm] (in5) at (-2.5, 0.9) {};
+    % Input nodes (spaced vertically)
+    \node[draw, fill=orange!10, minimum size=0.45cm] (in1) at (-3.5, 2.0) {};
+    \node[draw, fill=orange!10, minimum size=0.45cm] (in2) at (-3.5, 1.0) {};
+    \node[draw, fill=orange!10, minimum size=0.45cm] (in3) at (-3.5, 0) {};
+    \node[draw, fill=orange!10, minimum size=0.45cm] (in4) at (-3.5, -1.0) {};
+    \node[draw, fill=orange!10, minimum size=0.45cm] (in5) at (-3.5, -2.0) {};
 
-    \draw[arrow] (in1) -- (in2);
-    \draw[arrow] (in2) -- (in3);
-    \draw[arrow] (in3) -- (in4);
-    \draw[arrow] (in4) -- (in5);
+    % Arrow from Temporal Sequence (avoid overlap)
+    % \draw[arrow] (seq.east) -- ++(0.4, 0) -- ++(0, -2.4) -| (in3.west);
 
-    % Arrow into block
-    \node[conv] (dil1) at (-1.3, 0.9) {Dilated\\Convolution};
-    \draw[arrow] (in5) -- (dil1);
+    % Arrows between input nodes
+    \foreach \i/\j in {in1/in2, in2/in3, in3/in4, in4/in5}
+        \draw[->, thick] (\i) -- (\j);
 
-    % Residual Block container
-    \node[draw=orange!80!black, very thick, rounded corners=6pt, fit=(dil1), inner sep=2.5cm, label=below:{\textbf{Residual Block}}] (block) {};
+    % Dilated conv
+    \node[conv] (dilated) at (-1.5, 0) {Dilated\\Convolution};
+    \foreach \n in {in1,in2,in3,in4,in5}
+        \draw[arrow] (\n.east) -- ++(0.2, 0) |- (dilated.west);
 
-    % Inside block
-    \node[conv] (conv1) at (0.8, 2.1) {Convolution};
-    \node[conv] (relu) at (0.8, 1.0) {ReLU};
-    \node[draw, circle, minimum size=0.6cm, fill=white] (add) at (1.5, 0.4) {$+$};
-    \node[dropout] (drop) at (0.8, -0.6) {Dropout};
-    \node[box] (resid) at (2.8, 1.4) {\textit{Resid}\\Connection};
+    % Inside residual block
+    \node[conv] (conv1) at (2, 2.5) {Convolution};
+    \node[conv] (relu)  at (2, 1.3) {ReLU};
+    \node[dropout] (drop) at (2, 0) {Dropout};
+    \node[draw, minimum size=0.8cm, circle, fill=white] (add) at (4.2, 0) {$+$};
+    \node[box] (resid) at (2, -1.6) {\textit{Resid}\\Connection};
 
-    \draw[arrow] (dil1) -- (conv1);
+    % Arrows (main path)
+    \draw[arrow] (dilated) -- (conv1);
     \draw[arrow] (conv1) -- (relu);
-    \draw[arrow] (relu) -- (add);
+    \draw[arrow] (relu) -- (drop);
     \draw[arrow] (drop) -- (add);
-    \draw[arrow] (dil1) |- (drop);
-    \draw[arrow] (dil1) |- (resid);
-    \draw[arrow] (resid) -- (add);
+
+    % Residual connection
+    \draw[arrow] (dilated.south) |- (resid);
+    \draw[arrow] (resid.east) -- (add);
 
     % Output
-    \node[box] (output) at (4.5, 0.4) {Output};
-    \draw[arrow] (add) -- (output);
+    \node[box] (output) at (7.0, 0) {Output};
+    \draw[arrow] (add) -- (output.west);
+
+    % Residual block container
+    \node[draw=orange!80!black, very thick, rounded corners=6pt,
+          fit=(dilated)(conv1)(drop)(resid)(add), inner sep=15pt,
+          label=below:{\textbf{Residual Block}}] (block) {};
 
     \end{tikzpicture}
     \caption{Structure of a TCN Residual Block. Each convolution uses dilation to increase receptive field, while residual skip connections and dropout stabilise training.}
@@ -268,10 +265,10 @@ class LSTMModel(nn.Module):
         \draw[->, thick] (5.4,-0.9) -- (5.4,-0.4);
 
         % States
-        \node at (0.3,0.75) {\small $h_{t-1}, c_{t-1}$};
-        \node at (2.5,0.75) {\small $h_t, c_t$};
-        \node at (4.7,0.75) {\small $h_{t+1}, c_{t+1}$};
-        \node at (6.6,0.75) {\small $h_{t+2}, c_{t+2}$};
+        \node at (0.3,0.80) {\small $h_{t-1}, c_{t-1}$};
+        \node at (2.5,0.80) {\small $h_t, c_t$};
+        \node at (4.7,0.80) {\small $h_{t+1}, c_{t+1}$};
+        \node at (6.6,0.80) {\small $h_{t+2}, c_{t+2}$};
 
         \draw[->, thick] (0.4,0.6) -- (1,0.3);
         \draw[->, thick] (2.6,0.6) -- (3.2,0.3);
@@ -313,7 +310,7 @@ While the LSTM offers a reliable baseline for temporal prediction, its recurrent
 \section{Transformer Model}
 
 \subsection*{Overview and Motivation}
-The Transformer is an attention-based architecture originally developed for sequence transduction tasks in NLP. The Transformer architecture implemented in this project is a lightweight variant of the original Transformer encoder proposed by Vaswani et al.~(2017), adapted for short-length continuous 2D time-series data. Unlike recurrent or convolutional models, the Transformer uses \textbf{self-attention} to learn dependencies across the input sequence in parallel. This decouples sequence processing from sequential computation and provides greater flexibility in learning temporal relationships.
+The Transformer is an attention-based architecture originally developed for sequence transduction tasks in NLP. The Transformer architecture implemented in this project is a lightweight variant of the original Transformer encoder proposed by Vaswani et al.~\cite{vaswani2017attention}, adapted for short-length continuous 2D time-series data. Unlike recurrent or convolutional models, the Transformer uses \textbf{self-attention} to learn dependencies across the input sequence in parallel. This decouples sequence processing from sequential computation and provides greater flexibility in learning temporal relationships.
 
 \subsection*{Transformer Encoder Design}
 

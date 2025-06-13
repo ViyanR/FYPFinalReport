@@ -1,4 +1,4 @@
-\chapter{Adversarial Attack Methodology}
+\chapter{Adversarial Attack Methodology and Robustness Certification}
 
 \section{Introduction to Adversarial Attacks}
 
@@ -17,7 +17,7 @@ The metrics used for evaluating adversarial degradation included \textbf{Degrada
 
 \section{Fast Gradient Sign Method (FGSM)}
 
-The Fast Gradient Sign Method (FGSM) is a single-step adversarial attack first introduced by Goodfellow et al.\ in 2014. It exploits the local linearity of neural networks by using the gradient of the loss function with respect to the input to perturb the input data in the direction that maximally increases loss.
+The Fast Gradient Sign Method (FGSM) is a single-step adversarial attack first introduced by Goodfellow et al.\cite{goodfellow2015explaining} in 2014. It exploits the local linearity of neural networks by using the gradient of the loss function with respect to the input to perturb the input data in the direction that maximally increases loss.
 
 \subsection*{Mathematical Representation}
 Given a model $f_\theta$, a loss function $\mathcal{L}(f_\theta(x), y)$, and a clean input-target pair $(x, y)$, the FGSM adversarial input is constructed as:
@@ -43,7 +43,7 @@ FGSM is efficient but limited, as it assumes linearity and is easy to defend aga
 
 \section{Projected Gradient Descent (PGD)}
 
-The PGD attack is an iterative extension of FGSM and is regarded as one of the stronger first-order adversaries in adversarial machine learning. Proposed by Madry et al., PGD performs multiple small steps of perturbation in the direction of the loss gradient, updating the input to increase model error. After each step, the perturbed input is projected back onto an $\ell_p$ ball of fixed radius $\varepsilon$ centered around the original input. The $\ell_p$ ball defines the set of allowable perturbations under a given norm constraint. For instance, the $\ell_\infty$ ball constrains each individual input dimension to change by no more than $\varepsilon$, and the $\ell_2$ ball bounds the overall Euclidean distance of the perturbation. This constraint ensures that the adversarial input remains imperceptibly close to the original, preserving its semantics and attempting to fool the model.
+The PGD attack is an iterative extension of FGSM and is regarded as one of the stronger first-order adversaries in adversarial machine learning. Proposed by Madry et al. \cite{madry2018towards}, PGD performs multiple small steps of perturbation in the direction of the loss gradient, updating the input to increase model error. After each step, the perturbed input is projected back onto an $\ell_p$ ball of fixed radius $\varepsilon$ centered around the original input. The $\ell_p$ ball defines the set of allowable perturbations under a given norm constraint. For instance, the $\ell_\infty$ ball constrains each individual input dimension to change by no more than $\varepsilon$, and the $\ell_2$ ball bounds the overall Euclidean distance of the perturbation. This constraint ensures that the adversarial input remains imperceptibly close to the original, preserving its semantics and attempting to fool the model.
 
 \subsection*{Mathematical Representation}
 Given an input $x$ and perturbation budget $\epsilon$, PGD initializes the adversarial input as $x_0^{\text{adv}} = x + \delta$ (with $\delta$ small or random), and iteratively updates it as follows:
@@ -78,7 +78,7 @@ Unlike FGSM, PGD exposes high-curvature regions of the loss surface. The extent 
 
 \section{DeepFool-Inspired Directional Attack}
 
-FGSM and PGD rely on sign-based or norm-bounded perturbations and, whilst effective, can be inefficient in identifying the minimal perturbation required for misprediction. DeepFool, introduced by Moosavi-Dezfooli et al., aims to iteratively approximate the closest decision boundary in input space. Since it was originally designed for classification, a novel modified version was implemented here to exploit the gradient direction of loss for regression.
+FGSM and PGD rely on sign-based or norm-bounded perturbations and, whilst effective, can be inefficient in identifying the minimal perturbation required for misprediction. DeepFool, introduced by Moosavi-Dezfooli et al. \cite{moosavi2016deepfools}, aims to iteratively approximate the closest decision boundary in input space. Since it was originally designed for classification, a novel modified version was implemented here to exploit the gradient direction of loss for regression.
 
 \subsection*{Mathematical Representation}
 In its original form, DeepFool linearises the classifier around the current point and computes the minimal step in the direction of the gradient that crosses the decision boundary. In the adaptation for regression, the perturbation is applied directly in the normalised direction of the loss gradient, without projection.
@@ -244,6 +244,40 @@ The same spiral-based input sequence is used across all models and attacks, and 
     \item \textbf{Model Adaptation:} While some attacks are originally developed for classification or discrete tasks, each was carefully adapted to suit regression-based, sequence-oriented prediction.
 \end{itemize}
 
-\section{Bound Certification (Auto Lirpa)}
+\section{Certified Robustness Analysis of the LNN via Interval Bound Propagation}
 
-\hl{Make this a subsection at the end of adversarial attacks - 2 pages}
+One of the core contributions of this work is the application of certified robustness techniques to Liquid Neural Networks (LNNs), a model class whose temporal dynamics pose unique challenges to formal analysis. While LNNs have demonstrated strong empirical performance on continuous time-series tasks, their verification under perturbations remains largely unexplored in the literature. In this section, we investigate the provable robustness of the trained LNN using \texttt{auto\_LiRPA} \cite{autoLiRPA2022}, a state-of-the-art library for neural network bound propagation and formal verification.
+
+\subsection*{Methodology}
+
+To assess the model's stability under input perturbations, we employ \emph{Interval Bound Propagation} (IBP), a forward method which computes tight, conservative bounds on a model's output when subjected to norm-bounded adversarial noise. Specifically, given a test input \( x_0 \), we define an \(\ell_\infty\) perturbation set \( \mathcal{B}_\epsilon(x_0) = \{x : \|x - x_0\|_\infty \leq \epsilon\} \). IBP then propagates the resulting input interval through the model’s layers to produce lower and upper bounds \( [\underline{f}(x), \overline{f}(x)] \) on the output across the entire input region.
+
+This approach is particularly suitable for LNNs due to its architectural agnosticism and compatibility with continuous-time formulations, and represents, to the best of our knowledge, the first application of certified bound analysis to a liquid neural model. The experimental results in this section are derived from a single representative input sequence drawn from the validation set.
+
+\subsection*{Certified Output Bounds}
+
+Figure~\ref{fig:lnn_ibp_bounds} visualises the certified output interval for dimension 0 of the LNN's prediction across the temporal horizon. The solid blue curve represents the original output trajectory of the LNN on the unperturbed input, while the shaded region denotes the certified range of possible outputs under all admissible perturbations with \( \epsilon = 0.1 \). Notably, for the majority of the sequence, the output remains well-contained within the certified bounds, implying that the model's prediction is provably stable to small variations in the input. However, there is a clear increase in bound looseness in the latter part of the trajectory (timestep 400 onwards), indicating a region of greater uncertainty and higher sensitivity.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/auto_lirpa_lnn_certified_bounds.png}
+    \caption{Certified output bounds for LNN prediction on dimension 0, computed using IBP via \texttt{auto\_LiRPA}. The blue line denotes the nominal output; the pink region denotes the certified interval over \( \ell_\infty \)-bounded perturbations.}
+    \label{fig:lnn_ibp_bounds}
+\end{figure}
+
+\subsection*{Bound Width Dynamics}
+
+To gain insights into where and when the LNN exhibits greater susceptibility to perturbation, we measure the width of the certified bounds over time. Figure~\ref{fig:bound_width_plot} presents the bound width (computed as \( \overline{f}(x) - \underline{f}(x) \)) separately for each output dimension. The certified intervals vary significantly in both magnitude and temporal structure. In particular, dimension 0 shows sharp spikes in bound width near timesteps 300 and 450, reaching values above 20. These spikes align with regions where the underlying dynamics of the LNN are more nonlinear or where hidden states exhibit rapid transitions.
+
+The bound width in dimension 1, while generally smaller in amplitude, remains elevated throughout the sequence, suggesting a persistent direction of vulnerability in the output space. This observation aligns with adversarial attack results, where perturbations were more effective when targeting dimension 1.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/bound_width_over_time.png}
+    \caption{Evolution of certified output bound width over time, for both output dimensions of the LNN. Spikes in width correspond to higher uncertainty or sensitivity in the model's output.}
+    \label{fig:bound_width_plot}
+\end{figure}
+
+\subsection*{Discussion}
+
+These results highlight two key findings. First, the use of IBP enables formal robustness guarantees for LNNs. Second, the certified bounds demonstrate a non-uniform sensitivity profile, with certain regions of the prediction horizon exhibiting high confidence (tight bounds), and others reflecting instability (loose bounds). This fine-grained temporal analysis offers insight into where robustness training or architectural regularisation may be most effective. Future work could extend this framework using tighter bounds (e.g. CROWN-IBP) or adversarial training to actively reduce the width of certified intervals.

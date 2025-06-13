@@ -1,0 +1,47 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Contributions}{5}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Background and Literature Review}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Liquid Neural Networks}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Adversarial Attacks}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Neural Network Verification}{12}{section.2.3}%
+\contentsline {paragraph}{Steps in SIP:}{12}{section*.18}%
+\contentsline {paragraph}{Advantages for Liquid Neural Networks}{13}{section*.19}%
+\contentsline {paragraph}{Practical Considerations}{13}{section*.20}%
+\contentsline {paragraph}{Mathematical Framework}{13}{section*.22}%
+\contentsline {paragraph}{Bounding Nonlinearities}{13}{section*.23}%
+\contentsline {paragraph}{Output Certification}{14}{section*.24}%
+\contentsline {paragraph}{Application to Neural ODEs}{14}{section*.25}%
+\contentsline {paragraph}{Practical Implementation}{14}{section*.26}%
+\contentsline {chapter}{\numberline {3}Liquid Neural Network Design and Implementation}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Design Overview}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Wiring and Connectivity}{15}{section.3.2}%
+\contentsline {section}{\numberline {3.3}LTC Neuron Dynamics}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Network Architecture}{18}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Training Configuration (and dataset)}{19}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Training Behaviour}{20}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Comparative Models}{23}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction to Baseline Models}{23}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Temporal Convolutional Network (TCN)}{23}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Long Short-Term Memory Network (LSTM)}{26}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Transformer Model}{28}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Adversarial Attack Methodology and Robustness Certification}{31}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction to Adversarial Attacks}{31}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Fast Gradient Sign Method (FGSM)}{31}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Projected Gradient Descent (PGD)}{32}{section.5.3}%
+\contentsline {section}{\numberline {5.4}DeepFool-Inspired Directional Attack}{33}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Simultaneous Perturbation Stochastic Approximation (SPSA)}{34}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Time-Warping Attack}{34}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Continuous-Time Perturbation Attack}{35}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Summary of Attack Design and Implementation Decisions}{36}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Certified Robustness Analysis of the LNN via Interval Bound Propagation}{37}{section.5.9}%
+\contentsline {chapter}{\numberline {6}Evaluation}{40}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Evaluation Metrics}{40}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Quantitative Results}{41}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Visual Analysis}{42}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Discussion of Results}{49}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Defences for Liquid Neural Networks}{49}{section.6.5}%
+\contentsline {chapter}{\numberline {7}Conclusion}{52}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Work}{52}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Future Work}{52}{section.7.2}%

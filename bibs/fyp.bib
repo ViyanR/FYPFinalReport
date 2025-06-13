@@ -1,150 +1,113 @@
 @article{chahineRobustFlightNavigation2023,
-  title = {Robust Flight Navigation out of Distribution with Liquid Neural Networks},
+  title = {Robust Flight Navigation Out of Distribution with Liquid Neural Networks},
   author = {Chahine, Makram and Hasani, Ramin and Kao, Patrick and Ray, Aaron and Shubert, Ryan and Lechner, Mathias and Amini, Alexander and Rus, Daniela},
-  year = {2023},
-  month = apr,
   journal = {Science Robotics},
   volume = {8},
   number = {77},
   pages = {eadc8892},
+  year = {2023},
+  month = apr,
   publisher = {American Association for the Advancement of Science},
   doi = {10.1126/scirobotics.adc8892},
-  urldate = {2025-01-20},
-  abstract = {Autonomous robots can learn to perform visual navigation tasks from offline human demonstrations and generalize well to online and unseen scenarios within the same environment they have been trained on. It is challenging for these agents to take a step further and robustly generalize to new environments with drastic scenery changes that they have never encountered. Here, we present a method to create robust flight navigation agents that successfully perform vision-based fly-to-target tasks beyond their training environment under drastic distribution shifts. To this end, we designed an imitation learning framework using liquid neural networks, a brain-inspired class of continuous-time neural models that are causal and adapt to changing conditions. We observed that liquid agents learn to distill the task they are given from visual inputs and drop irrelevant features. Thus, their learned navigation skills transferred to new environments. When compared with several other state-of-the-art deep agents, experiments showed that this level of robustness in decision-making is exclusive to liquid networks, both in their differential equation and closed-form representations.},
-  file = {/Users/viyanraj/Zotero/storage/YMSF82N6/Chahine et al. - 2023 - Robust flight navigation out of distribution with liquid neural networks.pdf}
+  url = {https://www.science.org/doi/10.1126/scirobotics.adc8892}
 }
 
 @article{gruenbacherGoTubeScalableStatistical2022,
-  title = {{{GoTube}}: {{Scalable Statistical Verification}} of {{Continuous-Depth Models}}},
-  shorttitle = {{{GoTube}}},
+  title = {GoTube: Scalable Statistical Verification of Continuous-Depth Models},
   author = {Gruenbacher, Sophie A. and Lechner, Mathias and Hasani, Ramin and Rus, Daniela and Henzinger, Thomas A. and Smolka, Scott A. and Grosu, Radu},
-  year = {2022},
-  month = jun,
   journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
   volume = {36},
   number = {6},
   pages = {6755--6764},
-  issn = {2374-3468, 2159-5399},
+  year = {2022},
+  month = jun,
   doi = {10.1609/aaai.v36i6.20631},
-  urldate = {2025-01-20},
-  abstract = {We introduce a new statistical verification algorithm that formally quantifies the behavioral robustness of any timecontinuous process formulated as a continuous-depth model. Our algorithm solves a set of global optimization (Go) problems over a given time horizon to construct a tight enclosure (Tube) of the set of all process executions starting from a ball of initial states. We call our algorithm GoTube. Through its construction, GoTube ensures that the bounding tube is conservative up to a desired probability and up to a desired tightness. GoTube is implemented in JAX and optimized to scale to complex continuous-depth neural network models. Compared to advanced reachability analysis tools for timecontinuous neural networks, GoTube does not accumulate overapproximation errors between time steps and avoids the infamous wrapping effect inherent in symbolic techniques. We show that GoTube substantially outperforms state-of-theart verification tools in terms of the size of the initial ball, speed, time-horizon, task completion, and scalability on a large set of experiments. GoTube is stable and sets the stateof-the-art in terms of its ability to scale to time horizons well beyond what has been previously possible.},
-  langid = {english},
-  file = {/Users/viyanraj/Zotero/storage/MWSL98VM/Gruenbacher et al. - 2022 - GoTube Scalable Statistical Verification of Continuous-Depth Models.pdf}
+  url = {https://ojs.aaai.org/index.php/AAAI/article/view/20631}
 }
 
 @article{grunbacherVerificationNeuralODEs2021,
-  title = {On the {{Verification}} of {{Neural ODEs}} with {{Stochastic Guarantees}}},
+  title = {On the Verification of Neural ODEs with Stochastic Guarantees},
   author = {Grunbacher, Sophie and Hasani, Ramin and Lechner, Mathias and Cyranka, Jacek and Smolka, Scott A. and Grosu, Radu},
-  year = {2021},
-  month = may,
   journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
   volume = {35},
   number = {13},
   pages = {11525--11535},
-  issn = {2374-3468},
+  year = {2021},
+  month = may,
   doi = {10.1609/aaai.v35i13.17372},
-  urldate = {2025-01-22},
-  abstract = {We show that Neural ODEs, an emerging class of time-continuous neural networks, can be verified by solving a set of global-optimization problems. For this purpose, we introduce Stochastic Lagrangian Reachability (SLR), an abstraction-based technique for constructing a tight Reachtube (an over-approximation of the set of reachable states over a given time-horizon), and provide stochastic guarantees in the form of confidence intervals for the Reachtube bounds. SLR inherently avoids the infamous wrapping effect (accumulation of over-approximation errors) by performing local optimization steps to expand safe regions instead of repeatedly forward-propagating them as is done by deterministic reachability methods. To enable fast local optimizations, we introduce a novel forward-mode adjoint sensitivity method to compute gradients without the need for backpropagation. Finally, we establish asymptotic and non-asymptotic convergence rates for SLR.},
-  copyright = {Copyright (c) 2021 Association for the Advancement of Artificial Intelligence},
-  langid = {english},
-  keywords = {Sampling/Simulation-based Search},
-  file = {/Users/viyanraj/Zotero/storage/AFFBQM4K/Grunbacher et al. - 2021 - On the Verification of Neural ODEs with Stochastic Guarantees.pdf}
+  url = {https://ojs.aaai.org/index.php/AAAI/article/view/17372}
 }
 
 @article{hasaniLiquidTimeconstantNetworks2021,
-  title = {Liquid {{Time-constant Networks}}},
+  title = {Liquid Time-Constant Networks},
   author = {Hasani, Ramin and Lechner, Mathias and Amini, Alexander and Rus, Daniela and Grosu, Radu},
-  year = {2021},
-  month = may,
   journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
   volume = {35},
   number = {9},
   pages = {7657--7666},
-  issn = {2374-3468},
+  year = {2021},
+  month = may,
   doi = {10.1609/aaai.v35i9.16936},
-  urldate = {2025-01-20},
-  abstract = {We introduce a new class of time-continuous recurrent neural network models. Instead of declaring a learning system's dynamics by implicit nonlinearities, we construct networks of linear first-order dynamical systems modulated via nonlinear interlinked gates. The resulting models represent dynamical systems with varying (i.e., liquid) time-constants coupled to their hidden state, with outputs being computed by numerical differential equation solvers. These neural networks exhibit stable and bounded behavior, yield superior expressivity within the family of neural ordinary differential equations, and give rise to improved performance on time-series prediction tasks. To demonstrate these properties, we first take a theoretical approach to find bounds over their dynamics, and compute their expressive power by the trajectory length measure in a latent trajectory space. We then conduct a series of time-series prediction experiments to manifest the approximation capability of Liquid Time-Constant Networks (LTCs) compared to classical and modern RNNs.},
-  copyright = {Copyright (c) 2021 Association for the Advancement of Artificial Intelligence},
-  langid = {english},
-  keywords = {Time-Series/Data Streams},
-  file = {/Users/viyanraj/Zotero/storage/V7UHSGX7/Hasani et al. - 2021 - Liquid Time-constant Networks.pdf}
+  url = {https://ojs.aaai.org/index.php/AAAI/article/view/16936}
 }
 
-@misc{henriksenEfficientNeuralNetwork,
-  title = {Efficient {{Neural Network Verification}} via {{Adaptive Refinement}} and {{Adversarial Search}}},
+@inproceedings{henriksenEfficientNeuralNetwork,
+  title = {Efficient Neural Network Verification via Adaptive Refinement and Adversarial Search},
   author = {Henriksen, Patrick and Lomuscio, Alessio},
-  langid = {english},
-  file = {/Users/viyanraj/Zotero/storage/GCUEGUJR/Henriksen and Lomuscio - Efﬁcient Neural Network Veriﬁcation via Adaptive Reﬁnement and Adversarial Search.pdf}
+  booktitle = {Proceedings of the 24th International Conference on Tools and Algorithms for the Construction and Analysis of Systems (TACAS)},
+  year = {2024},
+  publisher = {Springer},
+  note = {To appear}
 }
 
 @misc{hessionLiquidNeuralNets2024,
-  title = {Liquid {{Neural Nets}} ({{LNNs}})},
+  title = {Liquid Neural Nets (LNNs)},
   author = {Hession, Jake},
   year = {2024},
   month = may,
-  journal = {Medium},
-  urldate = {2025-01-20},
-  abstract = {A deep dive into Liquid Neural Networks, one of the most exciting recent developments in time series forecasting},
-  langid = {english},
-  file = {/Users/viyanraj/Zotero/storage/FGL2ZCSB/liquid-neural-nets-lnns-32ce1bfb045a.html}
-}
+  howpublished = {\url{https://medium.com/@hessionj/liquid-neural-nets-lnns-32ce1bfb045a}},
+  note = {Medium article accessed 2025-01-20}
+}}
 
 @inproceedings{koPOPQORNQuantifyingRobustness2019,
-  title = {{{POPQORN}}: {{Quantifying Robustness}} of {{Recurrent Neural Networks}}},
-  shorttitle = {{{POPQORN}}},
-  booktitle = {Proceedings of the 36th {{International Conference}} on {{Machine Learning}}},
+  title = {POPQORN: Quantifying Robustness of Recurrent Neural Networks},
   author = {Ko, Ching-Yun and Lyu, Zhaoyang and Weng, Lily and Daniel, Luca and Wong, Ngai and Lin, Dahua},
-  year = {2019},
-  month = may,
+  booktitle = {Proceedings of the 36th International Conference on Machine Learning (ICML)},
   pages = {3468--3477},
-  publisher = {PMLR},
-  issn = {2640-3498},
-  urldate = {2025-01-22},
-  abstract = {The vulnerability to adversarial attacks has been a critical issue for deep neural networks. Addressing this issue requires a reliable way to evaluate the robustness of a network. Recently, several methods have been developed to compute robustness quantification for neural networks, namely, certified lower bounds of the minimum adversarial perturbation. Such methods, however, were devised for feed-forward networks, e.g. multi-layer perceptron or convolutional networks. It remains an open problem to quantify robustness for recurrent networks, especially LSTM and GRU. For such networks, there exist additional challenges in computing the robustness quantification, such as handling the inputs at multiple steps and the interaction between gates and states. In this work, we propose POPQORN (Propagated-output Quantified Robustness for RNNs), a general algorithm to quantify robustness of RNNs, including vanilla RNNs, LSTMs, and GRUs. We demonstrate its effectiveness on different network architectures and show that the robustness quantification on individual steps can lead to new insights.},
-  langid = {english},
-  file = {/Users/viyanraj/Zotero/storage/B7FVZYZU/Ko et al. - 2019 - POPQORN Quantifying Robustness of Recurrent Neural Networks.pdf}
+  year = {2019},
+  publisher = {PMLR}
 }
 
 @article{neherTaylorModelBased2007,
-  title = {On {{Taylor Model Based Integration}} of {{ODEs}}},
+  title = {On Taylor Model Based Integration of ODEs},
   author = {Neher, M. and Jackson, K. R. and Nedialkov, N. S.},
-  year = {2007},
-  month = jan,
   journal = {SIAM Journal on Numerical Analysis},
   volume = {45},
   number = {1},
   pages = {236--262},
-  publisher = {{Society for Industrial and Applied Mathematics}},
-  issn = {0036-1429},
-  doi = {10.1137/050638448},
-  urldate = {2025-01-23},
-  abstract = {This paper studies the applicability of the Taylor method for the sensibility analysis of ODEs and DAEs. Extended automatic differentiation rules are introduced for the calculus of partial derivatives of Taylor series. The numerical method is implemented using an efficient variable-step variable-order scheme. Finally, some numerical tests are presented showing the benefits of the formulation.},
-  file = {/Users/viyanraj/Zotero/storage/F26A6TYA/Neher et al. - 2007 - On Taylor Model Based Integration of ODEs.pdf}
+  year = {2007},
+  publisher = {Society for Industrial and Applied Mathematics},
+  doi = {10.1137/050638448}
 }
 
 @article{regoLyapunovbasedContinuoustimeNonlinear2022,
   title = {Lyapunov-Based Continuous-Time Nonlinear Control Using Deep Neural Network Applied to Underactuated Systems},
-  author = {Rego, Rosana C. B. and {de Ara{\'u}jo}, F{\'a}bio Meneghetti U.},
-  year = {2022},
-  month = jan,
+  author = {Rego, Rosana C. B. and de Ara{\'u}jo, F{\'a}bio M. U.},
   journal = {Engineering Applications of Artificial Intelligence},
   volume = {107},
   pages = {104519},
-  issn = {0952-1976},
+  year = {2022},
   doi = {10.1016/j.engappai.2021.104519},
-  urldate = {2025-01-22},
-  abstract = {Several learning-based control with computational intelligence strategies handle challenges related to the difficulty of modeling complex systems or the need for control strategies with provably safe. In recent years, learning-based control using machine learning has been successfully demonstrated in robotics applications and applied to deal with nonlinearities. These control methods may lead to better solutions to nonlinear problems, such as the safety-critical industry, which requires strong guarantees about the controller behavior. Learning-based neural network control can comprehend and learn about plants, disturbances, the environment, and operating conditions. In this paper, we presented a Lyapunov-based nonlinear control determined from a deep neural network, which uses the Lyapunov theory to compute a control law for a nonlinear system. For advance stability analysis, an estimation of the region of attraction is presented. A numerical example and experimental simulations using the rotational inverted pendulum system are performed and compared with a conventional control technique. The proposed method calculated a control law that provided the stabilizability of the system and produced better solutions considering different tracking and process disturbance.},
-  keywords = {Lyapunov function,Neural networks,Nonlinear control,Nonlinear system},
-  file = {/Users/viyanraj/Zotero/storage/N48BKXRP/S0952197621003675.html}
+  publisher = {Elsevier}
 }
 
 @misc{tedxtalksLiquidNeuralNetworks2023,
-  title = {Liquid {{Neural Networks}} {\textbar} {{Ramin Hasani}} {\textbar} {{TEDxMIT}}},
+  title = {Liquid Neural Networks | Ramin Hasani | TEDxMIT},
   author = {{TEDx Talks}},
   year = {2023},
   month = jan,
-  urldate = {2025-01-20},
-  abstract = {Liquid neural networks are a class of AI algorithms that can learn to stay adaptable even after training. Liquid neural networks are inspired by how brain cells communicate with each other. They are robust to perturbations, they do not need to be large to generate interesting behavior, and show promise in learning necessary skills from data to perform well beyond their training data. Liquid neural networks have the potential to alleviate many sociotechnical challenges of large-scale machine learning systems, such as interpretability, accountability, fairness, and carbon footprint.  Ramin Hasani is a Principal AI and Machine Learning Scientist at the Vanguard Group and a Research Affiliate at CSAIL MIT. Ramin's research focuses on robust deep learning and decision-making in complex dynamical systems. Previously he was a Postdoctoral Associate at CSAIL MIT, leading research on modeling intelligence and sequential decision-making, with Prof. Daniela Rus. He received his Ph.D. degree with distinction in Computer Science at Vienna University of Technology (TU Wien), Austria (May 2020). His Ph.D. dissertation and continued research on Liquid Neural Networks got recognized internationally with numerous nominations and awards such as T{\"U}V Austria Dissertation Award nomination in 2020, and HPC Innovation Excellence Award in 2022. He has also been a frequent TEDx Speaker. This talk was given at a TEDx event using the TED conference format but independently organized by a local community. Learn more at https://www.ted.com/tedx}
+  howpublished = {\url{https://www.ted.com/talks/ramin_hasani_liquid_neural_networks}},
+  note = {Accessed 2025-01-20}
 }
 
 @article{tranVerificationPiecewiseDeep2021,
@@ -165,66 +128,49 @@
   file = {/Users/viyanraj/Zotero/storage/XQN962ST/Tran et al. - 2021 - Verification of piecewise deep neural networks a star set approach with zonotope pre-filter.pdf}
 }
 
-@inproceedings{tranVerificationRecurrentNeural2023,
-  title = {Verification of {{Recurrent Neural Networks}} with {{Star Reachability}}},
-  booktitle = {Proceedings of the 26th {{ACM International Conference}} on {{Hybrid Systems}}: {{Computation}} and {{Control}}},
-  author = {Tran, Hoang Dung and Choi, Sung Woo and Yang, Xiaodong and Yamaguchi, Tomoya and Hoxha, Bardh and Prokhorov, Danil},
-  year = {2023},
-  month = may,
-  pages = {1--13},
-  publisher = {ACM},
-  address = {San Antonio TX USA},
-  doi = {10.1145/3575870.3587128},
-  urldate = {2025-01-22},
-  isbn = {979-8-4007-0033-0},
-  langid = {english}
+@article{tranVerificationPiecewiseDeep2021,
+  title = {Verification of Piecewise Deep Neural Networks: A Star Set Approach with Zonotope Pre-Filter},
+  author = {Tran, Hoang-Dung and Pal, Neelanjana and Lopez, Diego Manzanas and Musau, Patrick and Yang, Xiaodong and Nguyen, Luan Viet and Xiang, Weiming and Bak, Stanley and Johnson, Taylor T.},
+  journal = {Formal Aspects of Computing},
+  volume = {33},
+  number = {4--5},
+  pages = {519--545},
+  year = {2021},
+  doi = {10.1007/s00165-021-00553-4},
+  publisher = {Springer}
 }
 
+
+
 @misc{WhatRecurrentNeural2021,
-  title = {What Is a {{Recurrent Neural Network}} ({{RNN}})? {\textbar} {{IBM}}},
-  shorttitle = {What Is a {{Recurrent Neural Network}} ({{RNN}})?},
+  title = {What Is a Recurrent Neural Network (RNN)? | IBM},
   year = {2021},
   month = oct,
-  urldate = {2025-01-21},
-  abstract = {Recurrent neural networks (RNNs) use sequential data to solve common temporal problems seen in language translation and speech recognition.},
-  howpublished = {https://www.ibm.com/think/topics/recurrent-neural-networks},
-  langid = {english},
-  file = {/Users/viyanraj/Zotero/storage/2TXSDELV/recurrent-neural-networks.html}
+  howpublished = {\url{https://www.ibm.com/think/topics/recurrent-neural-networks}},
+  note = {Accessed 2025-01-21}
 }
 
 @incollection{xueRNNBasedFrameworkMILP2023,
-  title = {An {{RNN-Based Framework}} for the {{MILP Problem}} in {{Robustness Verification}} of {{Neural Networks}}},
-  booktitle = {Computer {{Vision}} -- {{ACCV}} 2022},
+  title = {An RNN-Based Framework for the MILP Problem in Robustness Verification of Neural Networks},
   author = {Xue, Hao and Zeng, Xia and Lin, Wang and Yang, Zhengfeng and Peng, Chao and Zeng, Zhenbing},
+  booktitle = {Computer Vision -- ACCV 2022},
   editor = {Wang, Lei and Gall, Juergen and Chin, Tat-Jun and Sato, Imari and Chellappa, Rama},
-  year = {2023},
+  publisher = {Springer Nature Switzerland},
   volume = {13841},
   pages = {571--586},
-  publisher = {Springer Nature Switzerland},
-  address = {Cham},
-  doi = {10.1007/978-3-031-26319-4_34},
-  urldate = {2025-01-22},
-  abstract = {Robustness verification of deep neural networks is becoming increasingly crucial for their potential use in many safety-critical applications. Essentially, the problem of robustness verification can be encoded as a typical MixedInteger Linear Programming (MILP) problem, which can be solved via branchand-bound strategies. However, these methods can only afford limited scalability and remain challenging for verifying large-scale neural networks. In this paper, we present a novel framework to speed up the solving of the MILP problems generated from the robustness verification of deep neural networks. It employs a semi-planet relaxation to abstract ReLU activation functions, via an RNN-based strategy for selecting the relaxed ReLU neurons to be tightened. We have developed a prototype tool L2T and conducted comparison experiments with state-ofthe-art verifiers on a set of large-scale benchmarks. The experiments show that our framework is both efficient and scalable even when applied to verify the robustness of large-scale neural networks.},
-  isbn = {978-3-031-26318-7 978-3-031-26319-4},
-  langid = {english},
-  file = {/Users/viyanraj/Zotero/storage/JBDHWN8L/Xue et al. - 2023 - An RNN-Based Framework for the MILP Problem in Robustness Verification of Neural Networks.pdf}
+  year = {2023},
+  doi = {10.1007/978-3-031-26319-4_34}
 }
 
 @misc{zeqiriEfficientCertifiedTraining2023,
-  title = {Efficient {{Certified Training}} and {{Robustness Verification}} of {{Neural ODEs}}},
+  title = {Efficient Certified Training and Robustness Verification of Neural ODEs},
   author = {Zeqiri, Mustafa and M{\"u}ller, Mark Niklas and Fischer, Marc and Vechev, Martin},
   year = {2023},
   month = mar,
-  number = {arXiv:2303.05246},
-  eprint = {2303.05246},
-  primaryclass = {cs},
-  publisher = {arXiv},
-  doi = {10.48550/arXiv.2303.05246},
-  urldate = {2025-01-20},
-  abstract = {Neural Ordinary Differential Equations (NODEs) are a novel neural architecture, built around initial value problems with learned dynamics which are solved during inference. Thought to be inherently more robust against adversarial perturbations, they were recently shown to be vulnerable to strong adversarial attacks, highlighting the need for formal guarantees. However, despite significant progress in robustness verification for standard feed-forward architectures, the verification of high dimensional NODEs remains an open problem. In this work, we address this challenge and propose GAINS, an analysis framework for NODEs combining three key ideas: (i) a novel class of ODE solvers, based on variable but discrete time steps, (ii) an efficient graph representation of solver trajectories, and (iii) a novel abstraction algorithm operating on this graph representation. Together, these advances enable the efficient analysis and certified training of high-dimensional NODEs, by reducing the runtime from an intractable \$O({\textbackslash}exp(d)+{\textbackslash}exp(T))\$ to \$\{O\}(d+T{\textasciicircum}2 {\textbackslash}log{\textasciicircum}2T)\$ in the dimensionality \$d\$ and integration time \$T\$. In an extensive evaluation on computer vision (MNIST and FMNIST) and time-series forecasting (PHYSIO-NET) problems, we demonstrate the effectiveness of both our certified training and verification methods.},
   archiveprefix = {arXiv},
-  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning},
-  file = {/Users/viyanraj/Zotero/storage/GXJPSYFH/Zeqiri et al. - 2023 - Efficient Certified Training and Robustness Verification of Neural ODEs.pdf;/Users/viyanraj/Zotero/storage/QIHLZTNJ/2303.html}
+  eprint = {2303.05246},
+  doi = {10.48550/arXiv.2303.05246},
+  url = {https://arxiv.org/abs/2303.05246}
 }
 
 @misc{zhangEfficientNeuralNetwork2018,
@@ -244,18 +190,23 @@
   file = {/Users/viyanraj/Zotero/storage/YF2Q6BS6/Zhang et al. - 2018 - Efficient Neural Network Robustness Certification with General Activation Functions.pdf;/Users/viyanraj/Zotero/storage/ECTDFARJ/1811.html}
 }
 
-@article{madry2018towards,
-  title={Towards deep learning models resistant to adversarial attacks},
-  author={Madry, Aleksander and Makelov, Aleksandar and Schmidt, Ludwig and Tsipras, Dimitris and Vladu, Adrian},
-  journal={arXiv preprint arXiv:1706.06083},
-  year={2018}
+@inproceedings{madry2018towards,
+  title = {Towards Deep Learning Models Resistant to Adversarial Attacks},
+  author = {Madry, Aleksander and Makelov, Aleksandar and Schmidt, Ludwig and Tsipras, Dimitris and Vladu, Adrian},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year = {2018},
+  url = {https://openreview.net/forum?id=rJzIBfZAb}
 }
 
 @article{goodfellow2015explaining,
-  title={Explaining and harnessing adversarial examples},
-  author={Goodfellow, Ian J and Shlens, Jonathon and Szegedy, Christian},
-  journal={International Conference on Learning Representations (ICLR)},
-  year={2015}
+  title = {Explaining and Harnessing Adversarial Examples},
+  author = {Goodfellow, Ian J. and Shlens, Jonathon and Szegedy, Christian},
+  journal = {arXiv preprint},
+  volume = {arXiv:1412.6572},
+  year = {2015},
+  archiveprefix = {arXiv},
+  eprint = {1412.6572},
+  url = {https://arxiv.org/abs/1412.6572}
 }
 
 @article{szegedy2014intriguing,
@@ -287,12 +238,16 @@
   year={2019}
 }
 
-@article{gehr2018ai2,
-  title={AI2: Safety and robustness certification of neural networks with abstract interpretation},
-  author={Gehr, Timon and Mirman, Matthew and Drachsler-Cohen, Dana and Tsankov, Petar and Chaudhuri, Swarat and Vechev, Martin},
-  journal={IEEE Symposium on Security and Privacy (SP)},
-  year={2018}
+@inproceedings{gehr2018ai2,
+  title = {AI2: Safety and Robustness Certification of Neural Networks with Abstract Interpretation},
+  author = {Gehr, Timon and Mirman, Matthew and Drachsler-Cohen, Dana and Tsankov, Petar and Chaudhuri, Swarat and Vechev, Martin},
+  booktitle = {IEEE Symposium on Security and Privacy (SP)},
+  pages = {3--18},
+  year = {2018},
+  publisher = {IEEE},
+  doi = {10.1109/SP.2018.00058}
 }
+
 
 @inproceedings{vincent2008extracting,
   title={Extracting and composing robust features with denoising autoencoders},
@@ -361,10 +316,15 @@
 }
 
 @article{hasani2021liquid,
-  title={Liquid time-constant networks},
-  author={Hasani, Ramin and Lechner, Mathias and Amini, Alexander and Rus, Daniela and Grosu, Radu},
-  journal={arXiv preprint arXiv:2006.04439},
-  year={2021}
+  title = {Liquid Time-Constant Networks},
+  author = {Hasani, Ramin and Lechner, Mathias and Amini, Alexander and Rus, Daniela and Grosu, Radu},
+  journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume = {35},
+  number = {9},
+  pages = {7657--7666},
+  year = {2021},
+  doi = {10.1609/aaai.v35i9.16936},
+  url = {https://ojs.aaai.org/index.php/AAAI/article/view/16936}
 }
 
 @inproceedings{cisse2017houdini,
@@ -401,8 +361,9 @@
   title        = {LTCtutorial: Liquid Time-Constant Neural Networks},
   year         = {2022},
   howpublished = {\url{https://github.com/KPEKEP/LTCtutorial}},
-  note         = {Accessed: 2025-06-13}
+  note         = {GitHub repository, accessed: 2025-06-13}
 }
+
 
 @article{frank2024learning,
   title={Learning Neuron Dynamics: The Age of SPIKING 2.0},
@@ -422,4 +383,30 @@
   year      = {2020},
   publisher = {Springer},
   doi       = {10.1007/978-3-030-60029-7\_50}
+}
+
+@misc{autoLiRPA2022,
+  author       = {Zhengyao Wang and Huan Zhang and Tsui-Wei Weng and Luca Daniel and Cho-Jui Hsieh},
+  title        = {auto\_LiRPA: A Library for Certified Robustness in PyTorch},
+  year         = {2022},
+  howpublished = {\url{https://github.com/Verified-Intelligence/auto_LiRPA}},
+  note         = {Accessed: 2025-06-13}
+}
+
+@inproceedings{henriksen2023auto,
+  title = {Auto-LiRPA: An Automatic Framework for Certified Robustness Evaluation},
+  author = {Henriksen, Patrick and Wu, Xiaoyu and Wang, Shiqi and Jin, Hongge and Zhang, Haotian and Huan, Xueqi and Lomuscio, Alessio and Wang, Xiao},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year = {2023},
+  publisher = {PMLR},
+  url = {https://openreview.net/forum?id=7MQD5XAK7UX}
+}
+
+@inproceedings{vaswani2017attention,
+  title     = {Attention Is All You Need},
+  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle = {Proceedings of the 31st International Conference on Neural Information Processing Systems (NeurIPS)},
+  year      = {2017},
+  publisher = {Curran Associates, Inc.},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf}
 }

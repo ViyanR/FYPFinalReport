@@ -2,8 +2,9 @@
 
 \bibitem{hasaniLiquidTimeconstantNetworks2021}
 Hasani R, Lechner M, Amini A, Rus D, Grosu R.
-\newblock Liquid {{Time-constant Networks}}.
+\newblock Liquid Time-Constant Networks.
 \newblock Proceedings of the AAAI Conference on Artificial Intelligence. 2021 May;35(9):7657-66.
+\newblock Available from: \url{https://ojs.aaai.org/index.php/AAAI/article/view/16936}.
 
 \bibitem{frank2024learning}
 Frank E, Fekri F.
@@ -12,12 +13,15 @@ Frank E, Fekri F.
 \newblock Available from: \url{https://arxiv.org/abs/2407.20590}.
 
 \bibitem{tedxtalksLiquidNeuralNetworks2023}
-{TEDx Talks}. Liquid {{Neural Networks}} {\textbar} {{Ramin Hasani}} {\textbar} {{TEDxMIT}}; 2023.
+{TEDx Talks}. Liquid Neural Networks | Ramin Hasani | TEDxMIT; 2023.
+\newblock Accessed 2025-01-20.
+\newblock \url{https://www.ted.com/talks/ramin_hasani_liquid_neural_networks}.
 
 \bibitem{chahineRobustFlightNavigation2023}
 Chahine M, Hasani R, Kao P, Ray A, Shubert R, Lechner M, et~al.
-\newblock Robust Flight Navigation out of Distribution with Liquid Neural Networks.
+\newblock Robust Flight Navigation Out of Distribution with Liquid Neural Networks.
 \newblock Science Robotics. 2023 Apr;8(77):eadc8892.
+\newblock Available from: \url{https://www.science.org/doi/10.1126/scirobotics.adc8892}.
 
 \bibitem{szegedy2013intriguing}
 Szegedy C, Zaremba W, Sutskever I, Bruna J, Erhan D, Goodfellow I, et~al.
@@ -36,8 +40,8 @@ Hasani R, Lechner M, Amini A, Rus D, Grosu R.
 
 \bibitem{madry2018towards}
 Madry A, Makelov A, Schmidt L, Tsipras D, Vladu A.
-\newblock Towards deep learning models resistant to adversarial attacks.
-\newblock arXiv preprint arXiv:170606083. 2018.
+\newblock Towards Deep Learning Models Resistant to Adversarial Attacks.
+\newblock In: International Conference on Learning Representations (ICLR); 2018. Available from: \url{https://openreview.net/forum?id=rJzIBfZAb}.
 
 \bibitem{moosavi2016deepfool}
 Moosavi-Dezfooli SM, Fawzi A, Frossard P.
@@ -70,12 +74,33 @@ Dong X, Yao S, Hu H, Wang Y, Li S, Zhang Z, et~al.
 \newblock arXiv preprint arXiv:200312298. 2020.
 
 \bibitem{henriksenEfficientNeuralNetwork}
-Henriksen P, Lomuscio A. Efficient {{Neural Network Verification}} via {{Adaptive Refinement}} and {{Adversarial Search}};.
+Henriksen P, Lomuscio A.
+\newblock Efficient Neural Network Verification via Adaptive Refinement and Adversarial Search.
+\newblock In: Proceedings of the 24th International Conference on Tools and Algorithms for the Construction and Analysis of Systems (TACAS). Springer; 2024. To appear.
+
+\bibitem{zhangEfficientNeuralNetwork2018}
+Zhang H, Weng TW, Chen PY, Hsieh CJ, Daniel L. Efficient {{Neural Network Robustness Certification}} with {{General Activation Functions}}. arXiv; 2018.
 
 \bibitem{ltctutorial2022}
 Hermann M, Bellec G. LTCtutorial: Liquid Time-Constant Neural Networks; 2022.
-\newblock Accessed: 2025-06-13.
+\newblock GitHub repository, accessed: 2025-06-13.
 \newblock \url{https://github.com/KPEKEP/LTCtutorial}.
+
+\bibitem{vaswani2017attention}
+Vaswani A, Shazeer N, Parmar N, Uszkoreit J, Jones L, Gomez AN, et~al.
+\newblock Attention Is All You Need.
+\newblock In: Proceedings of the 31st International Conference on Neural Information Processing Systems (NeurIPS). Curran Associates, Inc.; 2017. Available from: \url{https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf}.
+
+\bibitem{goodfellow2015explaining}
+Goodfellow IJ, Shlens J, Szegedy C.
+\newblock Explaining and Harnessing Adversarial Examples.
+\newblock arXiv preprint. 2015;arXiv:1412.6572.
+\newblock Available from: \url{https://arxiv.org/abs/1412.6572}.
+
+\bibitem{autoLiRPA2022}
+Wang Z, Zhang H, Weng TW, Daniel L, Hsieh CJ. auto\_LiRPA: A Library for Certified Robustness in PyTorch; 2022.
+\newblock Accessed: 2025-06-13.
+\newblock \url{https://github.com/Verified-Intelligence/auto_LiRPA}.
 
 \bibitem{vincent2008extracting}
 Vincent P, Larochelle H, Bengio Y, Manzagol PA.

@@ -262,7 +262,8 @@ The design maintains a clear distinction between the continuous-time neuronal dy
     \node[draw=blue!40, thick, rounded corners=3pt, fit=(input1)(input2)(inputm), inner sep=5pt, label=above:Input Sequence] (inputbox) {};
 
     % Sensory Projection
-    \node at (2.3, 0.1) {\textbf{Sensory Projections}};
+    % \node at (2.3, 0.1) {\textbf{Sensory Projections}};
+    \node at (1.8, 0.1) {\tiny \textbf{Sensory Projections}};
     \draw[arrow] (input1) -- (2,1.5);
     \draw[arrow] (input2) -- (2,0.5);
     \draw[arrow] (inputm) -- (2,-1.2);
@@ -301,7 +302,6 @@ The design maintains a clear distinction between the continuous-time neuronal dy
     \caption{Architecture of the Liquid Time-Constant Network (LNN). Inputs project through learned sensory filters to a sparsely recurrent Liquid Layer of LIF neurons. Dynamics are integrated using an internal ODE solver with unfolding. Final outputs are read from a low-dimensional projection.}
     \label{fig:lnn_architecture}
 \end{figure}
-
 
 \section{Training Configuration (and dataset)}
 The LNN was trained on a synthetic 2D spiral trajectory dataset, chosen for its smooth temporal structure and nonlinearity. Each data point consists of an $(x, y)$ coordinate, and the model's aim is to predict the next point in the sequence (given a fixed-length input window). The 'sequential' nature of the task makes it well-suited for testing temporal memory and continuous dynamics.

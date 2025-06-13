@@ -1,7 +1,23 @@
 \chapter{Introduction}
 
-\hl{Around 1-2 pages}
-
 \section{Motivation}
 
+In fields where system reliability is crucial, such as autonomous control, medical diagnostics, and financial forecasting, the susceptibility of machine learning models to adversarial inputs presents an important challenge. Even small, well-crafted perturbations can push high-performing neural networks to produce incorrect outputs. This raises concerns about their trustworthiness in real-world deployments.
+
+Liquid Neural Networks (LNNs), which draw from the dynamics of continuous-time systems, offer a compact and adaptive alternative to more conventional architectures. This resemblance stems from their representation as parameterised ordinary differential equations (ODEs), allowing each neuron to evolve its state continuously over time. This closely mirrors the adaptive membrane dynamics observed in biological neurons. Whilst traditional neural networks such as LSTMs have been studied extensively under adversarial conditions, there is little existing work on how LNNs behave when subjected to such threats. 
+
+The goal is to rigorously evaluate the adversarial robustness of LNNs and compare their behaviour with other widely used sequential models (such as such as LSTMs, TCNs, and Transformers). By doing so, the project contributes to a better quantification of the benefits/vulnerabilities that the continuous-time formulation of LNNs offer, when exposed to adversarial manipulation.
+
 \section{Contributions}
+
+This report presents, to the best of our knowledge, the first in-depth adversarial analysis of Liquid Neural Networks. Whilst this analysis for models such as CNNs and LSTMs are somewhat mainstream, this is yet to be done for LNNs. The main contributions can be summarised as follows:
+
+\begin{itemize}
+    \item An experimental framework for applying a broad range of adversarial attacks (including gradient-based, gradient-free, and temporal strategies) to four sequential architectures: LNN, LSTM, TCN, and Transformer.
+    \item Custom implementations of continuous-time and time-warping attacks, specifically designed to exploit the state dynamics unique to ODE-based models like the LNN.
+    \item A detailed comparative evaluation of adversarial responses using both quantitative metrics and visual trajectory analysis, highlighting failure patterns such as phase drift, memory corruption, and temporal smoothing effects.
+    \item The use of certified robustness techniques via the auto\_LiRPA library, allowing formal verification of LNN model stability under bounded perturbations.
+    \item Aggregated robustness metrics are presented and analysed for interpretability. These include percentage degradation, output deviation, and local Lipschitz constants.
+\end{itemize}
+
+In addition to these contributions, this work provides a unified platform for evaluating the connection between model architecture and adversarial vulnerability in time-series prediction tasks. We focus on how inductive biases shape a model's response to different attack surfaces. These biases include recurrence, convolutional locality, attention-based context aggregation, and continuous-time dynamics. The findings offer insights into both the practical robustness of Liquid Neural Networks but also the broader question of how architectural choices influence adversarial behaviour in low-data, temporally sensitive settings.

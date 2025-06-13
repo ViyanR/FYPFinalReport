@@ -167,7 +167,7 @@ Verification of neural networks is a crucial problem, especially when a new arch
 
 \subsection*{Symbolic and Interval Propagation Methods}
 
-This section explores methods that focus on propagating bounds through liquid neural networks, which verifies their robustness when faced with input perturbations. \textbf{Symbolic Interval Propagation (SIP)} is a technique that computes conservative output bounds using interval arithmetic, providing a computationally efficient way to check for robustness. \textbf{CROWN (Certified Robustness to Weight Perturbations)} is more complex, and introduces linear approximations which improves the precision of robustness verification. \textbf{Lipschitz-based methods} they estimate global sensitivity by bounding the Lipschitz constant of the network. These approaches are particularly useful for ensuring scalability and efficiency, making them suitable for applications where lightweight and real-time verification is required.
+This section explores methods that focus on propagating bounds through liquid neural networks, which verifies their robustness when faced with input perturbations. \textbf{Symbolic Interval Propagation (SIP)} is a technique that computes conservative output bounds using interval arithmetic, providing a computationally efficient way to check for robustness. \textbf{CROWN (Certified Robustness to Weight Perturbations)} is more complex, and introduces linear approximations which improves the precision of robustness verification.
 
 \subsubsection*{SIP (Symbolic Interval Propagation)}
 
@@ -258,52 +258,4 @@ CROWN can be implemented as follows:
     \item \textbf{Define Input Bounds}: Specify the \(\ell_p\)-ball around the input \(x_0\) and initialize the pre-activation bounds for the first layer.
     \item \textbf{Propagate Bounds}: Compute the upper and lower bounds layer-by-layer using the adaptive linear approximations.
     \item \textbf{Certify Robustness}: Verify that the certified bounds at the output satisfy the desired robustness property (e.g., consistent classification).
-\end{enumerate}
-
-\subsubsection*{Lipschitz-Based Methods}
-
-Lipschitz-based methods provide a robust framework for verifying the safety and robustness of liquid neural networks by quantifying how sensitive a network's outputs are to perturbations in its inputs. Their ability to provide global robustness guarantees is useful for neural ODEs. The Lipschitz constant of a network bounds the maximum rate at which outputs can change with respect to changes in inputs, ensuring that small input perturbations do not lead to large deviations in the output.
-
-\paragraph{Mathematical Foundation}
-For a liquid neural network modeled as:
-\[
-\frac{dx(t)}{dt} = f(x(t), t, \theta),
-\]
-where \(x(t) \in \mathbb{R}^n\) is the state, \(f(x, t, \theta)\) defines the dynamics, and \(\theta\) are the network parameters, the Lipschitz constant \(L\) satisfies:
-\[
-\|F(x) - F(y)\| \leq L \|x - y\|, \quad \forall x, y \in \mathbb{R}^n,
-\]
-where \(F(x)\) represents the solution to the neural ODE at the final time \(T\). The Lipschitz constant \(L\) bounds the global sensitivity of the network.
-
-\paragraph{Estimation of the Lipschitz Constant}
-The Lipschitz constant can be estimated for an LNN by analyzing the Jacobian of \(f(x, t, \theta)\). For a time-discretized system, the sensitivity of the network is determined by:
-\[
-L = \sup_{t \in [0, T]} \| J_f(x, t) \|,
-\]
-where \(J_f(x, t) = \frac{\partial f(x, t, \theta)}{\partial x}\) is the Jacobian matrix of \(f\). Computing or bounding \(L\) involves:
-\begin{itemize}
-    \item \textbf{Spectral Norm Analysis}: Evaluating \(\|J_f(x, t)\|\) as the largest singular value of the Jacobian at each time step.
-    \item \textbf{Pathwise Integral Bounds}: For neural ODEs, \(L\) can be bounded using the integral of the Jacobian along the trajectory:
-    \[
-    L \leq \int_0^T \|J_f(x(t), t)\| dt.
-    \]
-\end{itemize}
-
-\paragraph{Verification Applications}
-Lipschitz-based methods are widely used for:
-\begin{enumerate}
-    \item \textbf{Robustness Verification}: Verifying that small input perturbations \(x_0 \to x_0 + \delta x\) result in bounded output deviations, ensuring:
-    \[
-    \|F(x_0 + \delta x) - F(x_0)\| \leq L \|\delta x\|.
-    \]
-    \item \textbf{Safety Analysis}: Ensuring the network’s outputs remain within a safe region under bounded input perturbations.
-    \item \textbf{Adversarial Robustness}: Certifying that adversarial inputs cannot change the classification or decision boundaries within a certain radius.
-\end{enumerate}
-
-\paragraph{Practical Implementation}
-To implement Lipschitz-based verification for LNNs:
-\begin{enumerate}
-    \item \textbf{Compute the Lipschitz Constant}: Use numerical methods, such as spectral norm approximation or pathwise integration, to estimate \(L\).
-    \item \textbf{Bound Output Sensitivity}: Evaluate \(L\) for given input perturbations \(\delta x\) and verify that the resulting outputs satisfy safety and robustness criteria.
-    \item \textbf{Scaling for Efficiency}: For high-dimensional networks, consider approximation techniques or layer-wise bounds to improve scalability.
 \end{enumerate}
