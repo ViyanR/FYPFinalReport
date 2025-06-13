@@ -1,32 +1,81 @@
 \begin{thebibliography}{10}
 
-\bibitem{chahineRobustFlightNavigation2023}
-Chahine M, Hasani R, Kao P, Ray A, Shubert R, Lechner M, et~al.
-\newblock Robust Flight Navigation out of Distribution with Liquid Neural Networks.
-\newblock Science Robotics. 2023 Apr;8(77):eadc8892.
-
 \bibitem{hasaniLiquidTimeconstantNetworks2021}
 Hasani R, Lechner M, Amini A, Rus D, Grosu R.
 \newblock Liquid {{Time-constant Networks}}.
 \newblock Proceedings of the AAAI Conference on Artificial Intelligence. 2021 May;35(9):7657-66.
 
+\bibitem{frank2024learning}
+Frank E, Fekri F.
+\newblock Learning Neuron Dynamics: The Age of SPIKING 2.0.
+\newblock arXiv preprint arXiv:240720590. 2024.
+\newblock Available from: \url{https://arxiv.org/abs/2407.20590}.
+
 \bibitem{tedxtalksLiquidNeuralNetworks2023}
 {TEDx Talks}. Liquid {{Neural Networks}} {\textbar} {{Ramin Hasani}} {\textbar} {{TEDxMIT}}; 2023.
 
-\bibitem{henriksenEfficientNeuralNetwork}
-Henriksen P, Lomuscio A. Efficient {{Neural Network Verification}} via {{Adaptive Refinement}} and {{Adversarial Search}};.
+\bibitem{chahineRobustFlightNavigation2023}
+Chahine M, Hasani R, Kao P, Ray A, Shubert R, Lechner M, et~al.
+\newblock Robust Flight Navigation out of Distribution with Liquid Neural Networks.
+\newblock Science Robotics. 2023 Apr;8(77):eadc8892.
 
-\bibitem{WhatRecurrentNeural2021}
-What Is a {{Recurrent Neural Network}} ({{RNN}})? {\textbar} {{IBM}}; 2021.
-\newblock https://www.ibm.com/think/topics/recurrent-neural-networks.
+\bibitem{szegedy2013intriguing}
+Szegedy C, Zaremba W, Sutskever I, Bruna J, Erhan D, Goodfellow I, et~al.
+\newblock Intriguing properties of neural networks.
+\newblock arXiv preprint arXiv:13126199. 2013.
 
-\bibitem{zhangEfficientNeuralNetwork2018}
-Zhang H, Weng TW, Chen PY, Hsieh CJ, Daniel L. Efficient {{Neural Network Robustness Certification}} with {{General Activation Functions}}. arXiv; 2018.
+\bibitem{goodfellow2014explaining}
+Goodfellow IJ, Shlens J, Szegedy C.
+\newblock Explaining and harnessing adversarial examples.
+\newblock arXiv preprint arXiv:14126572. 2014.
+
+\bibitem{liquidTimeConstant}
+Hasani R, Lechner M, Amini A, Rus D, Grosu R.
+\newblock Liquid Time-Constant Networks.
+\newblock In: Proceedings of the 34th International Conference on Neural Information Processing (ICONIP). vol. 12533 of Lecture Notes in Computer Science. Springer; 2020. p. 650-61.
 
 \bibitem{madry2018towards}
 Madry A, Makelov A, Schmidt L, Tsipras D, Vladu A.
 \newblock Towards deep learning models resistant to adversarial attacks.
 \newblock arXiv preprint arXiv:170606083. 2018.
+
+\bibitem{moosavi2016deepfool}
+Moosavi-Dezfooli SM, Fawzi A, Frossard P.
+\newblock DeepFool: a simple and accurate method to fool deep neural networks.
+\newblock In: Proceedings of the IEEE conference on computer vision and pattern recognition; 2016. p. 2574-82.
+
+\bibitem{uesato2018adversarial}
+Uesato J, O'Donoghue B, van~den Oord A, Kohli P.
+\newblock Adversarial risk and the dangers of evaluating against weak attacks.
+\newblock International Conference on Machine Learning (ICML). 2018.
+
+\bibitem{cisse2017houdini}
+Cisse M, Adi Y, Neverova N, Keshet J.
+\newblock Houdini: Fooling deep structured prediction models.
+\newblock In: Advances in Neural Information Processing Systems; 2017. p. 6977-87.
+
+\bibitem{sun2018natural}
+Sun C, Shrivastava A, Singh S, Gupta A.
+\newblock Natural and adversarial error detection using invariant predictors.
+\newblock In: International Conference on Machine Learning (ICML); 2018. .
+
+\bibitem{weng2018evaluating}
+Weng TW, Zhang H, Chen PY, Yi J, Su D, Gao Y, et~al.
+\newblock Evaluating the robustness of neural networks: An extreme value theory approach.
+\newblock In: International Conference on Learning Representations (ICLR); 2018. .
+
+\bibitem{dong2020benchmarking}
+Dong X, Yao S, Hu H, Wang Y, Li S, Zhang Z, et~al.
+\newblock Benchmarking Robustness of Neural Networks on Time-Series Data.
+\newblock arXiv preprint arXiv:200312298. 2020.
+
+\bibitem{henriksenEfficientNeuralNetwork}
+Henriksen P, Lomuscio A. Efficient {{Neural Network Verification}} via {{Adaptive Refinement}} and {{Adversarial Search}};.
+
+\bibitem{ltctutorial2022}
+Hermann M, Bellec G. LTCtutorial: Liquid Time-Constant Neural Networks; 2022.
+\newblock Accessed: 2025-06-13.
+\newblock \url{https://github.com/KPEKEP/LTCtutorial}.
 
 \bibitem{vincent2008extracting}
 Vincent P, Larochelle H, Bengio Y, Manzagol PA.

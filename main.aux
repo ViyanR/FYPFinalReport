@@ -5,123 +5,128 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \babel@aux{english}{}
-\citation{chahineRobustFlightNavigation2023}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Motivation}{6}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Contributions}{6}{section.1.2}\protected@file@percent }
 \citation{hasaniLiquidTimeconstantNetworks2021}
-\citation{tedxtalksLiquidNeuralNetworks2023}
+\citation{frank2024learning}
+\citation{frank2024learning}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Background and Literature Review}{7}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Liquid Neural Networks}{7}{section.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Continuous-Time Dynamical Systems/Differential Equations}{7}{subsection.2.1.1}\protected@file@percent }
-\newlabel{eq:1}{{2.1}{8}{Continuous-Time Dynamical Systems/Differential Equations}{equation.2.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}LNN Training}{8}{subsection.2.1.2}\protected@file@percent }
-\citation{chahineRobustFlightNavigation2023}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}LNN Inference}{9}{subsection.2.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.4}Advantages of LNNs}{9}{subsection.2.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.4.a}Temporal Modelling}{9}{subsubsection.2.1.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.4.b}Adaptability}{9}{subsubsection.2.1.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.4.c}Efficiency}{9}{subsubsection.2.1.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.4.d}Stability}{10}{subsubsection.2.1.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Neural Network Verification}{10}{section.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}The Verification Problem}{10}{subsection.2.2.1}\protected@file@percent }
-\citation{henriksenEfficientNeuralNetwork}
-\citation{WhatRecurrentNeural2021}
-\newlabel{verification_def}{{2.2.1}{11}{The Verification Problem}{subsection.2.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Motivation}{11}{subsection.2.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Recurrent Neural Networks}{11}{subsection.2.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Feedforward (traditional) vs. Recurrent Neural Networks}}{11}{figure.caption.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces  Schematic Diagram of a Liquid Neural Network~\cite  {frank2024learning}. Figure illustrates the simplified architecture of an LNN, starting with the input layer receiving time-series data. The data then flows into the liquid layer, where dynamic, non-linear processing occurs through a complex network of interconnected neurons. Finally, the processed information is relayed to the output layer. }}{7}{figure.caption.4}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:example_image}{{2.1}{11}{Feedforward (traditional) vs. Recurrent Neural Networks}{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Robustness Verification for Recurrent Neural Networks}{12}{subsection.2.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.5}Symbolic and Interval Propagation Methods}{12}{subsection.2.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.5.a}SIP (Symbolic Interval Propagation)}{12}{subsubsection.2.2.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Steps in SIP:}{12}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Advantages for Liquid Neural Networks}{13}{section*.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Practical Considerations}{13}{section*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.5.b}CROWN (Certified Robustness to Weight Perturbations)}{13}{subsubsection.2.2.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Mathematical Framework}{13}{section*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Bounding Nonlinearities}{13}{section*.9}\protected@file@percent }
+\newlabel{fig:lnn_overview}{{2.1}{7}{Schematic Diagram of a Liquid Neural Network~\cite {frank2024learning}. Figure illustrates the simplified architecture of an LNN, starting with the input layer receiving time-series data. The data then flows into the liquid layer, where dynamic, non-linear processing occurs through a complex network of interconnected neurons. Finally, the processed information is relayed to the output layer}{figure.caption.4}{}}
+\citation{tedxtalksLiquidNeuralNetworks2023}
+\newlabel{eq:1}{{2.1}{8}{Continuous-Time Dynamical Systems/Differential Equations}{equation.2.1.1}{}}
+\citation{chahineRobustFlightNavigation2023}
+\citation{szegedy2013intriguing}
+\citation{goodfellow2014explaining}
+\citation{liquidTimeConstant}
+\citation{liquidTimeConstant}
+\citation{liquidTimeConstant}
+\citation{liquidTimeConstant}
+\citation{goodfellow2014explaining}
+\citation{madry2018towards}
+\citation{moosavi2016deepfool}
+\citation{uesato2018adversarial}
+\citation{cisse2017houdini}
+\citation{sun2018natural}
+\citation{weng2018evaluating}
+\citation{dong2020benchmarking}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Adversarial Attacks}{11}{section.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Adversarial Attack on a timeseries input~\cite  {liquidTimeConstant} \cite  {liquidTimeConstant} }}{11}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:spiking2}{{2.2}{11}{Adversarial Attack on a timeseries input~\cite {liquidTimeConstant} \cite {liquidTimeConstant}}{figure.caption.13}{}}
+\citation{henriksenEfficientNeuralNetwork}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Neural Network Verification}{12}{section.2.3}\protected@file@percent }
+\newlabel{verification_def}{{2.3}{12}{The Verification Problem}{section*.14}{}}
+\@writefile{toc}{\contentsline {paragraph}{Steps in SIP:}{12}{section*.18}\protected@file@percent }
 \citation{zhangEfficientNeuralNetwork2018}
-\@writefile{toc}{\contentsline {paragraph}{Output Certification}{14}{section*.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Application to Neural ODEs}{14}{section*.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Practical Implementation}{14}{section*.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.5.c}Lipschitz-Based Methods}{14}{subsubsection.2.2.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Mathematical Foundation}{14}{section*.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Estimation of the Lipschitz Constant}{14}{section*.14}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Verification Applications}{15}{section*.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Practical Implementation}{15}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Advantages for Liquid Neural Networks}{13}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Practical Considerations}{13}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Mathematical Framework}{13}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Bounding Nonlinearities}{13}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Output Certification}{14}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Application to Neural ODEs}{14}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Practical Implementation}{14}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Mathematical Foundation}{14}{section*.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Estimation of the Lipschitz Constant}{14}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Verification Applications}{15}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Practical Implementation}{15}{section*.31}\protected@file@percent }
+\citation{ltctutorial2022}
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Liquid Neural Network Design and Implementation}{16}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Design Overview}{16}{section.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Wiring and Connectivity}{16}{section.3.2}\protected@file@percent }
+\citation{hasaniLiquidTimeconstantNetworks2021}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.1}{\ignorespaces Simplified RandomWiring class}}{17}{lstlisting.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}LTC Neuron Dynamics}{17}{section.3.3}\protected@file@percent }
 \newlabel{eq:v_update}{{3.1}{17}{LTC Neuron Dynamics}{equation.3.3.1}{}}
 \newlabel{eq:v_update_denominator}{{3.2}{17}{LTC Neuron Dynamics}{equation.3.3.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Illustrative internal membrane voltage trace across $K$ ODE unfolding steps for a single neuron. This entire graph represents the internal dynamics used to compute $v_i^{(t+1)}$ from $v_i^{(t)}$, in a single timestep.}}{18}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:lif_voltage_evolution}{{3.1}{18}{Illustrative internal membrane voltage trace across $K$ ODE unfolding steps for a single neuron. This entire graph represents the internal dynamics used to compute $v_i^{(t+1)}$ from $v_i^{(t)}$, in a single timestep}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Example internal membrane voltage trace across $K$ ODE unfolding steps for a single neuron. This entire graph represents the internal dynamics used to compute $v_i^{(t+1)}$ from $v_i^{(t)}$, in a single timestep.}}{18}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:lif_voltage_evolution}{{3.1}{18}{Example internal membrane voltage trace across $K$ ODE unfolding steps for a single neuron. This entire graph represents the internal dynamics used to compute $v_i^{(t+1)}$ from $v_i^{(t)}$, in a single timestep}{figure.caption.32}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.2}{\ignorespaces Simplified LTC neuron forward method}}{19}{lstlisting.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Internal structure of a single LIF neuron used in the Liquid Time-Constant Network. Inputs undergo non-linear transformations based on trainable $\mu $ and $\sigma $, and the resulting activations are integrated using biophysical parameters (leak conductance $g_\text  {leak}$, membrane capacitance $C_m$, and reversal potentials $E_\text  {rev}$).}}{19}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:lif_neuron_detailed}{{3.2}{19}{Internal structure of a single LIF neuron used in the Liquid Time-Constant Network. Inputs undergo non-linear transformations based on trainable $\mu $ and $\sigma $, and the resulting activations are integrated using biophysical parameters (leak conductance $g_\text {leak}$, membrane capacitance $C_m$, and reversal potentials $E_\text {rev}$)}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Internal structure of a single LIF neuron used in the Liquid Time-Constant Network. Inputs undergo non-linear transformations based on trainable $\mu $ and $\sigma $, and the resulting activations are integrated using biophysical parameters (leak conductance $g_\text  {leak}$, membrane capacitance $C_m$, and reversal potentials $E_\text  {rev}$).}}{19}{figure.caption.33}\protected@file@percent }
+\newlabel{fig:lif_neuron_detailed}{{3.2}{19}{Internal structure of a single LIF neuron used in the Liquid Time-Constant Network. Inputs undergo non-linear transformations based on trainable $\mu $ and $\sigma $, and the resulting activations are integrated using biophysical parameters (leak conductance $g_\text {leak}$, membrane capacitance $C_m$, and reversal potentials $E_\text {rev}$)}{figure.caption.33}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}Network Architecture}{19}{section.3.4}\protected@file@percent }
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.3}{\ignorespaces Structure of the LTCRNN module}}{20}{lstlisting.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Architecture of the Liquid Time-Constant Network (LNN). Inputs project through learned sensory filters to a sparsely recurrent Liquid Layer of LIF neurons. Dynamics are integrated using an internal ODE solver with unfolding. Final outputs are read from a low-dimensional projection.}}{20}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:lnn_architecture}{{3.3}{20}{Architecture of the Liquid Time-Constant Network (LNN). Inputs project through learned sensory filters to a sparsely recurrent Liquid Layer of LIF neurons. Dynamics are integrated using an internal ODE solver with unfolding. Final outputs are read from a low-dimensional projection}{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Architecture of the Liquid Time-Constant Network (LNN). Inputs project through learned sensory filters to a sparsely recurrent Liquid Layer of LIF neurons. Dynamics are integrated using an internal ODE solver with unfolding. Final outputs are read from a low-dimensional projection.}}{20}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:lnn_architecture}{{3.3}{20}{Architecture of the Liquid Time-Constant Network (LNN). Inputs project through learned sensory filters to a sparsely recurrent Liquid Layer of LIF neurons. Dynamics are integrated using an internal ODE solver with unfolding. Final outputs are read from a low-dimensional projection}{figure.caption.35}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.5}Training Configuration (and dataset)}{20}{section.3.5}\protected@file@percent }
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.4}{\ignorespaces Simplified training loop for the LNN}}{21}{lstlisting.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.6}Training Behaviour}{21}{section.3.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Training and validation loss over epochs.}}{22}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:lnn_loss}{{3.4}{22}{Training and validation loss over epochs}{figure.caption.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Training and validation loss over epochs (zoomed).}}{22}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:lnn_loss_zoomed}{{3.5}{22}{Training and validation loss over epochs (zoomed)}{figure.caption.24}{}}
-\newlabel{fig:lnn_training_validation_spiral_epoch_1}{{3.6a}{23}{Epoch 1}{figure.caption.26}{}}
-\newlabel{sub@fig:lnn_training_validation_spiral_epoch_1}{{a}{23}{Epoch 1}{figure.caption.26}{}}
-\newlabel{fig:lnn_training_validation_spiral_epoch_400}{{3.6b}{23}{Epoch 400}{figure.caption.26}{}}
-\newlabel{sub@fig:lnn_training_validation_spiral_epoch_400}{{b}{23}{Epoch 400}{figure.caption.26}{}}
-\newlabel{fig:lnn_training_validation_spiral_epoch_2000}{{3.6c}{23}{Epoch 2000}{figure.caption.26}{}}
-\newlabel{sub@fig:lnn_training_validation_spiral_epoch_2000}{{c}{23}{Epoch 2000}{figure.caption.26}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces LLN predicted vs true spiral trajectories across training: early, mid, and final epochs (denormalised training and validation spiral)}}{23}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:lnn_spiral_progression_grid}{{3.6}{23}{LLN predicted vs true spiral trajectories across training: early, mid, and final epochs (denormalised training and validation spiral)}{figure.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Training and validation loss over epochs.}}{22}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:lnn_loss}{{3.4}{22}{Training and validation loss over epochs}{figure.caption.38}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Training and validation loss over epochs (zoomed).}}{22}{figure.caption.39}\protected@file@percent }
+\newlabel{fig:lnn_loss_zoomed}{{3.5}{22}{Training and validation loss over epochs (zoomed)}{figure.caption.39}{}}
+\newlabel{fig:lnn_training_validation_spiral_epoch_1}{{3.6a}{23}{Epoch 1}{figure.caption.41}{}}
+\newlabel{sub@fig:lnn_training_validation_spiral_epoch_1}{{a}{23}{Epoch 1}{figure.caption.41}{}}
+\newlabel{fig:lnn_training_validation_spiral_epoch_400}{{3.6b}{23}{Epoch 400}{figure.caption.41}{}}
+\newlabel{sub@fig:lnn_training_validation_spiral_epoch_400}{{b}{23}{Epoch 400}{figure.caption.41}{}}
+\newlabel{fig:lnn_training_validation_spiral_epoch_2000}{{3.6c}{23}{Epoch 2000}{figure.caption.41}{}}
+\newlabel{sub@fig:lnn_training_validation_spiral_epoch_2000}{{c}{23}{Epoch 2000}{figure.caption.41}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces LLN predicted vs true spiral trajectories across training: early, mid, and final epochs (denormalised training and validation spiral)}}{23}{figure.caption.41}\protected@file@percent }
+\newlabel{fig:lnn_spiral_progression_grid}{{3.6}{23}{LLN predicted vs true spiral trajectories across training: early, mid, and final epochs (denormalised training and validation spiral)}{figure.caption.41}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Comparative Models}{24}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Introduction to Baseline Models}{24}{section.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Temporal Convolutional Network (TCN)}{24}{section.4.2}\protected@file@percent }
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {4.1}{\ignorespaces Simplified TCN architecture}}{25}{lstlisting.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Temporal Convolutional Network (TCN) architecture}}{25}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:tcn_architecture}{{4.1}{25}{Temporal Convolutional Network (TCN) architecture}{figure.caption.31}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Structure of a TCN Residual Block. Each convolution uses dilation to increase receptive field, while residual skip connections and dropout stabilise training.}}{26}{figure.caption.32}\protected@file@percent }
-\newlabel{fig:tcn_residual_block}{{4.2}{26}{Structure of a TCN Residual Block. Each convolution uses dilation to increase receptive field, while residual skip connections and dropout stabilise training}{figure.caption.32}{}}
-\newlabel{fig:tcn_training_validation_spiral_epoch_1}{{4.3a}{26}{Epoch 1}{figure.caption.35}{}}
-\newlabel{sub@fig:tcn_training_validation_spiral_epoch_1}{{a}{26}{Epoch 1}{figure.caption.35}{}}
-\newlabel{fig:tcn_training_validation_spiral_epoch_400}{{4.3b}{26}{Epoch 400 (early stopping point)}{figure.caption.35}{}}
-\newlabel{sub@fig:tcn_training_validation_spiral_epoch_400}{{b}{26}{Epoch 400 (early stopping point)}{figure.caption.35}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces TCN predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}}{26}{figure.caption.35}\protected@file@percent }
-\newlabel{fig:tcn_spiral_progression_grid}{{4.3}{26}{TCN predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}{figure.caption.35}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Temporal Convolutional Network (TCN) architecture}}{25}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:tcn_architecture}{{4.1}{25}{Temporal Convolutional Network (TCN) architecture}{figure.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Structure of a TCN Residual Block. Each convolution uses dilation to increase receptive field, while residual skip connections and dropout stabilise training.}}{26}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:tcn_residual_block}{{4.2}{26}{Structure of a TCN Residual Block. Each convolution uses dilation to increase receptive field, while residual skip connections and dropout stabilise training}{figure.caption.47}{}}
+\newlabel{fig:tcn_training_validation_spiral_epoch_1}{{4.3a}{26}{Epoch 1}{figure.caption.50}{}}
+\newlabel{sub@fig:tcn_training_validation_spiral_epoch_1}{{a}{26}{Epoch 1}{figure.caption.50}{}}
+\newlabel{fig:tcn_training_validation_spiral_epoch_400}{{4.3b}{26}{Epoch 400 (early stopping point)}{figure.caption.50}{}}
+\newlabel{sub@fig:tcn_training_validation_spiral_epoch_400}{{b}{26}{Epoch 400 (early stopping point)}{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces TCN predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}}{26}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:tcn_spiral_progression_grid}{{4.3}{26}{TCN predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}{figure.caption.50}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}Long Short-Term Memory Network (LSTM)}{27}{section.4.3}\protected@file@percent }
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {4.2}{\ignorespaces Simplified LSTM model structure}}{27}{lstlisting.4.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Architecture of the LSTM model. The left shows residual-enhanced flow through a 2-layer LSTM, while the right shows the LSTM unrolled across time with hidden and cell state transitions.}}{28}{figure.caption.40}\protected@file@percent }
-\newlabel{fig:lstm_architecture_final}{{4.4}{28}{Architecture of the LSTM model. The left shows residual-enhanced flow through a 2-layer LSTM, while the right shows the LSTM unrolled across time with hidden and cell state transitions}{figure.caption.40}{}}
-\newlabel{fig:lstm_training_validation_spiral_epoch_1}{{4.5a}{28}{Epoch 1}{figure.caption.43}{}}
-\newlabel{sub@fig:lstm_training_validation_spiral_epoch_1}{{a}{28}{Epoch 1}{figure.caption.43}{}}
-\newlabel{fig:lstm_training_validation_spiral_epoch_1000}{{4.5b}{28}{Epoch 1000 (early stopping point)}{figure.caption.43}{}}
-\newlabel{sub@fig:lstm_training_validation_spiral_epoch_1000}{{b}{28}{Epoch 1000 (early stopping point)}{figure.caption.43}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces LSTM predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}}{28}{figure.caption.43}\protected@file@percent }
-\newlabel{fig:lstm_spiral_progression_grid}{{4.5}{28}{LSTM predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}{figure.caption.43}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Architecture of the LSTM model. The left shows residual-enhanced flow through a 2-layer LSTM, while the right shows the LSTM unrolled across time with hidden and cell state transitions.}}{28}{figure.caption.55}\protected@file@percent }
+\newlabel{fig:lstm_architecture_final}{{4.4}{28}{Architecture of the LSTM model. The left shows residual-enhanced flow through a 2-layer LSTM, while the right shows the LSTM unrolled across time with hidden and cell state transitions}{figure.caption.55}{}}
+\newlabel{fig:lstm_training_validation_spiral_epoch_1}{{4.5a}{28}{Epoch 1}{figure.caption.58}{}}
+\newlabel{sub@fig:lstm_training_validation_spiral_epoch_1}{{a}{28}{Epoch 1}{figure.caption.58}{}}
+\newlabel{fig:lstm_training_validation_spiral_epoch_1000}{{4.5b}{28}{Epoch 1000 (early stopping point)}{figure.caption.58}{}}
+\newlabel{sub@fig:lstm_training_validation_spiral_epoch_1000}{{b}{28}{Epoch 1000 (early stopping point)}{figure.caption.58}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces LSTM predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}}{28}{figure.caption.58}\protected@file@percent }
+\newlabel{fig:lstm_spiral_progression_grid}{{4.5}{28}{LSTM predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}{figure.caption.58}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.4}Transformer Model}{29}{section.4.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Architecture of the Transformer encoder used}}{30}{figure.caption.47}\protected@file@percent }
-\newlabel{fig:transformer_encoder_diagram}{{4.6}{30}{Architecture of the Transformer encoder used}{figure.caption.47}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Architecture of the Transformer encoder used}}{30}{figure.caption.62}\protected@file@percent }
+\newlabel{fig:transformer_encoder_diagram}{{4.6}{30}{Architecture of the Transformer encoder used}{figure.caption.62}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {4.3}{\ignorespaces Simplified Transformer architecture}}{30}{lstlisting.4.3}\protected@file@percent }
-\newlabel{fig:transformer_training_validation_spiral_epoch_1}{{4.7a}{31}{Epoch 1}{figure.caption.51}{}}
-\newlabel{sub@fig:transformer_training_validation_spiral_epoch_1}{{a}{31}{Epoch 1}{figure.caption.51}{}}
-\newlabel{fig:transformer_training_validation_spiral_epoch_600}{{4.7b}{31}{Epoch 600 (early stopping point)}{figure.caption.51}{}}
-\newlabel{sub@fig:transformer_training_validation_spiral_epoch_600}{{b}{31}{Epoch 600 (early stopping point)}{figure.caption.51}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Transformer predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}}{31}{figure.caption.51}\protected@file@percent }
-\newlabel{fig:transformer_spiral_progression_grid}{{4.7}{31}{Transformer predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}{figure.caption.51}{}}
+\newlabel{fig:transformer_training_validation_spiral_epoch_1}{{4.7a}{31}{Epoch 1}{figure.caption.66}{}}
+\newlabel{sub@fig:transformer_training_validation_spiral_epoch_1}{{a}{31}{Epoch 1}{figure.caption.66}{}}
+\newlabel{fig:transformer_training_validation_spiral_epoch_600}{{4.7b}{31}{Epoch 600 (early stopping point)}{figure.caption.66}{}}
+\newlabel{sub@fig:transformer_training_validation_spiral_epoch_600}{{b}{31}{Epoch 600 (early stopping point)}{figure.caption.66}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Transformer predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}}{31}{figure.caption.66}\protected@file@percent }
+\newlabel{fig:transformer_spiral_progression_grid}{{4.7}{31}{Transformer predicted vs true spiral trajectories across training: early and final epochs (denormalised training and validation spiral)}{figure.caption.66}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {5}Adversarial Attack Methodology}{32}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -139,118 +144,50 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5.7}Continuous-Time Perturbation Attack}{36}{section.5.7}\protected@file@percent }
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {5.6}{\ignorespaces Continuous-Time Perturbation Injection}}{37}{lstlisting.5.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5.8}Summary of Attack Design and Implementation Decisions}{37}{section.5.8}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Overview of attack types and model sensitivities.}}{37}{table.caption.73}\protected@file@percent }
-\newlabel{tab:attack_summary}{{5.1}{37}{Overview of attack types and model sensitivities}{table.caption.73}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Bound Certification (Auto Lirpa)}{39}{chapter.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Overview of attack types and model sensitivities.}}{37}{table.caption.88}\protected@file@percent }
+\newlabel{tab:attack_summary}{{5.1}{37}{Overview of attack types and model sensitivities}{table.caption.88}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.9}Bound Certification (Auto Lirpa)}{38}{section.5.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{39}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Evaluation}{40}{chapter.7}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:evaluation}{{7}{40}{Evaluation}{chapter.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Evaluation Metrics}{40}{section.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Quantitative Results}{41}{section.7.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Average degradation and deviation metrics across all attack types.}}{41}{table.caption.81}\protected@file@percent }
-\newlabel{tab:agg_metrics}{{7.1}{41}{Average degradation and deviation metrics across all attack types}{table.caption.81}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.2}{\ignorespaces Degradation ratios across models for each attack}}{41}{table.caption.83}\protected@file@percent }
-\newlabel{tab:attack_results_degradation}{{7.2}{41}{Degradation ratios across models for each attack}{table.caption.83}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.3}{\ignorespaces Deviation scores across models for each attack}}{41}{table.caption.84}\protected@file@percent }
-\newlabel{tab:attack_results_deviation}{{7.3}{41}{Deviation scores across models for each attack}{table.caption.84}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.4}{\ignorespaces Lipshitz Estimate (local sensitivity) across models for each attack}}{42}{table.caption.85}\protected@file@percent }
-\newlabel{tab:attack_results_sensitivity}{{7.4}{42}{Lipshitz Estimate (local sensitivity) across models for each attack}{table.caption.85}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Visual Analysis}{42}{section.7.3}\protected@file@percent }
-\newlabel{fig:fgsm_spiral_LTC}{{\caption@xref {fig:fgsm_spiral_LTC}{ on input line 151}}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\newlabel{sub@fig:fgsm_spiral_LTC}{{}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\newlabel{fig:fgsm_spiral_TCN}{{\caption@xref {fig:fgsm_spiral_TCN}{ on input line 156}}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\newlabel{sub@fig:fgsm_spiral_TCN}{{}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\newlabel{fig:fgsm_spiral_lstm}{{\caption@xref {fig:fgsm_spiral_lstm}{ on input line 161}}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\newlabel{sub@fig:fgsm_spiral_lstm}{{}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\newlabel{fig:fgsm_spiral_transformer}{{\caption@xref {fig:fgsm_spiral_transformer}{ on input line 166}}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\newlabel{sub@fig:fgsm_spiral_transformer}{{}{43}{FGSM Attack Results}{figure.caption.88}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Predicted, Target, and Adversarial projections under FGSM attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{43}{figure.caption.88}\protected@file@percent }
-\newlabel{fig:fsgm_spirals}{{7.1}{43}{Predicted, Target, and Adversarial projections under FGSM attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.88}{}}
-\newlabel{fig:pgd_spiral_LTC}{{\caption@xref {fig:pgd_spiral_LTC}{ on input line 190}}{44}{PGD Attack Results}{figure.caption.90}{}}
-\newlabel{sub@fig:pgd_spiral_LTC}{{}{44}{PGD Attack Results}{figure.caption.90}{}}
-\newlabel{fig:pgd_spiral_TCN}{{\caption@xref {fig:pgd_spiral_TCN}{ on input line 195}}{44}{PGD Attack Results}{figure.caption.90}{}}
-\newlabel{sub@fig:pgd_spiral_TCN}{{}{44}{PGD Attack Results}{figure.caption.90}{}}
-\newlabel{fig:pgd_spiral_lstm}{{\caption@xref {fig:pgd_spiral_lstm}{ on input line 200}}{44}{PGD Attack Results}{figure.caption.90}{}}
-\newlabel{sub@fig:pgd_spiral_lstm}{{}{44}{PGD Attack Results}{figure.caption.90}{}}
-\newlabel{fig:pgd_spiral_transformer}{{\caption@xref {fig:pgd_spiral_transformer}{ on input line 205}}{44}{PGD Attack Results}{figure.caption.90}{}}
-\newlabel{sub@fig:pgd_spiral_transformer}{{}{44}{PGD Attack Results}{figure.caption.90}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces Predicted, Target, and Adversarial projections under PGD attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{44}{figure.caption.90}\protected@file@percent }
-\newlabel{fig:pgd_spirals}{{7.2}{44}{Predicted, Target, and Adversarial projections under PGD attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.90}{}}
-\newlabel{fig:deepfool_spiral_LTC}{{\caption@xref {fig:deepfool_spiral_LTC}{ on input line 227}}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\newlabel{sub@fig:deepfool_spiral_LTC}{{}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\newlabel{fig:deepfool_spiral_TCN}{{\caption@xref {fig:deepfool_spiral_TCN}{ on input line 232}}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\newlabel{sub@fig:deepfool_spiral_TCN}{{}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\newlabel{fig:deepfool_spiral_lstm}{{\caption@xref {fig:deepfool_spiral_lstm}{ on input line 237}}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\newlabel{sub@fig:deepfool_spiral_lstm}{{}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\newlabel{fig:deepfool_spiral_transformer}{{\caption@xref {fig:deepfool_spiral_transformer}{ on input line 242}}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\newlabel{sub@fig:deepfool_spiral_transformer}{{}{45}{Deepfool-Like Attack Results}{figure.caption.92}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Predicted, Target, and Adversarial projections under Deepfool-Like attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{45}{figure.caption.92}\protected@file@percent }
-\newlabel{fig:deepfool_spirals}{{7.3}{45}{Predicted, Target, and Adversarial projections under Deepfool-Like attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.92}{}}
-\newlabel{fig:spsa_spiral_LTC}{{\caption@xref {fig:spsa_spiral_LTC}{ on input line 262}}{46}{SPSA Results}{figure.caption.94}{}}
-\newlabel{sub@fig:spsa_spiral_LTC}{{}{46}{SPSA Results}{figure.caption.94}{}}
-\newlabel{fig:spsa_spiral_TCN}{{\caption@xref {fig:spsa_spiral_TCN}{ on input line 267}}{46}{SPSA Results}{figure.caption.94}{}}
-\newlabel{sub@fig:spsa_spiral_TCN}{{}{46}{SPSA Results}{figure.caption.94}{}}
-\newlabel{fig:spsa_spiral_lstm}{{\caption@xref {fig:spsa_spiral_lstm}{ on input line 272}}{46}{SPSA Results}{figure.caption.94}{}}
-\newlabel{sub@fig:spsa_spiral_lstm}{{}{46}{SPSA Results}{figure.caption.94}{}}
-\newlabel{fig:spsa_spiral_transformer}{{\caption@xref {fig:spsa_spiral_transformer}{ on input line 277}}{46}{SPSA Results}{figure.caption.94}{}}
-\newlabel{sub@fig:spsa_spiral_transformer}{{}{46}{SPSA Results}{figure.caption.94}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces Predicted, Target, and Adversarial projections under SPSA attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{46}{figure.caption.94}\protected@file@percent }
-\newlabel{fig:spsa_spirals}{{7.4}{46}{Predicted, Target, and Adversarial projections under SPSA attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.94}{}}
-\newlabel{fig:time_warping_spiral_LTC}{{\caption@xref {fig:time_warping_spiral_LTC}{ on input line 297}}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\newlabel{sub@fig:time_warping_spiral_LTC}{{}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\newlabel{fig:time_warping_spiral_TCN}{{\caption@xref {fig:time_warping_spiral_TCN}{ on input line 302}}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\newlabel{sub@fig:time_warping_spiral_TCN}{{}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\newlabel{fig:time_warping_spiral_lstm}{{\caption@xref {fig:time_warping_spiral_lstm}{ on input line 307}}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\newlabel{sub@fig:time_warping_spiral_lstm}{{}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\newlabel{fig:time_warping_spiral_transformer}{{\caption@xref {fig:time_warping_spiral_transformer}{ on input line 312}}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\newlabel{sub@fig:time_warping_spiral_transformer}{{}{47}{Time Warping Attack Results}{figure.caption.96}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces Predicted, Target, and Adversarial projections under Time Warping attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{47}{figure.caption.96}\protected@file@percent }
-\newlabel{fig:time_warping_spirals}{{7.5}{47}{Predicted, Target, and Adversarial projections under Time Warping attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.96}{}}
-\newlabel{fig:continuous_time_spiral_LTC}{{\caption@xref {fig:continuous_time_spiral_LTC}{ on input line 332}}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\newlabel{sub@fig:continuous_time_spiral_LTC}{{}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\newlabel{fig:continuous_time_spiral_TCN}{{\caption@xref {fig:continuous_time_spiral_TCN}{ on input line 337}}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\newlabel{sub@fig:continuous_time_spiral_TCN}{{}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\newlabel{fig:continuous_time_spiral_lstm}{{\caption@xref {fig:continuous_time_spiral_lstm}{ on input line 342}}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\newlabel{sub@fig:continuous_time_spiral_lstm}{{}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\newlabel{fig:continuous_time_spiral_transformer}{{\caption@xref {fig:continuous_time_spiral_transformer}{ on input line 347}}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\newlabel{sub@fig:continuous_time_spiral_transformer}{{}{48}{Continuous-Time Adversarial Perturbation Attack Results}{figure.caption.98}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.6}{\ignorespaces Predicted, Target, and Adversarial projections under Continuous-Time Adversarial Perturbation attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{48}{figure.caption.98}\protected@file@percent }
-\newlabel{fig:continuous_time_spirals}{{7.6}{48}{Predicted, Target, and Adversarial projections under Continuous-Time Adversarial Perturbation attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.98}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.4}Further Analysis}{49}{section.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.5}Comparative Discussion of Model Robustness}{49}{section.7.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.1}Summary of Behaviour Under Attack}{49}{subsection.7.5.1}\protected@file@percent }
-\citation{madry2018towards}
-\@writefile{toc}{\contentsline {section}{\numberline {7.6}Defences for Liquid Neural Networks}{50}{section.7.6}\protected@file@percent }
-\citation{vincent2008extracting}
-\citation{dupont2019augmented}
-\citation{finlay2020trainable}
-\citation{wang2018adversarial}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.7}{\ignorespaces LNN membrane potential evolution with and without regularisation. Regularisation limits state drift, improving stability under input perturbations.}}{51}{figure.caption.109}\protected@file@percent }
-\newlabel{fig:lnn_dynamics_defence}{{7.7}{51}{LNN membrane potential evolution with and without regularisation. Regularisation limits state drift, improving stability under input perturbations}{figure.caption.109}{}}
-\citation{zhang2022towards}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.8}{\ignorespaces Illustration of low-pass temporal filtering as a defence mechanism. Sharp perturbations are smoothed before reaching the model.}}{52}{figure.caption.111}\protected@file@percent }
-\newlabel{fig:temporal_filter}{{7.8}{52}{Illustration of low-pass temporal filtering as a defence mechanism. Sharp perturbations are smoothed before reaching the model}{figure.caption.111}{}}
-\bibstyle{vancouver}
-\bibdata{bibs/fyp}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Conclusion}{53}{chapter.8}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\bibcite{chahineRobustFlightNavigation2023}{1}
-\bibcite{hasaniLiquidTimeconstantNetworks2021}{2}
-\bibcite{tedxtalksLiquidNeuralNetworks2023}{3}
-\bibcite{henriksenEfficientNeuralNetwork}{4}
-\bibcite{WhatRecurrentNeural2021}{5}
-\bibcite{zhangEfficientNeuralNetwork2018}{6}
-\bibcite{madry2018towards}{7}
-\bibcite{vincent2008extracting}{8}
-\bibcite{dupont2019augmented}{9}
-\bibcite{finlay2020trainable}{10}
-\bibcite{wang2018adversarial}{11}
-\bibcite{zhang2022towards}{12}
-\@writefile{toc}{\contentsline {chapter}{\numberline {9}Declaration}{55}{chapter.9}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\gdef \@abspage@last{55}
+\newlabel{chap:evaluation}{{6}{39}{Evaluation}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Evaluation Metrics}{39}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Quantitative Results}{40}{section.6.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Average robustness metrics across all attacks. Lower values are better for all columns.}}{40}{table.caption.96}\protected@file@percent }
+\newlabel{tab:avg_model_robustness}{{6.1}{40}{Average robustness metrics across all attacks. Lower values are better for all columns}{table.caption.96}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Average robustness metrics by model across all attacks. Lower is better.}}{40}{figure.caption.97}\protected@file@percent }
+\newlabel{fig:avg_metrics_barplot}{{6.1}{40}{Average robustness metrics by model across all attacks. Lower is better}{figure.caption.97}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Degradation ratios across models for each attack}}{41}{table.caption.99}\protected@file@percent }
+\newlabel{tab:attack_results_degradation}{{6.2}{41}{Degradation ratios across models for each attack}{table.caption.99}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Deviation scores across models for each attack}}{41}{table.caption.100}\protected@file@percent }
+\newlabel{tab:attack_results_deviation}{{6.3}{41}{Deviation scores across models for each attack}{table.caption.100}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces Lipschitz Estimate (local sensitivity) across models for each attack}}{41}{table.caption.101}\protected@file@percent }
+\newlabel{tab:attack_results_sensitivity}{{6.4}{41}{Lipschitz Estimate (local sensitivity) across models for each attack}{table.caption.101}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Visual Analysis}{41}{section.6.3}\protected@file@percent }
+\newlabel{fig:fgsm_spiral_LTC}{{\caption@xref {fig:fgsm_spiral_LTC}{ on input line 248}}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\newlabel{sub@fig:fgsm_spiral_LTC}{{}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\newlabel{fig:fgsm_spiral_TCN}{{\caption@xref {fig:fgsm_spiral_TCN}{ on input line 253}}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\newlabel{sub@fig:fgsm_spiral_TCN}{{}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\newlabel{fig:fgsm_spiral_lstm}{{\caption@xref {fig:fgsm_spiral_lstm}{ on input line 258}}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\newlabel{sub@fig:fgsm_spiral_lstm}{{}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\newlabel{fig:fgsm_spiral_transformer}{{\caption@xref {fig:fgsm_spiral_transformer}{ on input line 263}}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\newlabel{sub@fig:fgsm_spiral_transformer}{{}{42}{FGSM Attack Results}{figure.caption.104}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Predicted, Target, and Adversarial projections under FGSM attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{42}{figure.caption.104}\protected@file@percent }
+\newlabel{fig:fsgm_spirals}{{6.2}{42}{Predicted, Target, and Adversarial projections under FGSM attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.104}{}}
+\newlabel{fig:pgd_spiral_LTC}{{\caption@xref {fig:pgd_spiral_LTC}{ on input line 287}}{43}{PGD Attack Results}{figure.caption.106}{}}
+\newlabel{sub@fig:pgd_spiral_LTC}{{}{43}{PGD Attack Results}{figure.caption.106}{}}
+\newlabel{fig:pgd_spiral_TCN}{{\caption@xref {fig:pgd_spiral_TCN}{ on input line 292}}{43}{PGD Attack Results}{figure.caption.106}{}}
+\newlabel{sub@fig:pgd_spiral_TCN}{{}{43}{PGD Attack Results}{figure.caption.106}{}}
+\newlabel{fig:pgd_spiral_lstm}{{\caption@xref {fig:pgd_spiral_lstm}{ on input line 297}}{43}{PGD Attack Results}{figure.caption.106}{}}
+\newlabel{sub@fig:pgd_spiral_lstm}{{}{43}{PGD Attack Results}{figure.caption.106}{}}
+\newlabel{fig:pgd_spiral_transformer}{{\caption@xref {fig:pgd_spiral_transformer}{ on input line 302}}{43}{PGD Attack Results}{figure.caption.106}{}}
+\newlabel{sub@fig:pgd_spiral_transformer}{{}{43}{PGD Attack Results}{figure.caption.106}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Predicted, Target, and Adversarial projections under PGD attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}}{43}{figure.caption.106}\protected@file@percent }
+\newlabel{fig:pgd_spirals}{{6.3}{43}{Predicted, Target, and Adversarial projections under PGD attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral}{figure.caption.106}{}}
+\newlabel{fig:deepfool_spiral_LTC}{{\caption@xref {fig:deepfool_spiral_LTC}{ on input line 324}}{44}{Deepfool-Like Attack Results}{figure.caption.108}{}}
+\newlabel{sub@fig:deepfool_spiral_LTC}{{}{44}{Deepfool-Like Attack Results}{figure.caption.108}{}}
+\newlabel{fig:deepfool_spiral_TCN}{{\caption@xref {fig:deepfool_spiral_TCN}{ on input line 329}}{44}{Deepfool-Like Attack Results}{figure.caption.108}{}}
+\newlabel{sub@fig:deepfool_spiral_TCN}{{}{44}{Deepfool-Like Attack Results}{figure.caption.108}{}}
+\newlabel{fig:deepfool_spiral_lstm}{{\caption@xref {fig:deepfool_spiral_lstm}{ on input line 334}}{44}{Deepfool-Like Attack Results}{figure.caption.108}{}}
+\newlabel{sub@fig:deepfool_spiral_lstm}{{}{44}{Deepfool-Like Attack Results}{figure.caption.108}{}}
+\new

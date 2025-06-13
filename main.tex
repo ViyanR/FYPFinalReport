@@ -23,6 +23,14 @@
 \usepackage{amsmath}
 \usepackage{subcaption}
 \usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{subcaption}
+\pgfplotsset{compat=1.18}
+\definecolor{lnncolor}{RGB}{31,119,180}
+\definecolor{tcncolor}{RGB}{255,127,14}
+\definecolor{lstmcolor}{RGB}{44,160,44}
+\definecolor{transformercolor}{RGB}{214,39,40}
+\pgfplotsset{compat=1.18}
 \usetikzlibrary{shapes, arrows.meta, positioning, calc}
 \usetikzlibrary{fit}
 
@@ -67,12 +75,9 @@
 
 \input{introduction/introduction.tex}
 \input{background/background.tex}
-% Body of Work - Split into 3/4 Chapters:
-% Some students working on more experimental projects choose to instead split this up with one chapter per experiment, including aspects of both development and evaluation within each chapter.
 \input{body/lnn_model_implementation.tex}
 \input{body/comparative_models.tex}
 \input{body/adversarial_attacks.tex}
-\input{body/auto_lirpa.tex}
 \input{evaluation/evaluation.tex}
 \input{conclusion/conclusion.tex}
 
@@ -84,9 +89,3 @@
 \appendix
 
 \end{document}
-
-% \input{_INTERIM_introduction/_INTERIM_introduction.tex}
-% \input{_INTERIM_background/_INTERIM_background.tex}
-% \input{_INTERIM_project_plan/_INTERIM_project_plan.tex}
-% \input{_INTERIM_evaluation_plan/_INTERIM_evaluation_plan.tex}
-% \input{ethical_issues/ethical_issues.tex}

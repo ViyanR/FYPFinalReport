@@ -14,6 +14,8 @@ The aim of the implementation was to create a biologically-inspired, interpretab
     \item \textbf{Baseline Comparison:} To benchmark performance, identical training and evaluation protocols were implemented for alternative architectures (LSTM, TCN) using the same data.
 \end{itemize}
 
+The implementation was adapted from an incomplete and partially functional tutorial model \cite{ltctutorial2022}, which, despite containing bugs and missing components, provided a useful structural foundation for further development and refinement.
+
 The following sections document the architecture, neuron formulation, wiring strategy, training setup, and performance characteristics of the LNN.
 
 \section{Wiring and Connectivity}
@@ -49,7 +51,7 @@ class RandomWiring:
 \section{LTC Neuron Dynamics}
 The core unit of the LNN is the \texttt{LIFNeuronLayer}, a custom PyTorch module that simulates the behaviour of leaky integrate-and-fire neurons (also known as liquid time-constant neurons). These neurons operate using a continuous-time dynamical model controlled by a first-order differential equation, capturing the evolution of membrane potentials in response to internal and external stimuli.
 
-The model integrates over time using a discretised ODE solver implemented within the forward pass. Specifically, it unfolds the membrane update equation over a fixed number of steps (\texttt{ode\_unfolds}) using an Euler-like method.
+The model integrates over time using a discretised ODE solver implemented within the forward pass. Specifically, it unfolds the membrane update equation over a fixed number of steps (\texttt{ode\_unfolds}) using an Euler-like method \cite{hasaniLiquidTimeconstantNetworks2021}.
 
 \noindent The update rule is determined by the equation:
 
@@ -120,7 +122,7 @@ Z =
     \node at (7.5,1.95) [right, font=\footnotesize] {$v_i^{(t+1)}$};
 
     \end{tikzpicture}
-    \caption{Illustrative internal membrane voltage trace across $K$ ODE unfolding steps for a single neuron. This entire graph represents the internal dynamics used to compute $v_i^{(t+1)}$ from $v_i^{(t)}$, in a single timestep.}
+    \caption{Example internal membrane voltage trace across $K$ ODE unfolding steps for a single neuron. This entire graph represents the internal dynamics used to compute $v_i^{(t+1)}$ from $v_i^{(t)}$, in a single timestep.}
     \label{fig:lif_voltage_evolution}
 \end{figure}
 

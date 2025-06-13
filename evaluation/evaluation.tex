@@ -39,26 +39,123 @@ This ratio approximates the local Lipschitz constant, capturing how much the out
 \subsection*{Aggregate Metrics Across All Attacks}
 
 \begin{table}[H]
-\centering
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Model} & \textbf{Avg. Degradation} & \textbf{Avg. Deviation} & \textbf{Lipshchitz Estimate} & \textbf{Clean MSE} \\
-\hline
-LNN         & ? & ? & ? & 0.002795 \\
-TCN        & ? & ? & ? & 0.002782 \\
-LSTM         & ? & ? & ? & 0.004416 \\
-Transformer & ? & ? & ? & 0.007677 \\ 
-\hline
-\end{tabular}
-\caption{Average degradation and deviation metrics across all attack types.}
-\label{tab:agg_metrics}
+    \centering
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \textbf{Model} & \textbf{Avg. Degradation \%} & \textbf{Avg. Deviation} & \textbf{Avg. Lipschitz Estimate} & \textbf{Clean MSE} \\
+    \hline
+    LNN         & 417.8377 & 2.1646 & 0.9441 & 0.0028 \\
+    TCN         & 434.2948 & 2.2409 & 1.0071 & 0.0028 \\
+    LSTM        & 287.4266 & 2.1501 & 1.0132 & 0.0044 \\
+    Transformer & 183.5425 & 2.3060 & 1.1352 & 0.0077 \\
+    \hline
+    \end{tabular}
+    \caption{Average robustness metrics across all attacks. Lower values are better for all columns.}
+    \label{tab:avg_model_robustness}
 \end{table}
 
 Importantly, each model was designed/trained to have comparable MSEs, to allow for fair evaluation.
 
+\begin{figure}[H]
+    \centering
+    
+    \begin{subfigure}[t]{0.45\linewidth}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Avg. Degradation \%},
+        xtick=data,
+        xticklabels={LNN, TCN, LSTM, Transformer},
+        ymin=0, ymax=500,
+        bar width=10pt,
+        width=\linewidth,
+        height=4cm,
+        enlarge x limits=0.2,
+        ylabel style={font=\small},
+        tick label style={font=\small}
+    ]
+    \addplot coordinates {(0,417.8377) (1,434.2948) (2,287.4266) (3,183.5425)};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Average Degradation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.45\linewidth}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Avg. Deviation},
+        xtick=data,
+        xticklabels={LNN, TCN, LSTM, Transformer},
+        ymin=0, ymax=3,
+        bar width=10pt,
+        width=\linewidth,
+        height=4cm,
+        enlarge x limits=0.2,
+        ylabel style={font=\small},
+        tick label style={font=\small}
+    ]
+    \addplot coordinates {(0,2.1646) (1,2.2409) (2,2.1501) (3,2.3060)};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Average Deviation}
+    \end{subfigure}
+    
+    \vspace{0.8em}
+    
+    \begin{subfigure}[t]{0.45\linewidth}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Lipschitz Estimate},
+        xtick=data,
+        xticklabels={LNN, TCN, LSTM, Transformer},
+        ymin=0, ymax=1.2,
+        bar width=10pt,
+        width=\linewidth,
+        height=4cm,
+        enlarge x limits=0.2,
+        ylabel style={font=\small},
+        tick label style={font=\small}
+    ]
+    \addplot coordinates {(0,0.9441) (1,1.0071) (2,1.0132) (3,1.1352)};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Lipschitz Estimate}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.45\linewidth}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Clean MSE},
+        xtick=data,
+        xticklabels={LNN, TCN, LSTM, Transformer},
+        ymin=0, ymax=0.01,
+        bar width=10pt,
+        width=\linewidth,
+        height=4cm,
+        enlarge x limits=0.2,
+        ylabel style={font=\small},
+        tick label style={font=\small}
+    ]
+    \addplot coordinates {(0,0.0028) (1,0.0028) (2,0.0044) (3,0.0077)};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Clean MSE}
+    \end{subfigure}
+    
+    \caption{Average robustness metrics by model across all attacks. Lower is better.}
+    \label{fig:avg_metrics_barplot}
+    \end{figure}
+
 \subsection*{Attack-Specific Results}
 
-The following table summarises the degradation ratios for each model under various adversarial attacks. Lower values indicate better robustness.
+The following tables summarise each metric for each model, under various adversarial attacks. Lower values, across all metrics, indicate better robustness.
 
 \begin{table}[H]
     \centering
@@ -81,8 +178,6 @@ The following table summarises the degradation ratios for each model under vario
     \label{tab:attack_results_degradation}
 \end{table}
 
-The following table summarises the average deviation distances for each model under various adversarial attacks. Lower values indicate less deviation from the clean trajectory.
-
 \begin{table}[H]
     \centering
     \small
@@ -104,14 +199,12 @@ The following table summarises the average deviation distances for each model un
     \label{tab:attack_results_deviation}
 \end{table}
 
-The following table summarises the local sensitivity estimates for each model under various adversarial attacks. Lower values indicate smoother, more robust models.
-
 \begin{table}[H]
     \centering
     \small
     \begin{tabular}{|l|cccc|}
     \hline
-    \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Local Sensitivity (Lipshitz Estimate)}} \\
+    \textbf{Attack Type} & \multicolumn{4}{c|}{\textbf{Local Sensitivity (Lipschitz Estimate)}} \\
     \cline{2-5}
      & \textbf{LNN} & \textbf{TCN} & \textbf{LSTM} & \textbf{Transformer} \\
     \hline
@@ -123,11 +216,15 @@ The following table summarises the local sensitivity estimates for each model un
     Continuous-Time Perturb. & 1.011938 & 1.006981 & 1.005773 & 1.053375 \\
     \hline
     \end{tabular}
-    \caption{Lipshitz Estimate (local sensitivity) across models for each attack}
+    \caption{Lipschitz Estimate (local sensitivity) across models for each attack}
     \label{tab:attack_results_sensitivity}
 \end{table}
 
-\hl{ANALYSE THESE TABLES + BAR CHARTS + QUANTITATIVE RESULTS HERE}
+The summary statistics in Table~\ref{tab:avg_model_robustness} and the corresponding bar plots highlight a clear trade-off between clean accuracy and robustness. The Transformer achieves the lowest average degradation ($183.54\%$) and deviation ($2.3060$), suggesting superior resistance to adversarial attacks overall. However, it also has the highest clean MSE ($0.0077$) and Lipschitz sensitivity ($1.1352$), indicating instability under small perturbations and noisier baseline performance. In contrast, the LNN achieves stronger clean performance ($0.0028$ MSE) and a lower Lipschitz constant ($0.9441$), but suffers disproportionately under temporal or continuous-time attacks, inflating its degradation average ($417.84\%$). The TCN, while numerically similar to the LNN, is slightly less stable overall, whereas the LSTM maintains balance, with moderate robustness, the lowest average deviation (with the LNN being close), and the second-best clean accuracy. These findings suggest that robustness is not exculsively defined by architectural depth or sequence modelling capability, but instead emerges from the interaction of inductive bias, temporal sensitivity, and perturbation dynamics.
+
+With the lowest average Lipschitz constant (0.9441), the LNN shows the best local sensitivity profile, meaning small changes in input (under $L_p$ norms) cause relatively small changes in output. This is consistent with its ODE-based temporal smoothing.
+
+The LNN is not the most robust across all attacks/metrics, but it is does outperform in specific settings, especially against local gradient-based noise. It's architecture offers benefits for tasks involving temporal continuity, but requires careful consideration when deployed in environments with adversarial dynamics that align with its solver steps or temporal assumptions.
 
 \section{Visual Analysis}
 
@@ -364,85 +461,25 @@ This again highlights a key advantage of biologically inspired continuous-time m
 
 Models with rigid temporal assumptions or recurrent memory (LSTM) are more susceptible to both magnitude and timing distortions, whereas continuous-time dynamics (LNN) offer meaningful resistance. However, no model was universally robust, and each architecture exhibited specific weaknesses when faced with particular perturbation types.
 
-\section{Further Analysis}
+\section{Discussion of Results}
 
-\subsection*{Comparative Failure Modes}
+\subsection*{Architecture-Specific Vulnerabilities}
 
-\begin{itemize}
-    \item \textbf{LSTM:} Most errors are due to memory misalignment; adversarial perturbations early in the sequence affect long-term predictions.
-    \item \textbf{TCN:} Exhibits immediate, localised distortions that do not propagate. However, global structure is harder to recover post-perturbation.
-    \item \textbf{LNN:} Shows resilience to smooth temporal shifts but is vulnerable to persistent directional gradients or rapidly fluctuating noise.
-\end{itemize}
+A cross-attack comparison reveals that each model exhibits distinct vulnerabilities determined by its inductive biases. The LSTM is particularly sensitive to early-sequence perturbations due to its recurrent memory, leading to long-range compounding errors. TCNs, while able to contain noise locally, struggle to restore global structure after distortion. The Transformer's self-attention allows some recovery via context redistribution, but it remains susceptible to phase collapse under structured attacks (when key tokens are disrupted). The Liquid Neural Network (LNN), by contrast, preserves smoothness but responds poorly to high-frequency or temporally persistent adversaries, as shown in its high degradation under continuous-time and PGD perturbations.
 
-\subsection*{Phase Drift and Spiral Collapse}
+\subsection*{Model Design}
 
-A recurring theme observed across all models under PGD and DeepFool-like attacks is \emph{phase drift} — a steady deviation in angular position on the spiral. Unlike random noise, these attacks produce a consistent directional bias, causing the prediction to spiral inward or outward.
+These results align with the models' architectural design. LSTMs encode state recursively, which amplifies small errors. TCNs filter over fixed windows, making them blind to long-term disruptions. Transformers rely on positional encoding without state memory, making them sensitive to ordering distortions. LNNs model time explicitly via ODEs, offering natural resistance to time-warping and continuity-based attacks, but remain dependent on solver stability and hyperparameter tuning.
 
-\hl{spiral\_phase\_drift image here}
+\subsection*{Temporal Drift and Geometric Collapse}
 
-\subsection*{Interpretive Summary}
+A consistent phenomenon observed in PGD, DeepFool-like, and continuous-time attacks is phase drift. This is where adversarial trajectories spiral inward or outward over time. This error accumulates directionally rather than randomly, reflecting the effectiveness of gradient-aligned perturbations in destabilising long-term dynamics.
 
-Visual inspection confirms that degradation is not uniform:
-\begin{itemize}
-    \item Some attacks (e.g., PGD, directional gradient) cause persistent trajectory drift.
-    \item Others (e.g., SPSA, FGSM) introduce transient but recoverable perturbations.
-    \item Architectures with memory (LSTM) are vulnerable to compounding errors; feedforward models (TCN) localise degradation; ODE-based models (LNN) smooth over it.
-\end{itemize}
-
-These insights are not easily captured by scalar error metrics alone and reinforce the importance of including visual diagnostics in robustness evaluation.
-
-\section{Comparative Discussion of Model Robustness}
-
-Having evaluated the LNN, TCN, and LSTM across a wide spectrum of adversarial conditions, this section synthesises key observations into a comparative robustness profile. The aim is not only to rank models by resistance but to understand \emph{why} certain architectures fail or succeed under specific types of perturbation.
-
-\subsection{Summary of Behaviour Under Attack}
-
-\begin{itemize}
-    \item \textbf{LSTM:} Performs well under clean conditions, but suffers sharp degradation when adversarial noise is injected early in the sequence. The accumulation of errors in its gated memory mechanisms makes it particularly vulnerable to directional attacks (e.g., PGD, DeepFool). Despite this, it displays limited robustness to noise-based attacks like SPSA.
-    
-    \item \textbf{TCN:} Its feedforward and convolutional architecture gives it moderate robustness across most attacks. TCNs are especially vulnerable to non-local attacks like PGD that exploit the full sequence context, but are relatively stable under local noise and gradient-free attacks (e.g., SPSA). However, the model lacks a temporal memory mechanism to re-anchor itself after an attack.
-
-    \item \textbf{LNN:} Exhibits the most consistent robustness, particularly under time-warping and continuous-time attacks. Its ODE-based internal state provides smoother transitions and better filtering of high-frequency noise. Nevertheless, the LNN is not invulnerable—attacks that align with sensitive dynamical regimes (e.g., PGD or high-amplitude SPSA) can still destabilise the model.
-\end{itemize}
-
-\subsection*{Interpretation of Results}
-No single model outperformed others under all adversarial settings. The LSTM's gating mechanisms offered some regularisation benefits but failed under directional and temporal distortions. The TCN was resilient to localised noise but vulnerable to global shifts and multi-step attacks. The LNN demonstrated nuanced robustness, especially against temporal distortions, but remained sensitive to high-frequency injected noise within its ODE solver.
-
-Overall, the diversity of attack types reveals how robustness is not a singular property but a complex interplay of architectural assumptions, dynamic behaviour, and model training dynamics.
-
-\vspace{1em}
-\noindent The next chapter explores these architectural and behavioural insights in greater depth by comparing model robustness across all attacks using quantitative and qualitative metrics.
-
-
-\subsection*{Architectural Trade-offs}
-
-Each model's robustness can be linked to its architectural assumptions:
-\begin{enumerate}
-    \item \textbf{LSTM:} Sequential dependence and gating offer rich temporal modelling but also amplify error propagation. This makes them unsuitable for tasks where adversarial access to early inputs is likely.
-    \item \textbf{TCN:} Its parallel structure and limited receptive field enable stable training and efficiency, but prevent long-term correction after perturbation. It is highly sensitive to the location of the attack.
-    \item \textbf{LNN:} By encoding time explicitly through continuous dynamics, the LNN achieves robustness to subtle perturbations in both time and space. However, stability depends heavily on solver configuration and the nonlinearity of the governing ODE.
-\end{enumerate}
-
-\subsection*{Robustness by Attack Type}
-
-\begin{itemize}
-    \item \textbf{Gradient-based attacks:} PGD and DeepFool-inspired attacks exploit local curvature in the loss landscape. LSTM suffers most due to deep recurrence. LNN partially resists due to its low-sensitivity ODE integration.
-    \item \textbf{Gradient-free attacks:} SPSA shows that even in black-box settings, models like the TCN can be significantly affected by repeated local perturbations.
-    \item \textbf{Temporal attacks:} Time-warping and continuous-time perturbations target the model's implicit assumptions about sampling frequency and state evolution. LNN outperforms others, showcasing a key advantage of continuous-time architectures in adversarial settings.
-\end{itemize}
-
-\subsection*{Implications for Deployment}
-
-These findings carry important implications:
-\begin{itemize}
-    \item When deploying models in adversarial or uncertain environments, the temporal assumptions of the architecture must be scrutinised.
-    \item Robustness is context-dependent — no model is universally secure, and the choice of architecture should be informed by the anticipated type of input perturbation.
-    \item LNNs offer promising directions for tasks where input timing is noisy or attacker-controlled, such as sensor-based monitoring or robotics.
-\end{itemize}
+Attacks like FGSM and SPSA however result in less coherent but more transient distortions, typically recoverable unless they coincide with critical points in the trajectory.
 
 \section{Defences for Liquid Neural Networks}
 
-This section explores theoretical strategies to mitigate adversarial vulnerability in Liquid Neural Networks (LNNs), with comparisons to TCN and LSTM where relevant. The focus is on defences grounded in continuous-time modelling, structural stability, and principled input processing.
+There are a range of theoretical strategies that can be used to mitigate adversarial vulnerability in Liquid Neural Networks (LNNs), with comparisons to TCN and LSTM where relevant.
 
 \subsection*{Adversarial Training and Perturbation Smoothing}
 

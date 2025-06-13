@@ -1,6 +1,6 @@
 \chapter{Conclusion}
 
-\hl{Around 4 pages}
+\hl{Around 1-2 pages}
 
 This project has explored the robustness of Logic Neural Networks (LNNs) against adversarial attacks, comparing them with traditional neural networks. The evaluation focused on three main types of attacks: temporal, structured, and spatial, each designed to exploit different vulnerabilities in the models.
 The results indicate that LNNs exhibit superior robustness in temporal and structured adversarial regimes, where the attacks leverage the temporal dependencies and structured relationships inherent in the data. In contrast, traditional neural networks were more susceptible to these types of attacks, highlighting their limitations in handling complex data structures.
@@ -12,3 +12,25 @@ In summary, this evaluation demonstrates that:
     \item LNNs, while more complex, deliver meaningful robustness advantages under temporal and structured adversarial regimes.
     \item Careful architectural and training design — including regularisation and solver stability — is essential in real-world deployments where adversarial inputs cannot be ruled out.
 \end{enumerate}
+
+\subsection*{Summary of Robustness by Attack Type}
+
+Gradient-based attacks like PGD and DeepFool cause sharp degradation in LSTMs and Transformers, both of which rely heavily on positional alignment. The LNN is more resistant, likely due to its smoother ODE integration. SPSA, despite being gradient-free, still impacts TCNs and Transformers, suggesting vulnerability to repeated local noise. Against temporal attacks, such as time-warping and continuous-time perturbations, only the LNN maintains trajectory stability—highlighting its advantage in modelling dynamic systems explicitly over time.
+
+
+
+\subsection*{Implications for Deployment}
+
+These findings carry important implications:
+\begin{itemize}
+    \item When deploying models in adversarial or uncertain environments, the temporal assumptions of the architecture must be scrutinised.
+    \item Robustness is context-dependent — no model is universally secure, and the choice of architecture should be informed by the anticipated type of input perturbation.
+    \item LNNs offer promising directions for tasks where input timing is noisy or attacker-controlled, such as sensor-based monitoring or robotics.
+\end{itemize}
+
+
+
+\section{Summary of Work}
+
+
+\section{Future Work}
