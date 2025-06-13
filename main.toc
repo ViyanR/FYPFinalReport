@@ -52,43 +52,14 @@
 \contentsline {section}{\numberline {5.6}Time-Warping Attack}{35}{section.5.6}%
 \contentsline {section}{\numberline {5.7}Continuous-Time Perturbation Attack}{36}{section.5.7}%
 \contentsline {section}{\numberline {5.8}Summary of Attack Design and Implementation Decisions}{37}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Attack Categories and Coverage}{37}{subsection.5.8.1}%
-\contentsline {subsection}{\numberline {5.8.2}Implementation Consistency}{37}{subsection.5.8.2}%
-\contentsline {subsection}{\numberline {5.8.3}Design Considerations}{38}{subsection.5.8.3}%
 \contentsline {chapter}{\numberline {6}Bound Certification (Auto Lirpa)}{39}{chapter.6}%
 \contentsline {chapter}{\numberline {7}Evaluation}{40}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Quantitative Evaluation Metrics and Comparison}{40}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Aggregate Results}{41}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Attack-Specific Breakdowns}{41}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Qualitative Evaluation and Visual Analysis}{43}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Comparative Discussion of Model Robustness}{44}{section.7.5}%
-\contentsline {subsection}{\numberline {7.5.1}Summary of Behaviour Under Attack}{44}{subsection.7.5.1}%
-\contentsline {chapter}{\numberline {8}Defences and Mitigation Strategies}{46}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Introduction}{46}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Adversarial Training and Noise Injection}{46}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Gradient-Based Adversarial Training}{46}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}Noise Injection During Training}{47}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}Benefits and Trade-offs}{47}{subsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.2.4}Considerations}{47}{subsection.8.2.4}%
-\contentsline {section}{\numberline {8.3}Architectural Enhancements for Robustness}{47}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}Memory Mechanisms and Temporal Smoothing}{47}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}Receptive Field and Feature Redundancy}{47}{subsection.8.3.2}%
-\contentsline {subsection}{\numberline {8.3.3}Stability in Continuous-Time Models}{48}{subsection.8.3.3}%
-\contentsline {subsection}{\numberline {8.3.4}Summary}{48}{subsection.8.3.4}%
-\contentsline {section}{\numberline {8.4}Input Preprocessing and Temporal Defences}{48}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}Low-Pass Filtering}{48}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}Interpolation and Resampling Defences}{48}{subsection.8.4.2}%
-\contentsline {subsection}{\numberline {8.4.3}Temporal Quantisation}{48}{subsection.8.4.3}%
-\contentsline {subsection}{\numberline {8.4.4}Trade-offs and Limitations}{49}{subsection.8.4.4}%
-\contentsline {subsection}{\numberline {8.4.5}Summary}{49}{subsection.8.4.5}%
-\contentsline {section}{\numberline {8.5}Model-Specific Mitigation Insights}{49}{section.8.5}%
-\contentsline {subsection}{\numberline {8.5.1}LSTM: Sequential Memory Vulnerabilities}{49}{subsection.8.5.1}%
-\contentsline {subsection}{\numberline {8.5.2}TCN: Localised Perturbation Sensitivity}{49}{subsection.8.5.2}%
-\contentsline {subsection}{\numberline {8.5.3}LNN: ODE Sensitivity and Stability Management}{49}{subsection.8.5.3}%
-\contentsline {subsection}{\numberline {8.5.4}Summary Table}{50}{subsection.8.5.4}%
-\contentsline {section}{\numberline {8.6}Limitations and Future Work}{50}{section.8.6}%
-\contentsline {subsection}{\numberline {8.6.1}Limitations}{50}{subsection.8.6.1}%
-\contentsline {subsection}{\numberline {8.6.2}Future Work}{50}{subsection.8.6.2}%
-\contentsline {subsection}{\numberline {8.6.3}Conclusion}{51}{subsection.8.6.3}%
-\contentsline {chapter}{\numberline {9}Conclusion}{52}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Declaration}{54}{chapter.10}%
+\contentsline {section}{\numberline {7.1}Evaluation Metrics}{40}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Quantitative Results}{41}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Visual Analysis}{42}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Further Analysis}{49}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Comparative Discussion of Model Robustness}{49}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Summary of Behaviour Under Attack}{49}{subsection.7.5.1}%
+\contentsline {section}{\numberline {7.6}Defences for Liquid Neural Networks}{50}{section.7.6}%
+\contentsline {chapter}{\numberline {8}Conclusion}{53}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Declaration}{55}{chapter.9}%

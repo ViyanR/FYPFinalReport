@@ -1,9 +1,8 @@
 \chapter{Evaluation}
 \label{chap:evaluation}
-
 This chapter covers the quantitative and qualitative evaluation of all four models (LNN, TCN, LSTM, and Transformer) on the same input under various adversarial conditions. We systematically assess how each architecture responds to different types of perturbations, focusing on both performance degradation and qualitative failure modes. These metrics are chosen to capture both the accuracy of trajectory predictions and the model's stability and response to input changes.
 
-\section{Quantitative Evaluation Metrics and Comparison}
+\section{Evaluation Metrics}
 
 \subsubsection*{1. Mean Squared Error (MSE)}
 The loss function used during training was the Mean Squared Error, given by:
@@ -35,7 +34,9 @@ To characterise the smoothness of the model's function, local sensitivity is est
 \]
 This ratio approximates the local Lipschitz constant, capturing how much the output changes in response to small input perturbations. A higher sensitivity indicates that the model has sharp local gradients, potentially making it more brittle. This provides a theoretical metric for robustness, independent of task-specific loss.
 
-\section{Aggregate Results}
+\section{Quantitative Results}
+
+\subsection*{Aggregate Metrics Across All Attacks}
 
 \begin{table}[H]
 \centering
@@ -53,9 +54,9 @@ Transformer & ? & ? & ? & 0.007677 \\
 \label{tab:agg_metrics}
 \end{table}
 
-The MSE of each model are close to each-other, so they are comparable in terms of robustness.
+Importantly, each model was designed/trained to have comparable MSEs, to allow for fair evaluation.
 
-\section{Attack-Specific Breakdowns}
+\subsection*{Attack-Specific Results}
 
 The following table summarises the degradation ratios for each model under various adversarial attacks. Lower values indicate better robustness.
 
@@ -76,7 +77,7 @@ The following table summarises the degradation ratios for each model under vario
     Continuous-Time Perturb. & 458.7058 & 435.9864 & 329.8787 & 242.7071 \\
     \hline
     \end{tabular}
-    \caption{Degradation ratios across models for each attack. Lower is better.}
+    \caption{Degradation ratios across models for each attack}
     \label{tab:attack_results_degradation}
 \end{table}
 
@@ -99,7 +100,7 @@ The following table summarises the average deviation distances for each model un
     Continuous-Time Perturb. & 2.634408 & 2.599266 & 2.601533 & 2.717356 \\
     \hline
     \end{tabular}
-    \caption{?}
+    \caption{Deviation scores across models for each attack}
     \label{tab:attack_results_deviation}
 \end{table}
 
@@ -122,125 +123,248 @@ The following table summarises the local sensitivity estimates for each model un
     Continuous-Time Perturb. & 1.011938 & 1.006981 & 1.005773 & 1.053375 \\
     \hline
     \end{tabular}
-    \caption{?}
+    \caption{Lipshitz Estimate (local sensitivity) across models for each attack}
     \label{tab:attack_results_sensitivity}
 \end{table}
 
-\subsection*{FGSM Attack Results}
+\hl{ANALYSE THESE TABLES + BAR CHARTS + QUANTITATIVE RESULTS HERE}
 
-The FGSM attack was applied to all three models under a fixed perturbation budget $\epsilon = 0.05$. Key findings include:
-\begin{itemize}
-    \item \textbf{LSTM:} Showed significant degradation, especially in regions with abrupt curvature. The gating mechanisms did not mitigate linear perturbations.
-    \item \textbf{TCN:} Relatively robust in early regions of the spiral but vulnerable at turn boundaries. This is likely due to reliance on local receptive fields.
-    \item \textbf{LNN:} Demonstrated moderate degradation. The neuron dynamics offered some resistance to sharp perturbation, but sensitivity remained in areas where the membrane potential saturated.
-\end{itemize}
+\section{Visual Analysis}
 
-\hl{PUT FGSM TRAJECTORIES HERE}
-
-\subsection*{PGD Attack Results}
-
-PGD caused greater degradation than FGSM across all models, with stronger effect on deeper temporal structures. Results indicated:
-\begin{itemize}
-    \item \textbf{LSTM:} Highly vulnerable. PGD-induced drift accumulated over time, causing the model to diverge from the ground truth trajectory.
-    \item \textbf{TCN:} Whilst convolutional structure dampened some effects, the model's locality made it sensitive to consistent directional gradients across the sequence.
-    \item \textbf{LNN:} Showed meaningful robustness - the continuous-time integration added temporal stability which dampened the effect of rapid perturbations. However, convergence was sensitive to $\alpha$ and step count.
-\end{itemize}
-
-\hl{PUT PGD TRAJECTORIES HERE}
-
-\subsection*{Deepfool-Like Attack Results}
-
-\hl{PUT DEEPFOOL-LIKE TRAJECTORIES HERE}
-
-\subsection*{SPSA Results}
-
-\begin{itemize}
-    \item \textbf{LSTM:} SPSA degraded performance comparably to FGSM, although convergence was noisier due to the stochastic gradient estimate.
-    \item \textbf{TCN:} The convolutional structure resisted small random perturbations, but susceptibility increased when $\alpha$ was tuned to larger values.
-    \item \textbf{LNN:} Resistant in early iterations. The combination of continuous dynamics and sparsity in the input-response surface resulted in less reliable gradient estimates, which reduced the effectiveness of the attack.
-\end{itemize}
-
-\hl{PUT SPSA TRAJECTORIES HERE}
-
-\subsection*{Time Warping Attack Results}
-
-\begin{itemize}
-    \item \textbf{LSTM:} Sensitive to early warping. Because cell states are updated recursively, incorrect timing causes cumulative errors in the hidden dynamics.
-    \item \textbf{TCN:} Moderately robust. The fixed receptive field allowed the model to partially recover from distorted timing, particularly when the convolutional kernel sizes covered the affected regions.
-    \item \textbf{LNN:} Demonstrated strong resistance. Due to the use of continuous-time ODE integration, the model's internal dynamics adjusted to the temporal irregularity more gracefully than discrete-step models.
-\end{itemize}
-
-\hl{PUT TIME-WARPING TRAJECTORIES HERE? or maybe in evaluation section}
-
-\subsection*{Continuous-Time Adversarial Perturbation Attack Results}
-
-\begin{itemize}
-    \item \textbf{LSTM:} While hidden states filtered some noise, early perturbations caused unstable cell state updates and diverging outputs.
-    \item \textbf{TCN:} Most vulnerable. Injected noise propagated through convolutions without temporal gating, degrading local features significantly.
-    \item \textbf{LNN:} Performance depended on perturbation amplitude. For small $\epsilon$, the continuous dynamics helped dissipate noise. For larger values, membrane potential dynamics were destabilised, revealing vulnerabilities in non-linear integration regimes.
-\end{itemize}
-
-\hl{PUT CONTINUOUS-TIME PERTURBATION TRAJECTORIES HERE}
-
-
-\subsection*{Interpretation}
-
-Quantitative metrics reinforce qualitative observations: models with rigid temporal assumptions or recurrent memory (LSTM) are more susceptible to both magnitude and timing distortions, whereas continuous-time dynamics (LNN) offer meaningful resistance. However, no model was universally robust, and each architecture exhibited specific weaknesses when faced with particular perturbation types.
-
-\section{Qualitative Evaluation and Visual Analysis}
-
-While quantitative metrics provide a summary view of model degradation, they can obscure the qualitative character of errors — such as spiralling divergence, phase drift, or geometric distortion. In this section, we present visual comparisons between clean and adversarial predictions to better understand how each model's internal representation and output trajectory is disrupted.
+While quantitative metrics provide a summary view of model degradation, they can obscure the qualitative character of errors, such as spiralling divergence, phase drift, or geometric distortion. In this section, we present visual comparisons between clean and adversarial predictions to better understand how each model's internal representation and output trajectory is disrupted.
 
 \subsection*{Visualisation Methodology}
 
-For each attack and model combination:
-\begin{itemize}
-    \item Clean and adversarial predictions were overlaid on the same plot.
-    \item Ground truth trajectories were shown for reference.
-    \item All sequences were denormalised prior to plotting.
-    \item Visual emphasis was placed on curvature deviation and spatial phase shift.
-\end{itemize}
+For each attack and model combination, clean and adversarial predictions were overlaid on the same plot.
+Ground truth trajectories were shown for reference, and all sequences were denormalised prior to plotting.
 
 Each figure highlights a specific failure mode characteristic to the architecture under consideration.
 
-\subsection*{LSTM Responses}
+\subsection*{FGSM Attack Results}
 
-\hl{lstm\_pgd\_vs\_clean image here}
+The FGSM attack was applied to all three models under a fixed perturbation budget $\epsilon = 0.05$. 
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/lstm_pgd_vs_clean.png}
-%     \caption{LSTM: Prediction under PGD attack ($\epsilon=0.05$).}
-%     \label{fig:lstm_pgd}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/fgsm_spiral_LTC.png}
+        \label{fig:fgsm_spiral_LTC}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/fgsm_spiral_TCN.png}
+        \label{fig:fgsm_spiral_TCN}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/fgsm_spiral_lstm.png}
+        \label{fig:fgsm_spiral_lstm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/fgsm_spiral_transformer.png}
+        \label{fig:fgsm_spiral_transformer}
+    \end{subfigure}
+    \caption{Predicted, Target, and Adversarial projections under FGSM attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}
+    \label{fig:fsgm_spirals}
+\end{figure}
 
-In Figure~\ref{fig:lstm_pgd}, the LSTM exhibits a delayed but growing deviation from the target trajectory. The adversarial path initially aligns with the ground truth but diverges significantly after the midpoint. This reflects the cumulative sensitivity of cell states to early perturbations.
+From figure~\ref{fig:fsgm_spirals}, the Liquid Neural Network (LTC) shows notable resilience, maintaining close alignment between its original and adversarial predictions for the majority of the trajectory. While minor deviations are visible, especially near the inner spiral, the global structure remains coherent. This is likely due to the continuous-time membrane integration and temporal smoothing induced by the ODE solver.
 
-\subsection*{TCN Responses}
+In contrast, the TCN and Transformer models show pronounced adversarial distortion. The TCN suffers from its lack of recurrent memory, leading to sharp deflections in regions of local perturbation.
 
-\hl{tcn\_spsa\_vs\_clean image here}
+The Transformer, despite its capacity, exhibits highly unstable predictions under attack, likely due to its limited inductive bias and sensitivity to global input shifts.
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/tcn_spsa_vs_clean.png}
-%     \caption{TCN: Trajectory under SPSA attack. Local noise causes short-horizon deviation.}
-%     \label{fig:tcn_spsa}
-% \end{figure}
+The LSTM model shows intermediate robustness: although its gating structure filters out some perturbations, it remains vulnerable to gradient-based attacks that propagate through long-term memory.
 
-As shown in Figure~\ref{fig:tcn_spsa}, the TCN is affected primarily in the local vicinity of the perturbation. The convolutional receptive fields help contain the noise, but the model fails to recover global structure due to its lack of temporal feedback.
+Thus, the LTC's continuous dynamics and biophysical parameterisation seem to have stabilising effect, outperforming the more discrete or attention-based baselines under single-step adversarial pressure.
 
-\subsection*{LNN Responses}
+\subsection*{PGD Attack Results}
 
-\hl{lnn\_timewarp\_vs\_clean image here}
+PGD, as a stronger attack method, caused greater degradation than FGSM across all models, with stronger effect on deeper temporal structures.
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/lnn_timewarp_vs_clean.png}
-%     \caption{LNN: Prediction under time-warping attack. Temporal smoothness mitigates deformation.}
-%     \label{fig:lnn_timewarp}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/pgd_spiral_LTC.png}
+        \label{fig:pgd_spiral_LTC}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/pgd_spiral_TCN.png}
+        \label{fig:pgd_spiral_TCN}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/pgd_spiral_lstm.png}
+        \label{fig:pgd_spiral_lstm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/pgd_spiral_transformer.png}
+        \label{fig:pgd_spiral_transformer}
+    \end{subfigure}
+    \caption{Predicted, Target, and Adversarial projections under PGD attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}
+    \label{fig:pgd_spirals}
+\end{figure}
 
-Figure~\ref{fig:lstm_pgd} shows the LNN's response to temporal distortion. The predicted spiral remains coherent even under significant warping, reflecting the network's ability to integrate inputs continuously over time. The internal dynamics filter out high-frequency changes, preventing sharp deflections.
+Figure~\ref{fig:pgd_spirals} presents the effect of a 15-step PGD attack on each model, using $\epsilon = 0.05$ and $\alpha = 0.01$. The LTC continues to exhibit strong robustness, with its adversarial trajectory (blue) closely shadowing the original prediction (red) and the true path (green). Despite minor divergence being visible (particularly near the spiral's centre where curvature is high) the global structure remains largely preserved. This resilience is again due to the regularising effect of continuous-time dynamics and the internal ODE solver. For the PGD attack, this limits perturbations across integration steps, dampening the cumulative effect.
+
+In contrast, the Transformer model suffers substantial degradation. Its adversarial trajectory spirals off course significantly, as a result of the model's sensitivity to small input shifts and lack of temporal inductive bias.
+
+The LSTM also displays clear distortion, particularly in early spiral turns, reflecting how perturbations to the input cascade through long-range memory states. 
+
+The TCN, while affected, shows slightly improved robustness relative to the Transformer and LSTM, likely due to the inherent smoothing effect of its dilated convolutions. The absence of state memory however limits its ability to resist cumulative perturbation.
+
+The LTC model still seems to stabilise stabilise predictions under iterative, gradient-based adversaries like PGD.
+
+\subsection*{Deepfool-Like Attack Results}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/deepfool_spiral_LTC.png}
+        \label{fig:deepfool_spiral_LTC}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/deepfool_spiral_TCN.png}
+        \label{fig:deepfool_spiral_TCN}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/deepfool_spiral_lstm.png}
+        \label{fig:deepfool_spiral_lstm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/deepfool_spiral_transformer.png}
+        \label{fig:deepfool_spiral_transformer}
+    \end{subfigure}
+    \caption{Predicted, Target, and Adversarial projections under Deepfool-Like attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}
+    \label{fig:deepfool_spirals}
+\end{figure}
+
+The plots in Figure~\ref{fig:deepfool_spirals} show the effects of a DeepFool-like iterative attack (20 steps, step size = 0.005) adapted for regression. Unlike PGD or FGSM, which aim for maximal distortion within a norm-bound, DeepFool attempts to perturb inputs just enough to cross decision boundaries. In this case, this corresponds to inducing maximal deviation in continuous predictions. The Transformer model shows the highest vulnerability: its adversarial trajectory (blue) diverges significantly from the true path (green), especially in the inner spiral turns where minor distortions amplify rapidly.
+
+The LSTM is similarly affected, to a slightly lesser extent, with perturbations distorting predictions in both early and late sequence segments. This aligns with known vulnerability of memory-based architectures to accumulated gradient signals across time.
+
+The TCN demonstrates moderate resilience. While some deviations occur, especially near tight curvatures, the global shape is retained.
+
+The LTC model remains the most stable under this attack. Its adversarial predictions are closer to the original (red), indicating that the internal ODE dynamics of the LNN may diffuse perturbations temporally, flattening adversarial gradients.
+
+\subsection*{SPSA Results}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/spsa_spiral_LTC.png}
+        \label{fig:spsa_spiral_LTC}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/spsa_spiral_TCN.png}
+        \label{fig:spsa_spiral_TCN}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/spsa_spiral_lstm.png}
+        \label{fig:spsa_spiral_lstm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/spsa_spiral_transformer.png}
+        \label{fig:spsa_spiral_transformer}
+    \end{subfigure}
+    \caption{Predicted, Target, and Adversarial projections under SPSA attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}
+    \label{fig:spsa_spirals}
+\end{figure}
+
+As shown in Figure~\ref{fig:spsa_spirals}, the impact of SPSA is comparatively mild across all models, consistent with its tendency to explore less optimal perturbation directions relative to gradient-based attacks like PGD. It does still reveal architectural differences in robustness.
+
+The LTC model shows minimal divergence under SPSA, maintaining tight alignment between original and adversarial predictions. This further reinforces it's resilience observed in prior attack scenarios.
+
+The TCN and Transformer show more visible degradation in the spiral's outer loops, indicating that their fixed receptive fields and positional encoding mechanisms are more easily disrupted by uniform input noise. 
+
+The LSTM shows moderate vulnerability, with adversarial traces deviating steadily from the true trajectory over time.
+
+\subsection*{Time Warping Attack Results}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/time_warping_spiral_LTC.png}
+        \label{fig:time_warping_spiral_LTC}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/time_warping_spiral_TCN.png}
+        \label{fig:time_warping_spiral_TCN}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/time_warping_spiral_lstm.png}
+        \label{fig:time_warping_spiral_lstm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/time_warping_spiral_transformer.png}
+        \label{fig:time_warping_spiral_transformer}
+    \end{subfigure}
+    \caption{Predicted, Target, and Adversarial projections under Time Warping attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}
+    \label{fig:time_warping_spirals}
+\end{figure}
+
+Figure~\ref{fig:time_warping_spirals} displays the impact of a time-warping attack on each model. This attack perturbs the temporal spacing of input points without altering the values themselves, distorting the perceived dynamics of the sequence. The LSTM model appears particularly sensitive, with adversarial predictions deviating noticeably from the true path green, especially in outer spiral turns. This is expected given the LSTM's reliance on a fixed temporal memory structure, which is easily disrupted by misaligned temporal cues.
+
+Similarly, the Transformer struggles to adapt to the warped temporal signal, showing severe prediction drift. This is due to its reliance on position encodings that assume uniform spacing.
+
+In contrast, the TCN maintains good alignment with the true path, showing resilience due to its convolutional structure and dilated receptive fields, which provide a form of local smoothing.
+
+The Liquid Neural Network (LTC) performs best under this attack. Its continuous-time dynamics and internal state integration appear to absorb the warping, maintaining alignment between the adversarial and original predictions. This reinforces the hypothesis that ODE-based temporal models like LNNs are inherently more invariant to temporal distortions, making them better suited for tasks with irregular or corrupted time sampling.
+
+\subsection*{Continuous-Time Adversarial Perturbation Attack Results}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/continuous_time_spiral_LTC.png}
+        \label{fig:continuous_time_spiral_LTC}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/continuous_time_spiral_TCN.png}
+        \label{fig:continuous_time_spiral_TCN}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/continuous_time_spiral_lstm.png}
+        \label{fig:continuous_time_spiral_lstm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/continuous_time_spiral_transformer.png}
+        \label{fig:continuous_time_spiral_transformer}
+    \end{subfigure}
+    \caption{Predicted, Target, and Adversarial projections under Continuous-Time Adversarial Perturbation attack on LTC, TCN, LSTM and Transformer models. Using the same denormalised input spiral.}
+    \label{fig:continuous_time_spirals}
+\end{figure}
+
+The continuous-time perturbation attack, specifically tailored for models governed by differential equations, targets the latent state evolution rather than directly modifying the input trajectory. This makes it particularly suited for evaluating the Liquid Neural Network (LTC), whose continuous-time membrane dynamics offer both flexibility and potential vulnerability to such perturbations.
+
+As shown in Figure~\ref{fig:continuous_time_spirals}, the LTC model remains relatively stable under attack, with adversarial predictions closely tracking the original predictions throughout the spiral. This indicates that the internal ODE dynamics, when properly regularised, can absorb structured noise and maintain functional predictions.
+
+The TCN and LSTM models however exhibit more pronounced deviations, especially in the outer spiral turns, suggesting that perturbations which indirectly affect temporal relationships (e.g. via integration-like behaviour) are disruptive to their sequential representations.
+
+The Transformer, which lacks an explicit temporal evolution mechanism, is highly vulnerable to these perturbations, with the adversarial trajectory diverging significantly from the true path.
+
+This again highlights a key advantage of biologically inspired continuous-time models (LNNs) in handling dynamic, structured adversarial noise.
+
+\subsection*{Interpretation}
+
+Models with rigid temporal assumptions or recurrent memory (LSTM) are more susceptible to both magnitude and timing distortions, whereas continuous-time dynamics (LNN) offer meaningful resistance. However, no model was universally robust, and each architecture exhibited specific weaknesses when faced with particular perturbation types.
+
+\section{Further Analysis}
 
 \subsection*{Comparative Failure Modes}
 
@@ -255,13 +379,6 @@ Figure~\ref{fig:lstm_pgd} shows the LNN's response to temporal distortion. The p
 A recurring theme observed across all models under PGD and DeepFool-like attacks is \emph{phase drift} — a steady deviation in angular position on the spiral. Unlike random noise, these attacks produce a consistent directional bias, causing the prediction to spiral inward or outward.
 
 \hl{spiral\_phase\_drift image here}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/spiral_phase_drift.png}
-%     \caption{Phase drift under directional attacks. The model outputs remain spiral-like but fall out of sync with the ground truth.}
-%     \label{fig:phase_drift}
-% \end{figure}
 
 \subsection*{Interpretive Summary}
 
@@ -322,3 +439,117 @@ These findings carry important implications:
     \item Robustness is context-dependent — no model is universally secure, and the choice of architecture should be informed by the anticipated type of input perturbation.
     \item LNNs offer promising directions for tasks where input timing is noisy or attacker-controlled, such as sensor-based monitoring or robotics.
 \end{itemize}
+
+\section{Defences for Liquid Neural Networks}
+
+This section explores theoretical strategies to mitigate adversarial vulnerability in Liquid Neural Networks (LNNs), with comparisons to TCN and LSTM where relevant. The focus is on defences grounded in continuous-time modelling, structural stability, and principled input processing.
+
+\subsection*{Adversarial Training and Perturbation Smoothing}
+
+While adversarial training has been shown effective in conventional networks \cite{madry2018towards}, its adaptation to continuous-time models like LNNs requires careful consideration. One potential direction is continuous-time adversarial training, where adversarial perturbations are applied not only at the input level but across intermediate ODE solver steps. This would simulate realistic, dynamic threats such as time-warping or sensor noise.
+
+In addition, input noise injection (e.g. Gaussian or uniform noise) could promote smoother input-output mappings, as seen in denoising autoencoders \cite{vincent2008extracting}. For LNNs, perturbing the input current $u_i(t)$ over time can improve resistance to minor temporal distortions.
+
+\subsection*{Structural Regularisation in Liquid Architectures}
+
+A core advantage of LNNs lies in their biologically-inspired dynamics:
+\begin{equation}
+\frac{dv_i}{dt} = -\frac{v_i}{\tau} + \sum_j W_{ij} \cdot \sigma(v_j(t)) + u_i(t)
+\end{equation}
+
+Here, the decay constant $\tau$ and activation function $\sigma$ are learnable. Imposing soft constraints on $\tau$ or bounding the membrane potential $v_i$ could prevent exponential state divergence under perturbation.
+
+\textbf{Figure~\ref{fig:lnn_dynamics_defence}} illustrates how limiting the slope of the state curve over time may preserve stability.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+        % Axes
+        \draw[->] (0,0) -- (6,0) node[right] {Time $t$};
+        \draw[->] (0,-2.2) -- (0,2.2) node[above] {Membrane Potential $v_i(t)$};
+    
+        % Unregularised curve (exponential growth)
+        \draw[red, thick, domain=0:5.2, samples=100] plot (\x, {1.5*(1 - exp(-0.7*\x)) + 0.4*sin(2*\x r)});
+        \node[red] at (5.5,1.7) {\scriptsize Unregularised};
+    
+        % Regularised curve (bounded)
+        \draw[blue, thick, domain=0:5.2, samples=100] plot (\x, {tanh(1.5*(1 - exp(-0.7*\x)))});
+        \node[blue] at (5.5,0.6) {\scriptsize Regularised};
+    
+        % Horizontal dashed lines (bounds)
+        \draw[dashed, gray] (0,1.2) -- (5.7,1.2);
+        \draw[dashed, gray] (0,-1.2) -- (5.7,-1.2);
+        \node[gray] at (5.9,1.2) {\scriptsize $+v_{\max}$};
+        \node[gray] at (5.9,-1.2) {\scriptsize $-v_{\max}$};
+    \end{tikzpicture}
+    \caption{LNN membrane potential evolution with and without regularisation. Regularisation limits state drift, improving stability under input perturbations.}
+    \label{fig:lnn_dynamics_defence}
+    \end{figure}
+
+Additionally, dynamically adjusting the solver step size during inference (based on detected input smoothness or gradient norms) can act as another form of defence. Such adaptive schemes are supported by work in neural ODE robustness \cite{dupont2019augmented, finlay2020trainable}.
+
+\subsection*{Temporal Input Filtering and Quantisation}
+
+Preprocessing defences offer architecture-agnostic robustness benefits. Applying a low-pass filter to the input trajectory, defined as:
+\begin{equation}
+x_t^{\text{filtered}} = \alpha x_t + (1 - \alpha) x_{t-1}, \quad \alpha \in [0, 1]
+\end{equation}
+can suppress high-frequency adversarial noise typical in gradient-based attacks.
+
+Similarly, discretising the time component or input position encoding:
+\begin{equation}
+\text{quantised}_t = \left\lfloor \frac{t}{\Delta t} \right\rfloor
+\end{equation}
+has been hypothesised to improve invariance to small timing shifts \cite{wang2018adversarial}.
+
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.65\linewidth]{img/temporal_filtering.png}
+% \caption{Illustration of low-pass temporal filtering as a defence mechanism. Sharp perturbations are smoothed before reaching the model.}
+% \label{fig:temporal_filter}
+% \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+        % Axes
+        \draw[->] (0,0) -- (6.5,0) node[right] {Time $t$};
+        \draw[->] (0,-2.2) -- (0,2.2) node[above] {Input Value};
+    
+        % Raw input signal (with perturbations)
+        \draw[red, thick, domain=0:6, samples=100, smooth] plot (\x, {1.2*sin(1.5*\x r) + 0.5*sin(12*\x r)});
+        \node[red] at (6.2,1.5) {\scriptsize Raw Input};
+    
+        % Filtered signal
+        \draw[blue, thick, domain=0:6, samples=100, smooth] plot (\x, {1.2*sin(1.5*\x r)});
+        \node[blue] at (6.1,-1.2) {\scriptsize Filtered};
+    
+        % Noise label
+        \draw[->, thick, gray] (2.6,1.2) -- (2.3,0.3);
+        \node[gray] at (3.2,1.3) {\scriptsize High-frequency perturbation};
+    
+        % Filter label
+        \draw[->, thick, gray] (1.7,-0.7) -- (1.7,-1.5);
+        \node[gray] at (2.4,-0.6) {\scriptsize Smoothed by filter};
+    
+    \end{tikzpicture}
+    \caption{Illustration of low-pass temporal filtering as a defence mechanism. Sharp perturbations are smoothed before reaching the model.}
+    \label{fig:temporal_filter}
+    \end{figure}
+
+\subsection*{Inductive Bias and Solver-Aware Stability}
+
+Unlike discrete models, LNNs require the solver to faithfully capture non-linear temporal dynamics. This opens unique defence opportunities:
+\begin{itemize}
+\item \textbf{Step-size modulation:} Smaller solver steps reduce numerical error accumulation under perturbed inputs.
+\item \textbf{Activation bounding:} Enforcing $|v_i(t)| \leq V_\text{max}$ could prevent state explosion.
+\item \textbf{Implicit regularisation:} Using solver-aware loss terms penalising high curvature over time.
+\end{itemize}
+
+These mechanisms can be integrated during training to enforce smooth, stable behaviour even when inputs deviate adversarially.
+
+\subsection*{Limitations}
+
+Liquid models do also present unique challenges, since adversarial attacks in continuous time are underexplored and difficult to formalise. Solver regularisation may reduce model expressivity or increase compute cost. There is also a risk that filtering can remove meaningful signal patterns in real-world tasks.
+
+Practially incorporating formal verification \cite{zhang2022towards} or hybrid models that mix discrete and continuous pathways may further improve LNN reliability.

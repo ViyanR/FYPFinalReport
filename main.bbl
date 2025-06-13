@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{chahineRobustFlightNavigation2023}
 Chahine M, Hasani R, Kao P, Ray A, Shubert R, Lechner M, et~al.
@@ -22,5 +22,35 @@ What Is a {{Recurrent Neural Network}} ({{RNN}})? {\textbar} {{IBM}}; 2021.
 
 \bibitem{zhangEfficientNeuralNetwork2018}
 Zhang H, Weng TW, Chen PY, Hsieh CJ, Daniel L. Efficient {{Neural Network Robustness Certification}} with {{General Activation Functions}}. arXiv; 2018.
+
+\bibitem{madry2018towards}
+Madry A, Makelov A, Schmidt L, Tsipras D, Vladu A.
+\newblock Towards deep learning models resistant to adversarial attacks.
+\newblock arXiv preprint arXiv:170606083. 2018.
+
+\bibitem{vincent2008extracting}
+Vincent P, Larochelle H, Bengio Y, Manzagol PA.
+\newblock Extracting and composing robust features with denoising autoencoders.
+\newblock In: Proceedings of the 25th international conference on Machine learning. ACM; 2008. p. 1096-103.
+
+\bibitem{dupont2019augmented}
+Dupont E, Doucet A, Teh YW.
+\newblock Augmented neural ODEs.
+\newblock Advances in Neural Information Processing Systems. 2019;32.
+
+\bibitem{finlay2020trainable}
+Finlay C, Papamakarios G.
+\newblock Trainable verification of neural networks.
+\newblock Advances in Neural Information Processing Systems. 2020;33:11427-38.
+
+\bibitem{wang2018adversarial}
+Wang Y, Ma X, Bailey J, Zisselman E, Ye J, Liu B, et~al.
+\newblock Adversarial defense by restricting the hidden space of deep neural networks.
+\newblock In: European Conference on Computer Vision (ECCV). Springer; 2018. p. 350-66.
+
+\bibitem{zhang2022towards}
+Zhang L, Zhang K, Zhang K, Weng TW.
+\newblock Towards certifying LSTM robustness to adversarial perturbations.
+\newblock IEEE Transactions on Information Forensics and Security. 2022;17:439-54.
 
 \end{thebibliography}

@@ -16,45 +16,45 @@ Warning--empty author in WhatRecurrentNeural2021
 Warning--empty author and editor in WhatRecurrentNeural2021
 Warning--missing publisher in WhatRecurrentNeural2021
 Warning--empty author and editor in zhangEfficientNeuralNetwork2018
-You've used 6 entries,
+You've used 12 entries,
             3507 wiz_defined-function locations,
-            728 strings with 6241 characters,
-and the built_in function-call counts, 9488 in all, are:
-= -- 1051
-> -- 108
-< -- 42
-+ -- 44
-- -- 21
-* -- 751
-:= -- 1027
-add.period$ -- 13
-call.type$ -- 6
-change.case$ -- 0
-chr.to.int$ -- 102
-cite$ -- 15
-duplicate$ -- 798
-empty$ -- 931
-format.name$ -- 24
-if$ -- 2220
+            765 strings with 7456 characters,
+and the built_in function-call counts, 23011 in all, are:
+= -- 2599
+> -- 248
+< -- 128
++ -- 104
+- -- 50
+* -- 1765
+:= -- 2457
+add.period$ -- 37
+call.type$ -- 12
+change.case$ -- 4
+chr.to.int$ -- 292
+cite$ -- 21
+duplicate$ -- 2040
+empty$ -- 2216
+format.name$ -- 55
+if$ -- 5424
 int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 57
-newline$ -- 26
-num.names$ -- 5
-pop$ -- 150
+int.to.str$ -- 12
+missing$ -- 123
+newline$ -- 56
+num.names$ -- 11
+pop$ -- 364
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 129
+skip$ -- 291
 stack$ -- 0
-substring$ -- 1699
-swap$ -- 138
-text.length$ -- 9
+substring$ -- 4078
+swap$ -- 324
+text.length$ -- 41
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 9
-while$ -- 45
-width$ -- 7
-write$ -- 54
+while$ -- 114
+width$ -- 14
+write$ -- 121
 (There were 9 warnings)

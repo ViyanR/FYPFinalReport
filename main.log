@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.20)  12 JUN 2025 13:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.20)  13 JUN 2025 05:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1171,7 +1171,7 @@ Package epstopdf Info: Source file: <title/logo.eps>
 (epstopdf)             Command: <repstopdf --outfile=title/logo-eps-converted-to.pdf title/logo.eps>
 (epstopdf)             \includegraphics on input line 9.
 Package epstopdf Info: Output file is already uptodate.
-<title/logo-eps-converted-to.pdf, id=332, 362.35374pt x 95.35625pt>
+<title/logo-eps-converted-to.pdf, id=216, 362.35374pt x 95.35625pt>
 File: title/logo-eps-converted-to.pdf Graphic file (type pdf)
 <use title/logo-eps-converted-to.pdf>
 Package pdftex.def Info: title/logo-eps-converted-to.pdf  used on input line 9.
@@ -1209,7 +1209,7 @@ Chapter 2.
 [7
 
 ] [8{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [9] [10]
-<img/RNN_vs_FeedForward.png, id=496, 644.4075pt x 349.305pt>
+<img/RNN_vs_FeedForward.png, id=350, 644.4075pt x 349.305pt>
 File: img/RNN_vs_FeedForward.png Graphic file (type png)
 <use img/RNN_vs_FeedForward.png>
 Package pdftex.def Info: img/RNN_vs_FeedForward.png  used on input line 144.
@@ -1231,54 +1231,51 @@ Overfull \hbox (1.14444pt too wide) in paragraph at lines 241--242
  []
 
 [20] [21]
-<img/lnn_loss_curve.png, id=651, 1392.20125pt x 669.50125pt>
+<img/lnn_loss_curve.png, id=506, 1392.20125pt x 669.50125pt>
 File: img/lnn_loss_curve.png Graphic file (type png)
 <use img/lnn_loss_curve.png>
 Package pdftex.def Info: img/lnn_loss_curve.png  used on input line 356.
 (pdftex.def)             Requested size: 364.19667pt x 175.13887pt.
-<img/lnn_loss_curve_zoomed.png, id=652, 1391.1975pt x 589.20125pt>
+<img/lnn_loss_curve_zoomed.png, id=507, 1391.1975pt x 589.20125pt>
 File: img/lnn_loss_curve_zoomed.png Graphic file (type png)
 <use img/lnn_loss_curve_zoomed.png>
 Package pdftex.def Info: img/lnn_loss_curve_zoomed.png  used on input line 363.
 (pdftex.def)             Requested size: 364.19667pt x 154.24059pt.
-<img/lnn_training_validation_spiral_epoch_1.png, id=653, 593.21625pt x 487.8225pt>
+<img/lnn_training_validation_spiral_epoch_1.png, id=508, 593.21625pt x 487.8225pt>
 File: img/lnn_training_validation_spiral_epoch_1.png Graphic file (type png)
 <use img/lnn_training_validation_spiral_epoch_1.png>
 Package pdftex.def Info: img/lnn_training_validation_spiral_epoch_1.png  used on input line 376.
 (pdftex.def)             Requested size: 204.85846pt x 168.46269pt.
-<img/lnn_training_validation_spiral_epoch_400.png, id=654, 599.23875pt x 488.82625pt>
+<img/lnn_training_validation_spiral_epoch_400.png, id=509, 599.23875pt x 488.82625pt>
 File: img/lnn_training_validation_spiral_epoch_400.png Graphic file (type png)
 <use img/lnn_training_validation_spiral_epoch_400.png>
 Package pdftex.def Info: img/lnn_training_validation_spiral_epoch_400.png  used on input line 382.
 (pdftex.def)             Requested size: 204.85846pt x 167.1087pt.
-<img/lnn_training_validation_spiral_epoch_2000.png, id=655, 601.24625pt x 481.8pt>
+<img/lnn_training_validation_spiral_epoch_2000.png, id=510, 601.24625pt x 481.8pt>
 File: img/lnn_training_validation_spiral_epoch_2000.png Graphic file (type png)
 <use img/lnn_training_validation_spiral_epoch_2000.png>
 Package pdftex.def Info: img/lnn_training_validation_spiral_epoch_2000.png  used on input line 388.
 (pdftex.def)             Requested size: 204.85846pt x 164.1627pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5288) has occurred while \output is active []
 
  [22 <./img/lnn_loss_curve.png> <./img/lnn_loss_curve_zoomed.png>]) (./body/comparative_models.tex [23 <./img/lnn_training_validation_spiral_epoch_1.png> <./img/lnn_training_validation_spiral_epoch_400.png> <./img/lnn_training_validation_spiral_epoch_2000.png>]
 Chapter 4.
-
-Underfull \vbox (badness 2261) has occurred while \output is active []
-
- [24
+[24
 
 ] [25]
-<img/tcn_training_validation_spiral_epoch_1.png, id=698, 592.2125pt x 485.815pt>
+<img/tcn_training_validation_spiral_epoch_1.png, id=554, 592.2125pt x 485.815pt>
 File: img/tcn_training_validation_spiral_epoch_1.png Graphic file (type png)
 <use img/tcn_training_validation_spiral_epoch_1.png>
-Package pdftex.def Info: img/tcn_training_validation_spiral_epoch_1.png  used on input line 161.
+Package pdftex.def Info: img/tcn_training_validation_spiral_epoch_1.png  used on input line 163.
 (pdftex.def)             Requested size: 204.85846pt x 168.05113pt.
-<img/tcn_training_validation_spiral_epoch_400.png, id=699, 591.20876pt x 486.81876pt>
+<img/tcn_training_validation_spiral_epoch_400.png, id=555, 591.20876pt x 486.81876pt>
 File: img/tcn_training_validation_spiral_epoch_400.png Graphic file (type png)
 <use img/tcn_training_validation_spiral_epoch_400.png>
-Package pdftex.def Info: img/tcn_training_validation_spiral_epoch_400.png  used on input line 167.
+Package pdftex.def Info: img/tcn_training_validation_spiral_epoch_400.png  used on input line 169.
 (pdftex.def)             Requested size: 204.85846pt x 168.68062pt.
  [26 <./img/tcn_training_validation_spiral_epoch_1.png> <./img/tcn_training_validation_spiral_epoch_400.png>]
-Overfull \hbox (5.25089pt too wide) in paragraph at lines 280--281
+Overfull \hbox (5.25089pt too wide) in paragraph at lines 282--283
  [][] 
  []
 
@@ -1286,46 +1283,41 @@ Overfull \hbox (5.25089pt too wide) in paragraph at lines 280--281
 Underfull \vbox (badness 3364) has occurred while \output is active []
 
  [27]
-<img/lstm_training_validation_spiral_epoch_1.png, id=728, 598.235pt x 478.78876pt>
+<img/lstm_training_validation_spiral_epoch_1.png, id=585, 598.235pt x 478.78876pt>
 File: img/lstm_training_validation_spiral_epoch_1.png Graphic file (type png)
 <use img/lstm_training_validation_spiral_epoch_1.png>
-Package pdftex.def Info: img/lstm_training_validation_spiral_epoch_1.png  used on input line 294.
+Package pdftex.def Info: img/lstm_training_validation_spiral_epoch_1.png  used on input line 296.
 (pdftex.def)             Requested size: 204.85846pt x 163.95493pt.
-<img/lstm_training_validation_spiral_epoch_1000.png, id=729, 589.20125pt x 489.83pt>
+<img/lstm_training_validation_spiral_epoch_1000.png, id=586, 589.20125pt x 489.83pt>
 File: img/lstm_training_validation_spiral_epoch_1000.png Graphic file (type png)
 <use img/lstm_training_validation_spiral_epoch_1000.png>
-Package pdftex.def Info: img/lstm_training_validation_spiral_epoch_1000.png  used on input line 300.
+Package pdftex.def Info: img/lstm_training_validation_spiral_epoch_1000.png  used on input line 302.
 (pdftex.def)             Requested size: 204.85846pt x 170.30698pt.
 
 Underfull \vbox (badness 7722) has occurred while \output is active []
 
  [28 <./img/lstm_training_validation_spiral_epoch_1.png> <./img/lstm_training_validation_spiral_epoch_1000.png>] [29] [30]
-<img/transformer_training_validation_spiral_epoch_1.png, id=766, 590.205pt x 483.8075pt>
+<img/transformer_training_validation_spiral_epoch_1.png, id=622, 590.205pt x 483.8075pt>
 File: img/transformer_training_validation_spiral_epoch_1.png Graphic file (type png)
 <use img/transformer_training_validation_spiral_epoch_1.png>
-Package pdftex.def Info: img/transformer_training_validation_spiral_epoch_1.png  used on input line 424.
+Package pdftex.def Info: img/transformer_training_validation_spiral_epoch_1.png  used on input line 426.
 (pdftex.def)             Requested size: 204.85846pt x 167.92514pt.
-<img/transformer_training_validation_spiral_epoch_600.png, id=767, 593.21625pt x 486.81876pt>
+<img/transformer_training_validation_spiral_epoch_600.png, id=623, 593.21625pt x 486.81876pt>
 File: img/transformer_training_validation_spiral_epoch_600.png Graphic file (type png)
 <use img/transformer_training_validation_spiral_epoch_600.png>
-Package pdftex.def Info: img/transformer_training_validation_spiral_epoch_600.png  used on input line 430.
+Package pdftex.def Info: img/transformer_training_validation_spiral_epoch_600.png  used on input line 432.
 (pdftex.def)             Requested size: 204.85846pt x 168.11607pt.
 ) (./body/adversarial_attacks.tex [31 <./img/transformer_training_validation_spiral_epoch_1.png> <./img/transformer_training_validation_spiral_epoch_600.png>]
 Chapter 5.
-
-Overfull \hbox (41.4437pt too wide) in paragraph at lines 30--31
-\T1/cmr/m/n/10 FGSM was im-ple-mented us-ing Py-Torch's au-to-grad en-gine. The in-put ten-sor was marked with \T1/cmtt/m/n/10 requires_grad=True
- []
-
 [32
 
 ] [33]
-Overfull \hbox (4.22684pt too wide) in paragraph at lines 115--115
+Overfull \hbox (4.22684pt too wide) in paragraph at lines 112--112
 []\T1/cmr/bx/n/14.4 Simultaneous Per-tur-ba-tion Stochas-tic Ap-prox-i-ma-tion (SPSA) 
  []
 
 [34] [35] [36]
-Overfull \hbox (24.127pt too wide) in paragraph at lines 236--248
+Overfull \hbox (24.127pt too wide) in paragraph at lines 220--232
  [][] 
  []
 
@@ -1337,61 +1329,186 @@ Chapter 6.
 Chapter 7.
 [40
 
-] [41] [42]
+] [41]
+<img/fgsm_spiral_LTC.png, id=746, 567.11874pt x 434.62375pt>
+File: img/fgsm_spiral_LTC.png Graphic file (type png)
+<use img/fgsm_spiral_LTC.png>
+Package pdftex.def Info: img/fgsm_spiral_LTC.png  used on input line 150.
+(pdftex.def)             Requested size: 204.85846pt x 156.99496pt.
+<img/fgsm_spiral_TCN.png, id=747, 560.0925pt x 430.60875pt>
+File: img/fgsm_spiral_TCN.png Graphic file (type png)
+<use img/fgsm_spiral_TCN.png>
+Package pdftex.def Info: img/fgsm_spiral_TCN.png  used on input line 155.
+(pdftex.def)             Requested size: 204.85846pt x 157.49612pt.
+<img/fgsm_spiral_lstm.png, id=748, 566.115pt x 437.635pt>
+File: img/fgsm_spiral_lstm.png Graphic file (type png)
+<use img/fgsm_spiral_lstm.png>
+Package pdftex.def Info: img/fgsm_spiral_lstm.png  used on input line 160.
+(pdftex.def)             Requested size: 204.85846pt x 158.36316pt.
+<img/fgsm_spiral_transformer.png, id=749, 565.11125pt x 436.63126pt>
+File: img/fgsm_spiral_transformer.png Graphic file (type png)
+<use img/fgsm_spiral_transformer.png>
+Package pdftex.def Info: img/fgsm_spiral_transformer.png  used on input line 165.
+(pdftex.def)             Requested size: 204.85846pt x 158.27977pt.
 
-LaTeX Warning: Reference `fig:lstm_pgd' on page 43 undefined on input line 217.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[43]
+ [42]
+<img/pgd_spiral_LTC.png, id=758, 576.1525pt x 434.62375pt>
+File: img/pgd_spiral_LTC.png Graphic file (type png)
+<use img/pgd_spiral_LTC.png>
+Package pdftex.def Info: img/pgd_spiral_LTC.png  used on input line 189.
+(pdftex.def)             Requested size: 204.85846pt x 154.53456pt.
+<img/pgd_spiral_TCN.png, id=759, 573.14125pt x 432.61626pt>
+File: img/pgd_spiral_TCN.png Graphic file (type png)
+<use img/pgd_spiral_TCN.png>
+Package pdftex.def Info: img/pgd_spiral_TCN.png  used on input line 194.
+(pdftex.def)             Requested size: 204.85846pt x 154.63274pt.
+<img/pgd_spiral_lstm.png, id=760, 582.175pt x 429.605pt>
+File: img/pgd_spiral_lstm.png Graphic file (type png)
+<use img/pgd_spiral_lstm.png>
+Package pdftex.def Info: img/pgd_spiral_lstm.png  used on input line 199.
+(pdftex.def)             Requested size: 204.85846pt x 151.17029pt.
+<img/pgd_spiral_transformer.png, id=761, 606.265pt x 430.60875pt>
+File: img/pgd_spiral_transformer.png Graphic file (type png)
+<use img/pgd_spiral_transformer.png>
+Package pdftex.def Info: img/pgd_spiral_transformer.png  used on input line 204.
+(pdftex.def)             Requested size: 204.85846pt x 145.50487pt.
 
-LaTeX Warning: Reference `fig:tcn_spsa' on page 44 undefined on input line 230.
+Underfull \vbox (badness 7203) has occurred while \output is active []
 
+ [43 <./img/fgsm_spiral_LTC.png> <./img/fgsm_spiral_TCN.png> <./img/fgsm_spiral_lstm.png> <./img/fgsm_spiral_transformer.png>]
+<img/deepfool_spiral_LTC.png, id=774, 577.15625pt x 430.60875pt>
+File: img/deepfool_spiral_LTC.png Graphic file (type png)
+<use img/deepfool_spiral_LTC.png>
+Package pdftex.def Info: img/deepfool_spiral_LTC.png  used on input line 226.
+(pdftex.def)             Requested size: 204.85846pt x 152.84416pt.
+<img/deepfool_spiral_TCN.png, id=775, 579.16376pt x 428.60126pt>
+File: img/deepfool_spiral_TCN.png Graphic file (type png)
+<use img/deepfool_spiral_TCN.png>
+Package pdftex.def Info: img/deepfool_spiral_TCN.png  used on input line 231.
+(pdftex.def)             Requested size: 204.85846pt x 151.60188pt.
+<img/deepfool_spiral_lstm.png, id=776, 580.1675pt x 429.605pt>
+File: img/deepfool_spiral_lstm.png Graphic file (type png)
+<use img/deepfool_spiral_lstm.png>
+Package pdftex.def Info: img/deepfool_spiral_lstm.png  used on input line 236.
+(pdftex.def)             Requested size: 204.85846pt x 151.6947pt.
+<img/deepfool_spiral_transformer.png, id=777, 611.28375pt x 428.60126pt>
+File: img/deepfool_spiral_transformer.png Graphic file (type png)
+<use img/deepfool_spiral_transformer.png>
+Package pdftex.def Info: img/deepfool_spiral_transformer.png  used on input line 241.
+(pdftex.def)             Requested size: 204.85846pt x 143.63626pt.
 
-LaTeX Warning: Reference `fig:lstm_pgd' on page 44 undefined on input line 243.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[44]) (./evaluation/defenses_and_mitigation.tex [45]
+ [44 <./img/pgd_spiral_LTC.png> <./img/pgd_spiral_TCN.png> <./img/pgd_spiral_lstm.png> <./img/pgd_spiral_transformer.png>]
+<img/spsa_spiral_LTC.png, id=788, 570.13pt x 431.6125pt>
+File: img/spsa_spiral_LTC.png Graphic file (type png)
+<use img/spsa_spiral_LTC.png>
+Package pdftex.def Info: img/spsa_spiral_LTC.png  used on input line 261.
+(pdftex.def)             Requested size: 204.85846pt x 155.08401pt.
+<img/spsa_spiral_TCN.png, id=789, 577.15625pt x 427.5975pt>
+File: img/spsa_spiral_TCN.png Graphic file (type png)
+<use img/spsa_spiral_TCN.png>
+Package pdftex.def Info: img/spsa_spiral_TCN.png  used on input line 266.
+(pdftex.def)             Requested size: 204.85846pt x 151.77533pt.
+<img/spsa_spiral_lstm.png, id=790, 581.17125pt x 428.60126pt>
+File: img/spsa_spiral_lstm.png Graphic file (type png)
+<use img/spsa_spiral_lstm.png>
+Package pdftex.def Info: img/spsa_spiral_lstm.png  used on input line 271.
+(pdftex.def)             Requested size: 204.85846pt x 151.07869pt.
+<img/spsa_spiral_transformer.png, id=791, 613.29124pt x 433.62pt>
+File: img/spsa_spiral_transformer.png Graphic file (type png)
+<use img/spsa_spiral_transformer.png>
+Package pdftex.def Info: img/spsa_spiral_transformer.png  used on input line 276.
+(pdftex.def)             Requested size: 204.85846pt x 144.8418pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [45 <./img/deepfool_spiral_LTC.png> <./img/deepfool_spiral_TCN.png> <./img/deepfool_spiral_lstm.png> <./img/deepfool_spiral_transformer.png>]
+<img/time_warping_spiral_LTC.png, id=803, 559.08875pt x 428.60126pt>
+File: img/time_warping_spiral_LTC.png Graphic file (type png)
+<use img/time_warping_spiral_LTC.png>
+Package pdftex.def Info: img/time_warping_spiral_LTC.png  used on input line 296.
+(pdftex.def)             Requested size: 204.85846pt x 157.04309pt.
+<img/time_warping_spiral_TCN.png, id=804, 562.1pt x 430.60875pt>
+File: img/time_warping_spiral_TCN.png Graphic file (type png)
+<use img/time_warping_spiral_TCN.png>
+Package pdftex.def Info: img/time_warping_spiral_TCN.png  used on input line 301.
+(pdftex.def)             Requested size: 204.85846pt x 156.93105pt.
+<img/time_warping_spiral_lstm.png, id=805, 563.10374pt x 430.60875pt>
+File: img/time_warping_spiral_lstm.png Graphic file (type png)
+<use img/time_warping_spiral_lstm.png>
+Package pdftex.def Info: img/time_warping_spiral_lstm.png  used on input line 306.
+(pdftex.def)             Requested size: 204.85846pt x 156.65509pt.
+<img/time_warping_spiral_transformer.png, id=806, 564.1075pt x 426.59375pt>
+File: img/time_warping_spiral_transformer.png Graphic file (type png)
+<use img/time_warping_spiral_transformer.png>
+Package pdftex.def Info: img/time_warping_spiral_transformer.png  used on input line 311.
+(pdftex.def)             Requested size: 204.85846pt x 154.92105pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [46 <./img/spsa_spiral_LTC.png> <./img/spsa_spiral_TCN.png> <./img/spsa_spiral_lstm.png> <./img/spsa_spiral_transformer.png>]
+<img/continuous_time_spiral_LTC.png, id=818, 591.20876pt x 430.60875pt>
+File: img/continuous_time_spiral_LTC.png Graphic file (type png)
+<use img/continuous_time_spiral_LTC.png>
+Package pdftex.def Info: img/continuous_time_spiral_LTC.png  used on input line 331.
+(pdftex.def)             Requested size: 204.85846pt x 149.20409pt.
+<img/continuous_time_spiral_TCN.png, id=819, 595.22375pt x 428.60126pt>
+File: img/continuous_time_spiral_TCN.png Graphic file (type png)
+<use img/continuous_time_spiral_TCN.png>
+Package pdftex.def Info: img/continuous_time_spiral_TCN.png  used on input line 336.
+(pdftex.def)             Requested size: 204.85846pt x 147.50789pt.
+<img/continuous_time_spiral_lstm.png, id=820, 600.2425pt x 428.60126pt>
+File: img/continuous_time_spiral_lstm.png Graphic file (type png)
+<use img/continuous_time_spiral_lstm.png>
+Package pdftex.def Info: img/continuous_time_spiral_lstm.png  used on input line 341.
+(pdftex.def)             Requested size: 204.85846pt x 146.27838pt.
+<img/continuous_time_spiral_transformer.png, id=821, 648.4225pt x 431.6125pt>
+File: img/continuous_time_spiral_transformer.png Graphic file (type png)
+<use img/continuous_time_spiral_transformer.png>
+Package pdftex.def Info: img/continuous_time_spiral_transformer.png  used on input line 346.
+(pdftex.def)             Requested size: 204.85846pt x 136.36038pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [47 <./img/time_warping_spiral_LTC.png> <./img/time_warping_spiral_TCN.png> <./img/time_warping_spiral_lstm.png> <./img/time_warping_spiral_transformer.png>] [48 <./img/continuous_time_spiral_LTC.png> <./img/continuous_time_spiral_TCN.png> <./img/continuous_time_spiral_lstm.png> <./img/continuous_time_spiral_transformer.png>] [49] [50] [51]) (./conclusion/conclusion.tex [52]
 Chapter 8.
-[46
-
-] [47] [48] [49] [50]) (./conclusion/conclusion.tex [51]
-Chapter 9.
-) (./main.bbl [52
+) (./main.bbl [53
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 20--22
 []\T1/cmr/m/n/10 What Is a Re-cur-rent Neu-ral Net-work (RNN)? | IBM; 2021.
  []
 
-) (./declaration/declaration.tex [53
+) (./declaration/declaration.tex [54
 
 ]
-Chapter 10.
-) [54
+Chapter 9.
+) [55
 
 ] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 297A8A74391A75D3F5465A42BB24ABAA;16388.
+(rerunfilecheck)             Checksum: 81D686BE5FE44DD2B3FE52531DFA9A5C;10285.
  ) 
 Here is how much of TeX's memory you used:
- 29986 strings out of 474116
- 570175 string characters out of 5743682
- 2039187 words of memory out of 5000000
- 51410 multiletter control sequences out of 15000+600000
+ 30514 strings out of 474116
+ 584153 string characters out of 5743682
+ 2038187 words of memory out of 5000000
+ 51948 multiletter control sequences out of 15000+600000
  583452 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,17n,131p,1235b,2111s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfit0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0500.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on main.pdf (54 pages, 3252868 bytes).
+ 99i,17n,131p,1235b,1391s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfit0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0500.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on main.pdf (55 pages, 11961608 bytes).
 PDF statistics:
- 1226 PDF objects out of 1440 (max. 8388607)
- 1050 compressed objects within 11 object streams
- 376 named destinations out of 1000 (max. 500000)
- 726 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1162 PDF objects out of 1200 (max. 8388607)
+ 940 compressed objects within 10 object streams
+ 369 named destinations out of 1000 (max. 500000)
+ 614 words of extra memory for PDF output out of 10000 (max. 10000000)
 
